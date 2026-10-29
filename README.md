@@ -15,7 +15,7 @@ python src/rate_prep.py           # item files for the 12 simulation benchmarks 
 python src/prior_eval_build.py    # the 87 training pairs for the subject-prior evaluation
 python src/make_anchors.py        # the eight calibration examples -> submission/anchors.json
 python reproduce.py               # all tables, from cached model outputs and the simulation logs in data/
-python reproduce.py --rerun       # rerun every simulation first (JOBS=6 parallel jobs, a few hours on a laptop), still no API key
+python reproduce.py --rerun       # rerun every simulation first (JOBS=6 parallel jobs, several hours on a laptop), still no API key
 ```
 
 measurement-db is gated, so this repository ships item and subject identifiers, never item text or per-model results, and the scripts above rebuild them once access is granted. Language-model outputs are cached by item or pair: subject-prior estimates in `data/llm/prior_eval_*.json` and `data/llm/prior_cache.jsonl`, item ratings in `data/llm/api_haiku/` and `data/llm/batches_opus/`. `data/llm/prior_estimates.csv` lists the Opus, Sonnet and Haiku accuracy estimates for all 87 training pairs. The online tables need the Codabench scoring logs of the listed runs (`src/online_table.py`), which are private to the submitting team, so `reproduce.py` skips them when `data/online/` is absent.

@@ -2,7 +2,7 @@
 
 Submission, simulator and cached model outputs for the Predictive AI Evaluation Competition. Technical report: `report/main.pdf`. Final Codabench submission: 1017682.
 
-Before a model has answered anything on a new benchmark, we ask a language model how often that model answers items like these. On held-out training pairs the estimate is worth about seven of the model's own answers. It becomes a Beta prior inside a predictor that pools revealed labels across models and calibrates per-item difficulty ratings on the fly.
+Before a model has answered anything on a new benchmark, we ask a language model how often that model answers items like these. On held-out training benchmarks the deployed estimate is worth about six of the model's own answers. It becomes a Beta prior inside a predictor that pools revealed labels across models and calibrates per-item difficulty ratings on the fly.
 
 ## Reproduce every table, no API key
 
@@ -22,15 +22,16 @@ measurement-db is gated, so this repository ships item and subject identifiers, 
 
 | Report | Source |
 |---|---|
-| Table 1, subject prior | `reproduce.py` from `data/llm/prior_eval_*.json` |
+| Table 1 and the recall tests, subject prior | `reproduce.py` from `data/llm/prior_eval_*.json` (estimates made with `src/prior_eval_deployed.py`) |
 | Tables 2-3, online runs | `src/online_table.py` (run IDs inside) |
 | Table 4, submitted predictor with each language-model term switched off | `src/sim_sh.py`, subject priors replayed from `data/llm/prior_cache.jsonl` (logs in `data/ablate/`) |
 | Table 5 and Table A1, pooling in simulation | `src/sim_pp.py` (commands in `reproduce.py`, logs in `data/` and `data/small/`) |
 | Figure A1 | `report/fig_budget.py` |
+| Item-rating signal given the true pair accuracy (Section 3) | `src/item_signal_oracle.py`, log in `data/item_signal_oracle.log` |
 
 ## The submission
 
-`submission/model.py` (predictor) and `submission/labeling.py` (acquisition). Python standard library and NumPy only, no parameters fitted to the training data.
+`submission/model.py` (predictor) and `submission/labeling.py` (acquisition). `model.py` is the predictor of Codabench submission 1017682 (named v26 in the logs), except that it loads the calibration examples from `anchors.json` instead of carrying them inline. `model_v5.py` and `model_v6.py` are the earlier pooled predictors in the simulation tables. Python standard library and NumPy only, no parameters fitted to the training data.
 
 - Without an API key the language-model terms are skipped and the pooled predictor runs on its own.
 - With `llm_config.json` next to `model.py` (see `submission/llm_config.example.json`), it asks Claude Opus 5.5 for each subject's accuracy (once per subject and benchmark) and each item's difficulty, falling back to Claude Sonnet 5.5 and Claude Haiku 5.5 when a call is refused. Results are cached on disk so the platform's worker processes share them, calls retry on rate limits, and per-process caps (150 prior calls, 300 item ratings) bound the cost to about $10-15 per formative run.

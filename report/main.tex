@@ -31,7 +31,7 @@
 \maketitle
 
 \begin{abstract}
-Predicting how an AI system will answer a new benchmark is hardest before it has answered anything. On the competition's online draws most benchmarks had a single model, and more than four fifths of the excess error sat at the first three label budgets, where the predictor did not yet know how strong that model was. We ask a language model to estimate it. Given the model's name and settings and a handful of the benchmark's items, the deployed prompt estimates the model's accuracy with an RMSE of 0.16 on held-out training benchmarks, as informative as about five of the model's own answers. The estimate becomes a Beta prior that revealed answers update, inside a predictor that pools labels across models and calibrates per-item difficulty ratings on the fly. On online runs the prior cuts the excess error from 0.031 to 0.011 of Brier ALC, and the final submission improves the draw-adjusted ALC by 0.022 over our pooled baseline. On identical simulated draws, the prior alone improves the submitted predictor's ALC by $0.007 \pm 0.001$. Code, cached model outputs and a script that recomputes every table are released.
+Predicting how an AI system will answer a new benchmark is hardest before it has answered anything. On the competition's online draws most benchmarks had a single model, and more than four fifths of the excess error sat at the first three label budgets, where the predictor did not yet know how strong that model was. We ask a language model to estimate it. Given the model's name and settings and a handful of the benchmark's items, the deployed prompt estimates the model's accuracy with an RMSE of 0.15 on held-out training benchmarks, as informative as about six of the model's own answers. Hiding the model's identity removes almost all of this, while naming the benchmark adds nothing, so the estimate rests on knowledge of the model rather than recall of published scores. The estimate becomes a Beta prior that revealed answers update, inside a predictor that pools labels across models and calibrates per-item difficulty ratings on the fly. On online runs the prior cuts the excess error from 0.031 to 0.011 of Brier ALC, and the final submission improves the draw-adjusted ALC by 0.022 over our pooled baseline. On identical simulated draws, the prior alone improves the submitted predictor's ALC by $0.007 \pm 0.001$. Code, cached model outputs and a script that recomputes every table are released.
 \end{abstract}
 
 \section{Introduction}
@@ -43,8 +43,8 @@ Two sources can. Other subjects on the same benchmark reveal how hard it is, and
 
 Our contributions:
 \begin{itemize}
-\item \textbf{A subject prior from a language model} (Section~\ref{sec:prior}). We measure its value in the competition's own currency, the number of revealed answers it replaces: about five on held-out training benchmarks, two to three on the online draws, where many subjects answer nearly every item and a few labels already pin them down.
-\item \textbf{A pooled predictor that fits nothing to the training corpus} beyond two constants of the prior (Section~\ref{sec:method}) that combines the prior with labels from all subjects on the benchmark, an exact-item Rasch step and per-item difficulty ratings calibrated on the revealed labels.
+\item \textbf{A subject prior from a language model} (Section~\ref{sec:prior}). We measure its value in the competition's own currency, the number of revealed answers it replaces: about six on held-out training benchmarks, two to three on the online draws, where many subjects answer nearly every item and a few labels already pin them down.
+\item \textbf{A pooled predictor with no parameters fitted to the training responses} (Section~\ref{sec:method}) that combines the prior with labels from all subjects on the benchmark, an exact-item Rasch step and per-item difficulty ratings calibrated on the revealed labels.
 \item \textbf{An analysis of the online runs} (Section~\ref{sec:online}) that separates which subjects a run happens to draw from what the method changes. Three runs of the same final package scored 0.130 to 0.181, tracking their budget-31 levels (0.126 to 0.175), while their excess over that level stayed between 0.005 and 0.015.
 \item \textbf{A simulator of the protocol and cached model outputs}, released with the code, in which the submitted predictor and its ablations rerun without an API key (Section~\ref{sec:ablate}).
 \end{itemize}
@@ -59,7 +59,7 @@ For each subject--benchmark pair, the items are split 50/50 into an acquisition 
 \section{Method}
 \label{sec:method}
 
-Apart from the subject prior's calibration examples and two constants chosen on the prior-evaluation pairs (shrinkage 0.75 and $k_0=4$), nothing is fitted to the training corpus. Every other quantity is estimated at prediction time from the labels revealed so far on the target benchmark.
+No parameters are fitted to the training responses. The subject prior's calibration examples and its two constants (shrinkage 0.75 and $k_0=4$) come from the prior-evaluation pairs, and the remaining settings (such as $k=8$ and the ridge penalty) were chosen in simulation on the 12 simulation benchmarks, which therefore serve as development data. Every other quantity is estimated at prediction time from the labels revealed so far in the evaluation, on the target benchmark where it has enough of them and across benchmarks otherwise, as for the rating slope below.
 
 \paragraph{Subject prior.} \label{sec:prior-method} We ask Claude Opus~5.5 what percentage of the benchmark's items the subject answers correctly, given up to eight sample items (each cut to 600 characters) and the subject's attributes: name, provider, release date, harness and reasoning effort. Eight solved examples from public training benchmarks, each with a model name, two sample items and that model's true accuracy, precede the question and fix the scale. The estimate $q_s$ is shrunk toward one half, $m_s = 0.5 + 0.75\,(q_s - 0.5)$, used directly at budget 0 and as a Beta prior with $k_0=4$ pseudo-counts once the subject's own labels $R_s$ arrive:
 \begin{equation}
@@ -73,7 +73,7 @@ A worker asks first from the sample items it has seen, often just one, and once 
 \begin{equation}
 \operatorname{logit}\hat p_{sj} \leftarrow \operatorname{logit}\hat p_{sj} + \frac{\sum_{s' \neq s} (y_{s'j} - \hat p_{s'j})}{\sum_{s' \neq s} \hat p_{s'j}(1-\hat p_{s'j}) + 1/\tau^2}.
 \end{equation}
-(ii) The similarity-weighted mean residual of the 30 nearest revealed items, by cosine similarity of hashed character $n$-grams. (iii) A difficulty rating: Claude Opus~5.5 gives the probability that a typical current model answers the item correctly, and residuals are regressed on the standardised rating with a ridge penalty, so the rating is calibrated on the fly to the subjects at hand. Given each pair's true accuracy, Opus ratings lower the item-level Brier score on 70{,}563 responses from 11 simulation benchmarks from 0.1508 to 0.1387, against 0.1440 for Claude Haiku~5.5.
+(ii) The similarity-weighted mean residual of the 30 nearest revealed items, by cosine similarity of hashed character $n$-grams. (iii) A difficulty rating: Claude Opus~5.5 gives the probability that a typical current model answers the item correctly, and residuals are regressed on the standardised rating with a ridge penalty, so the rating is calibrated on the fly to the subjects at hand. Given each pair's true accuracy, Opus ratings lower the item-level Brier score on 70{,}563 responses from 11 simulation benchmarks from 0.1508 to 0.1387, against 0.1440 for Claude Haiku~5.5 (\texttt{src/item\_signal\_oracle.py}).
 
 \paragraph{Acquisition.} The acquisition function reveals an item only if no subject has revealed it yet on this benchmark, and always reveals when the remaining items are no more than the remaining budget. This maximises the number of evaluation items that carry an exact-item label from someone else. The rule looks only at which items were revealed, never at outcomes, so pooled rates stay unbiased.
 
@@ -86,29 +86,29 @@ We evaluated the prior on 87 subject--benchmark pairs from 25 public training be
 
 \begin{table}[t]
 \centering
-\caption{Subject prior quality on held-out training pairs. ``Labels'' is the number of the subject's own answers a Laplace estimate needs to match the prior's mean squared error. Model rows use the 70 pairs on which all three models gave a number. The deployed row uses all 79 pairs, with the shrinkage chosen leave-one-benchmark-out, and a 90\% interval from a bootstrap over benchmarks.}
+\caption{Subject prior quality on held-out training pairs. ``Labels'' is the number of the subject's own answers a Laplace estimate needs to match the prior's mean squared error. Model rows use the 71 pairs on which all three models gave a number. Every estimate used the deployed prompt with five sample items. The deployed row uses all 79 pairs, with the shrinkage chosen leave-one-benchmark-out, and a 90\% interval from a bootstrap over benchmarks.}
 \label{tab:prior}
 \small
 \begin{tabular}{lcccc}
 \toprule
 Prior & Pairs & RMSE & Correlation & Labels \\
 \midrule
-Constant 0.5 & 70 & 0.219 & -- & 0 \\
-Claude Haiku~5.5 & 70 & 0.192 & 0.63 & 3 \\
-Claude Sonnet~5.5 & 70 & 0.141 & 0.77 & 7 \\
-Claude Opus~5.5 & 70 & 0.142 & 0.76 & 7 \\
+Constant 0.5 & 71 & 0.217 & -- & 0 \\
+Claude Haiku~5.5 & 71 & 0.185 & 0.63 & 3 \\
+Claude Sonnet~5.5 & 71 & 0.142 & 0.76 & 7 \\
+Claude Opus~5.5 & 71 & 0.141 & 0.76 & 7 \\
 \midrule
-Deployed: Opus, then Sonnet, then Haiku & 79 & 0.162 [0.126, 0.194] & 0.66 & 5 [2, 10] \\
-Opus, calibration benchmarks removed & 47 & 0.151 & 0.78 & 6 \\
+Deployed: Opus, then Sonnet, then Haiku & 79 & 0.153 [0.118, 0.184] & 0.69 & 6 [3, 13] \\
+Opus, calibration benchmarks removed & 48 & 0.149 & 0.78 & 6 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:prior} shows the result. Opus and Sonnet estimate accuracy with an RMSE of 0.14, each worth about seven revealed answers, and Haiku is worth three. Opus gave no number on the eight pairs of two benchmarks, where the deployed predictor falls back to Sonnet and then Haiku. With that fallback and the shrinkage chosen leave-one-benchmark-out, the deployed prior is worth five labels, and removing every benchmark that supplied a calibration example still leaves Opus worth six. Cheap priors that use no language model did not work. Rank correlations between true accuracy and priors from the model's name, its release date or its accuracy on other benchmarks ranged from $-0.5$ to $0.46$ across benchmarks, and using the subject's accuracy on other training benchmarks as its budget-0 prediction scored 0.252, against 0.250 for a constant one half.
+Table~\ref{tab:prior} shows the result. Opus and Sonnet estimate accuracy with an RMSE of 0.14, each worth about seven revealed answers, and Haiku is worth three. Opus gave no number on the eight pairs of two benchmarks, where the deployed predictor falls back to Sonnet and then Haiku. With that fallback and the shrinkage chosen leave-one-benchmark-out, the deployed prior is worth six labels, and removing every benchmark that supplied a calibration example still leaves Opus worth six. Cheap priors that use no language model did not work. Rank correlations between true accuracy and priors from the model's name, its release date or its accuracy on other benchmarks ranged from $-0.5$ to $0.46$ across benchmarks, and using the subject's accuracy on other training benchmarks as its budget-0 prediction scored 0.252, against 0.250 for a constant one half.
 
 The value of a prior depends on the subjects. When accuracy sits near 0 or 1, a few labels already pin it down, and the same prior error is worth fewer labels. Many online subjects answered nearly every item, and there the prior was worth two to three labels (Section~\ref{sec:online}).
 
-\paragraph{Estimating or remembering?} A language model might recall published scores rather than estimate them. The prompt never names the benchmark, and every training subject was released before the rater's training cutoff, so we cannot split the training pairs by date. The online benchmarks, however, come from the organisers' held-out pool. There the prior's error was 0.16 to 0.19 (Section~\ref{sec:online}), close to its offline error of 0.16. The prior holds up outside the public data, although scores for some of those benchmarks may be published elsewhere. We release the estimates for all 87 training pairs (\texttt{data/llm/prior\_estimates.csv}) as a starting prior for other predictors.
+\paragraph{Estimating or remembering?} A language model might recall published scores rather than estimate them. We tested this on the same 71 pairs with two variants of the deployed Opus prompt. Hiding the subject's identity (name, provider, release date and model identifier) raises the RMSE from 0.141 to 0.211, close to the constant's 0.217, so the estimate depends on knowing the model. Naming the benchmark, which the deployed prompt never does, changes it from 0.141 to 0.136 (90\% benchmark-bootstrap interval for the change $-0.021$ to $+0.010$). A model that retrieved a published score for this model on this benchmark should gain from the name, and this one does not. The online benchmarks, from the organisers' held-out pool, point the same way: the prior's error there was 0.16 to 0.19 (Section~\ref{sec:online}). We release the estimates for all 87 training pairs (\texttt{data/llm/prior\_estimates.csv}) as a starting prior for other predictors.
 
 \section{Online results}
 \label{sec:online}
@@ -119,14 +119,14 @@ Each formative run draws nine subject--benchmark pairs (eight in some runs) from
 
 \begin{table}[t]
 \centering
-\caption{Online formative runs (lower is better), mean $\pm$ standard error over runs. ``Adjusted'' is relative to the pooled baseline after correcting each pair for its budget-31 level. ``Excess'' is the weighted Brier above each pair's budget-31 level. Codabench submissions: baseline 1016627, 1016628, 1016651. Subject prior 1017498, 1017499, 1017545, 1017562, 1017629 (versions differing in deployment details). Final 1017607, 1017628, 1017682.}
+\caption{Online formative runs (lower is better), mean $\pm$ standard error over runs. ``Adjusted'' is relative to the pooled baseline after correcting each pair for its budget-31 level. ``Excess'' is the weighted Brier above each pair's budget-31 level. Codabench submission IDs and per-run results are in Appendix~\ref{app:runs}. The subject-prior row pools four versions that differ only in deployment details and excludes the first deployment.}
 \label{tab:online}
 \small
 \begin{tabular}{lccccc}
 \toprule
 Version & Runs & Pairs & Raw ALC & Adjusted & Excess \\
 \midrule
-Pooled baseline (no language model) & 3 & 26 & 0.162 & $0.000 \pm 0.004$ & $0.031 \pm 0.006$ \\
+Pooled baseline, no subject prior (v6) & 3 & 26 & 0.162 & $0.000 \pm 0.004$ & $0.031 \pm 0.006$ \\
 + subject prior & 5 & 43 & 0.177 & $-0.017 \pm 0.002$ & $0.011 \pm 0.002$ \\
 + Opus item ratings (final, 1017682) & 3 & 26 & 0.158 & $-0.022 \pm 0.004$ & $0.008 \pm 0.003$ \\
 \bottomrule
@@ -149,14 +149,14 @@ Pooled baseline & 0.119 & 0.048 & 0.023 & 0.018 & 0.007 \\
 \end{tabular}
 \end{table}
 
-\paragraph{Where the gain comes from.} Table~\ref{tab:online} gives the result. The subject prior lowers the adjusted ALC in all five of its runs, by 0.017 on average, and cuts the excess from 0.031 to 0.011. Opus item ratings add a further 0.005, within noise on three runs. Table~\ref{tab:budget} shows where. The baseline's excess at budget 0 was 0.119: with one subject and no labels it could not tell a model that answers nearly everything from one that answers half. The prior lowers it to 0.026 and 0.038 in the two later versions, which run the same prior on different draws. Both lie between the baseline's excess after one and after three labels, the two-to-three-label value from Section~\ref{sec:prior}. Working back from the budget-0 excess, the prior's online error was about 0.16 to 0.19, in line with the 0.16 measured offline.
+\paragraph{Where the gain comes from.} Table~\ref{tab:online} gives the result. The subject prior lowers the adjusted ALC in all five of its runs, by 0.017 on average, and cuts the excess from 0.031 to 0.011. Without any adjustment, every run with the prior had a lower excess (0.004 to 0.017) than every baseline run (0.024 to 0.042). Opus item ratings add a further 0.005, within noise on three runs. Table~\ref{tab:budget} shows where. The baseline's excess at budget 0 was 0.119: with one subject and no labels it could not tell a model that answers nearly everything from one that answers half. The prior lowers it to 0.026 and 0.038 in the two later versions, which run the same prior on different draws. Both lie between the baseline's excess after one and after three labels, the two-to-three-label value from Section~\ref{sec:prior}. Working back from the budget-0 excess, the prior's online error was about 0.16 to 0.19, in line with the 0.15 measured offline.
 
 \paragraph{Deployment.} Because workers are recreated at every budget, a prior kept in memory reaches only the workers that asked for it. Our first deployment asked only after several items of a pair, which many workers never saw, and gained 0.004 instead of 0.017. Asking from the first item and sharing results on disk fixed this. For future editions, a scratch directory shared by the workers of one evaluation, or workers that persist across budgets, would let language-model submissions call each model once instead of once per worker, cutting cost and removing a source of run-to-run variation.
 
 \section{The submitted predictor in simulation}
 \label{sec:ablate}
 
-Online versions differ in their draws as well as their code. To compare components on identical draws, we ran the submitted predictor in an online-regime simulator: nine pairs over seven of the 12 simulation benchmarks per draw, mostly one subject per benchmark, 120 items per benchmark and the subject attributes as the online inputs give them, over 90 draws (three seeds of 30). Every draw starts from a fresh state, as a new evaluation does. Item ratings come from cached Opus ratings. Subject priors are real Opus calls with the deployed prompt, cached so that every variant sees the same estimates (641 calls, about \$10). We then switched the subject prior and the item ratings off in turn.
+Online versions differ in their draws as well as their code. To compare components on identical draws, we ran the submitted predictor in an online-regime simulator: nine pairs over seven of the 12 simulation benchmarks per draw, mostly one subject per benchmark, 120 items per benchmark and the subject attributes as the online inputs give them, over 90 draws (three seeds of 30). Every draw starts from a fresh state, as a new evaluation does. Item ratings come from cached Opus ratings. Subject priors are real Opus calls with the deployed prompt, cached so that every variant sees the same estimates (641 calls, about \$10). We then switched the subject prior and the item ratings off in turn, and added a smoothed baseline that predicts $(k+1)/(n+2)$ from the subject's own labels.
 
 \begin{table}[t]
 \centering
@@ -167,6 +167,7 @@ Online versions differ in their draws as well as their code. To compare componen
 \toprule
 Variant & ALC & $B_0$ & Difference & Better in \\
 \midrule
+Laplace estimate on own labels & 0.2020 & 0.250 & $+0.0008 \pm 0.0002$ & 20\% of draws \\
 Neither term & 0.2012 & 0.250 & -- & -- \\
 Item ratings only & 0.1992 & 0.244 & $-0.0020 \pm 0.0004$ & 68\% of draws \\
 Subject prior only & 0.1941 & 0.221 & $-0.0071 \pm 0.0009$ & 80\% of draws \\
@@ -175,12 +176,12 @@ Both (submitted) & \textbf{0.1924} & 0.216 & $-0.0088 \pm 0.0010$ & 83\% of draw
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:ablate} shows the result. The subject prior is the larger term. With item ratings on, adding it lowers the ALC by $0.0068 \pm 0.0009$ and helps in 80\% of draws. With the prior on, item ratings add $0.0017 \pm 0.0004$. The prior acts where the method predicts: Brier at budget 0 falls from 0.244 to 0.216, and the gap closes by budget 7, once the subject's own labels dominate. The simulated gain is smaller than the online 0.017 from Table~\ref{tab:online}, which compares different draws and is the less controlled of the two.
+Table~\ref{tab:ablate} shows the result. With mostly one subject per benchmark, the predictor without its language-model terms is barely better than the smoothed baseline, so nearly all of the gain comes from those terms, and the subject prior is the larger of them. With item ratings on, adding it lowers the ALC by $0.0068 \pm 0.0009$ and helps in 80\% of draws. With the prior on, item ratings add $0.0017 \pm 0.0004$. The prior acts where the method predicts: Brier at budget 0 falls from 0.244 to 0.216, and the gap closes by budget 7, once the subject's own labels dominate. The simulated gain is smaller than the online 0.017 from Table~\ref{tab:online}, which compares different draws and is the less controlled of the two.
 
 \section{Pooling when subjects share a benchmark}
 \label{sec:results}
 
-The hidden test set may have more subjects per benchmark than the formative runs. To test the pooling machinery on its own, we simulated the protocol with per-pair 50/50 splits, streaming acquisition with the same coverage rule as \texttt{labeling.py} applied to item IDs, nested budgets and labels pooled across pairs, with identical splits and streams for every method. These runs use the pooled predictor before the subject prior was added (v6), with item ratings from a cache of Claude Haiku ratings. We report three regimes: (i) \emph{300 items}, 12 benchmarks with 300 sampled items each and up to 30 subjects, (ii) \emph{online scale}, 100 items per benchmark with 2, 5 or 10 subjects, averaged over three seeds, and (iii) \emph{full pools}, all items available for acquisition, evaluation capped at 150 items per pair and no rating term. ALC is averaged equally over pairs, as in the competition.
+The hidden test set may have more subjects per benchmark than the formative runs. To test the pooling machinery on its own, we simulated the protocol with per-pair 50/50 splits, streaming acquisition with the coverage rule of \texttt{labeling.py} applied to item IDs (this simulator forces a reveal against the full budget of 31 rather than the current checkpoint, which differs only near the end of a stream), nested budgets and labels pooled across pairs, with identical splits and streams for every method. These runs use the pooled predictor before the subject prior was added (v6), with item ratings from a cache of Claude Haiku ratings. We report three regimes: (i) \emph{300 items}, 12 benchmarks with 300 sampled items each and up to 30 subjects, (ii) \emph{online scale}, 100 items per benchmark with 2, 5 or 10 subjects, averaged over three seeds, and (iii) \emph{full pools}, all items available for acquisition, evaluation capped at 150 items per pair and no rating term. ALC is averaged equally over pairs, as in the competition.
 
 \begin{table}[t]
 \centering
@@ -205,7 +206,7 @@ Table~\ref{tab:main} shows that pooling does most of the work when subjects shar
 \section{Limitations}
 \label{sec:limits}
 
-The subject prior depends on the language model knowing the subject. It returns nothing for an unnamed subject and will help less for unfamiliar ones, and its offline error may be optimistic if the model has seen results for the training benchmarks. We did not test this, for example by release date relative to the model's training cutoff. Online we had three to five runs per version, so the 0.005 from Opus item ratings is within noise, and the draw adjustment uses each pair's budget-31 score, which the method itself affects. We have no direct comparison with the organisers' Bayesian Linguistic Evaluator. We tried its default configuration from the baseline repository (version of 15 October 2026) on the current public data, and it failed there: its data preparation found no eligible benchmarks in the embedding dataset, and its keyword retrieval expects an \texttt{n\_trials} field that the benchmark tables no longer contain. It runs a retrieval agent of up to ten language-model turns for every prediction, of which a formative run has about 3{,}000 (about 500 evaluation cells at six budgets), while our predictor asks once per subject and benchmark and once per item. The method needs a paid API key, and its cost grows with the number of worker processes. All benchmarks we used have binary responses.
+The subject prior depends on the language model knowing the subject. It returns nothing for an unnamed subject and will help less for unfamiliar ones, and the recall test in Section~\ref{sec:prior} cannot rule out that the model recognises a benchmark from its items. Online we had three to five runs per version, so the 0.005 from Opus item ratings is within noise, and the draw adjustment uses each pair's budget-31 score, which the method itself affects. We have no direct comparison with the organisers' Bayesian Linguistic Evaluator. We tried its default configuration from the baseline repository (version of 15 October 2026) on the current public data, and it failed there: its data preparation found no eligible benchmarks in the embedding dataset, and its keyword retrieval expects an \texttt{n\_trials} field that the benchmark tables no longer contain. It runs a retrieval agent of up to ten language-model turns for every prediction, of which a formative run has about 3{,}000 (about 500 evaluation cells at six budgets), while our predictor asks once per subject and benchmark and once per item. The method needs a paid API key, and its cost grows with the number of worker processes. All benchmarks we used have binary responses.
 
 \section{Reproducibility and disclosures}
 \label{sec:repro}
@@ -264,6 +265,32 @@ Benchmark & Subjects & Baseline & v5 & v6, coverage-first & no rating term \\
 \caption{Brier score by budget on the 300-item regime. The oracle line replaces the estimated ability of each subject with its true accuracy on the benchmark.}
 \label{fig:budget}
 \end{figure}
+
+\section{Online runs}
+\label{app:runs}
+
+\begin{table}[h]
+\centering
+\caption{Every online formative run in Table~\ref{tab:online}. $B_{31}$ is the mean Brier at budget 31, the draw's difficulty level.}
+\small
+\begin{tabular}{llcccc}
+\toprule
+Submission & Version & Pairs & Raw ALC & $B_{31}$ & Excess \\
+\midrule
+1016627 & v6 & 9 & 0.158 & 0.116 & 0.042 \\
+1016628 & v6 & 9 & 0.170 & 0.143 & 0.027 \\
+1016651 & v6, no API key & 8 & 0.158 & 0.134 & 0.024 \\
+1017498 & + subject prior (v19) & 9 & 0.169 & 0.164 & 0.006 \\
+1017499 & + subject prior (v19) & 9 & 0.159 & 0.151 & 0.008 \\
+1017545 & + subject prior (v23) & 8 & 0.195 & 0.183 & 0.011 \\
+1017562 & + subject prior (v25) & 8 & 0.179 & 0.169 & 0.010 \\
+1017629 & + subject prior (v27) & 9 & 0.184 & 0.167 & 0.017 \\
+1017607 & final & 8 & 0.181 & 0.175 & 0.006 \\
+1017628 & final & 9 & 0.130 & 0.126 & 0.004 \\
+1017682 & final (selected) & 9 & 0.164 & 0.149 & 0.014 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Variants that did not improve the submission}
 \label{app:neg}

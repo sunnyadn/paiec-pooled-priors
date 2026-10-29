@@ -1,0 +1,5 @@
+rows 70563 benches 11
+zh oracle-intercept Brier 0.1440 (b=0.5) vs none 0.1508
+zo oracle-intercept Brier 0.1387 (b=0.7) vs none 0.1508
+md0 oracle-intercept Brier 0.1431 (b=0.5) vs none 0.1508
+zho oracle-intercept Brier 0.1398 (b=0.7) vs none 0.1508

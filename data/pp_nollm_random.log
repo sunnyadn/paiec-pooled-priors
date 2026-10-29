@@ -1,0 +1,4 @@
+agi_elo 20 0.19 distinct revealed 259
+cmmlu 16 0.1961 distinct revealed 251
+ceval 11 0.2711 distinct revealed 201
+cruxeval 30 0.248 distinct revealed 256

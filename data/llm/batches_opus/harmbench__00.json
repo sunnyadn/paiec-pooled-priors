@@ -1,0 +1,11 @@
+API Error: Opus 5's safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5.
+
+Try rephrasing the request in a new session or change your model.
+
+Learn more: https://support.claude.com/en/articles/16049681
+
+Details: `[general_harms]`
+
+Request ID: req_011CgJKK5AnYp8HvSoT2u3z3
+
+Message ID: msg_011CgJKK5SAEP6rmhdJ4Zwdg

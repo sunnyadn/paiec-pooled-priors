@@ -1,0 +1,5 @@
+cruxeval 30 0.2015 distinct revealed 293
+afrimedqa 23 0.1856 distinct revealed 246
+bird_sql 30 0.0813 distinct revealed 300
+helm_afr 22 0.2471 distinct revealed 299
+MEAN 0.1789

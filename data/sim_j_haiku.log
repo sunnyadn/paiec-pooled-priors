@@ -1,0 +1,12 @@
+agi_elo {'none': 0.197, 'knn': 0.1948, 'llm': 0.1913, 'both': 0.1895, 'both_res': 0.1892}
+cmmlu {'none': 0.2115, 'knn': 0.2124, 'llm': 0.1935, 'both': 0.1943, 'both_res': 0.1934}
+ceval {'none': 0.2456, 'knn': 0.2452, 'llm': 0.2408, 'both': 0.2408, 'both_res': 0.2407}
+cruxeval {'none': 0.2549, 'knn': 0.2572, 'llm': 0.2161, 'both': 0.2166, 'both_res': 0.2154}
+bird_sql {'none': 0.0928, 'knn': 0.0936, 'llm': 0.0897, 'both': 0.0906, 'both_res': 0.0904}
+editbench {'none': 0.2521, 'knn': 0.2424, 'llm': 0.2475, 'both': 0.242, 'both_res': 0.2408}
+financebench {'none': 0.2108, 'knn': 0.2116, 'llm': 0.2093, 'both': 0.2103, 'both_res': 0.21}
+helm_afr {'none': 0.2524, 'knn': 0.2523, 'llm': 0.2496, 'both': 0.2518, 'both_res': 0.252}
+afrimedqa {'none': 0.2132, 'knn': 0.2121, 'llm': 0.1987, 'both': 0.1988, 'both_res': 0.1976}
+agentdojo {'none': 0.1749, 'knn': 0.1663, 'llm': 0.1754, 'both': 0.1664, 'both_res': 0.1663}
+benger {'none': 0.1446, 'knn': 0.1441, 'llm': 0.1437, 'both': 0.1445, 'both_res': 0.1439}
+{'none': 0.2045, 'knn': 0.2029, 'llm': 0.196, 'both': 0.1951, 'both_res': 0.1945}

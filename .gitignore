@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+submission/llm_config.json
+submission/anchors.json
+data/mdb/
+data/long.parquet
+data/llm/items_to_rate.json
+data/llm/prior_eval.json
+data/llm/prior_eval_full.json
+data/rerun/
+data/online/
+dist/

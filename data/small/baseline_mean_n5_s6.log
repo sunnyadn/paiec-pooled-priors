@@ -1,0 +1,9 @@
+agi_elo 5 0.181 distinct revealed 81
+cmmlu 5 0.2534 distinct revealed 80
+ceval 5 0.3245 distinct revealed 88
+bird_sql 5 0.062 distinct revealed 88
+editbench 5 0.3121 distinct revealed 87
+financebench 5 0.2105 distinct revealed 86
+agentdojo 5 0.1899 distinct revealed 83
+MEAN 0.2191
+PER_BUDGET {0: 0.25, 1: 0.2971, 3: 0.229, 7: 0.1858, 15: 0.1745, 31: 0.1679}

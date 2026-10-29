@@ -1,0 +1,227 @@
+/Users/sunny/Projects/paiec-2026/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+afrieval {'none': 0.169, 'char_prob_0.5': 0.1695, 'emb_prob_0.5': 0.17, 'char_prob_0.75': 0.1701}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+afrimedqa {'bm25_prob_0.75': 0.2322, 'bm25_prob_0.5': 0.2322, 'bm25_prob_1.0': 0.2328, 'emb_prob_0.5': 0.2329}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+agentdojo {'bm25_prob_1.0': 0.1646, 'bm25_prob_0.75': 0.1649, 'char_prob_1.0': 0.1655, 'char_prob_0.75': 0.1656}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+agi_elo {'char_prob_1.0': 0.1948, 'char_prob_0.75': 0.1951, 'char_prob_0.5': 0.1954, 'bm25_prob_0.5': 0.1961}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+ai2d_test {'bm25_prob_1.0': 0.1896, 'bm25_prob_0.75': 0.1922, 'char_prob_1.0': 0.1951, 'bm25_prob_0.5': 0.1962}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+algotune {'char_prob_1.0': 0.2069, 'char_prob_0.75': 0.2071, 'emb_prob_1.0': 0.2073, 'emb_prob_0.75': 0.2073}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+alignment_faking {'bm25_prob_1.0': 0.1804, 'char_prob_1.0': 0.1805, 'emb_prob_1.0': 0.1813, 'bm25_prob_0.75': 0.1841}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+appworld {'char_prob_1.0': 0.1761, 'bm25_prob_1.0': 0.177, 'char_prob_0.75': 0.1771, 'bm25_prob_0.75': 0.1776}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+babilong {'bm25_prob_1.0': 0.225, 'bm25_prob_0.75': 0.2268, 'bm25_prob_0.5': 0.23, 'char_prob_1.0': 0.2301}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+benger {'bm25_prob_0.75': 0.1434, 'bm25_prob_0.5': 0.1435, 'char_prob_0.75': 0.1441, 'bm25_prob_1.0': 0.1443}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+bird_sql {'emb_prob_0.5': 0.0941, 'char_prob_0.5': 0.0941, 'emb_prob_0.75': 0.0942, 'none': 0.0942}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+brace {'char_prob_1.0': 0.1333, 'char_prob_0.75': 0.1335, 'char_prob_0.5': 0.1339, 'bm25_prob_0.75': 0.1342}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+bridging_gap {'none': 0.2386, 'char_prob_0.5': 0.2405, 'emb_prob_0.5': 0.2405, 'char_prob_0.75': 0.2417}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+ceval {'char_prob_0.5': 0.2454, 'char_prob_0.75': 0.2455, 'none': 0.2455, 'char_prob_1.0': 0.2457}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+chatgpt_drift {'bm25_prob_1.0': 0.2176, 'bm25_prob_0.75': 0.2192, 'char_prob_1.0': 0.2195, 'char_prob_0.75': 0.2209}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+cmmlu {'none': 0.1992, 'char_prob_0.5': 0.1998, 'char_prob_0.75': 0.2003, 'bm25_prob_0.5': 0.2005}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+crow {'none': 0.0856, 'char_prob_0.5': 0.0857, 'emb_prob_0.5': 0.0857, 'bm25_prob_0.5': 0.0858}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+cruxeval {'char_prob_0.5': 0.2483, 'emb_prob_0.5': 0.2485, 'none': 0.2488, 'char_prob_0.75': 0.2488}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+dave {'bm25_prob_0.5': 0.2409, 'bm25_prob_0.75': 0.2412, 'none': 0.2422, 'bm25_prob_1.0': 0.2423}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+devbench {'bm25_prob_1.0': 0.2117, 'bm25_prob_0.75': 0.2121, 'emb_prob_1.0': 0.2124, 'emb_prob_0.75': 0.2129}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+dtap_bench {'bm25_prob_0.5': 0.2762, 'none': 0.2763, 'bm25_prob_0.75': 0.277, 'emb_prob_0.5': 0.2775}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+editbench {'bm25_prob_1.0': 0.2392, 'char_prob_1.0': 0.2397, 'bm25_prob_0.75': 0.2415, 'char_prob_0.75': 0.2421}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+egoschema {'none': 0.2517, 'emb_prob_0.5': 0.2531, 'char_prob_0.5': 0.2532, 'emb_prob_0.75': 0.2541}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+elicitation_game {'bm25_prob_1.0': 0.2406, 'bm25_prob_0.75': 0.2409, 'char_prob_1.0': 0.2415, 'char_prob_0.75': 0.2422}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+emoji_attack {'bm25_prob_1.0': 0.1906, 'bm25_prob_0.75': 0.1917, 'bm25_prob_0.5': 0.1942, 'char_prob_1.0': 0.1945}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+engdesign {'emb_prob_1.0': 0.1999, 'emb_prob_0.75': 0.2004, 'emb_prob_0.5': 0.201, 'bm25_prob_0.5': 0.2015}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+erbench {'none': 0.2267, 'char_prob_0.5': 0.2271, 'char_prob_0.75': 0.2277, 'emb_prob_0.5': 0.2278}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+fewshot_ttt_bbh {'emb_prob_1.0': 0.2488, 'emb_prob_0.75': 0.2492, 'emb_prob_0.5': 0.2505, 'char_prob_0.75': 0.2513}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+financebench {'char_prob_1.0': 0.2115, 'bm25_prob_1.0': 0.212, 'char_prob_0.75': 0.212, 'bm25_prob_0.75': 0.2121}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+hallusionbench {'bm25_prob_0.75': 0.2411, 'bm25_prob_0.5': 0.2411, 'bm25_prob_1.0': 0.2419, 'char_prob_0.5': 0.2421}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+harmbench {'bm25_prob_0.75': 0.2344, 'char_prob_0.75': 0.2347, 'bm25_prob_0.5': 0.2347, 'char_prob_1.0': 0.2348}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: divide by zero encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: overflow encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+/Users/sunny/Projects/paiec-2026/src/sim_item4.py:30: RuntimeWarning: invalid value encountered in matmul
+  return {'char':lambda a,b:(Xc[a]@Xc[b].T).toarray(),'emb':lambda a,b:Xe[a]@Xe[b].T,'bm25':bm}
+helm_afr {'none': 0.2485, 'char_prob_0.5': 0.2495, 'emb_prob_0.5': 0.2497, 'bm25_prob_0.5': 0.2509}
+{'bm25_prob_0.75': 0.2084, 'char_prob_0.75': 0.2085, 'char_prob_1.0': 0.2086, 'bm25_prob_0.5': 0.2086, 'bm25_prob_1.0': 0.209, 'char_prob_0.5': 0.2091, 'emb_prob_0.75': 0.2099, 'emb_prob_0.5': 0.21, 'emb_prob_1.0': 0.2103, 'none': 0.212}

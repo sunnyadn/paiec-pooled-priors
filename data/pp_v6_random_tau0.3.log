@@ -1,0 +1,13 @@
+agi_elo 20 0.1866 distinct revealed 266
+cmmlu 16 0.1961 distinct revealed 242
+ceval 11 0.2489 distinct revealed 209
+cruxeval 30 0.2152 distinct revealed 247
+bird_sql 30 0.0739 distinct revealed 291
+harmbench 29 0.2112 distinct revealed 201
+editbench 30 0.2345 distinct revealed 289
+financebench 16 0.2045 distinct revealed 147
+helm_afr 22 0.2513 distinct revealed 266
+afrimedqa 23 0.1807 distinct revealed 192
+agentdojo 28 0.1662 distinct revealed 292
+benger 24 0.1318 distinct revealed 271
+MEAN 0.1917

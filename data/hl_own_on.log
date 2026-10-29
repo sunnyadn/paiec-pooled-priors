@@ -1,0 +1,13 @@
+agi_elo 20 0.1902
+cmmlu 16 0.2205
+ceval 11 0.2388
+cruxeval 29 0.2504
+bird_sql 30 0.1203
+harmbench 29 0.234
+editbench 30 0.265
+financebench 16 0.2066
+helm_afr 22 0.2653
+afrimedqa 28 0.2185
+agentdojo 28 0.2042
+benger 24 0.1673
+MEAN 0.2151

@@ -150,6 +150,13 @@ for draw in range(DRAWS):
             pr = np.array([PRED[(pi, k)] for k in range(len(p['ev']))]) if WK else np.array([M.predict([p['subj'], it], labeled) for it, _ in p['ev']]); y = np.array([y for _, y in p['ev']])
             e = np.mean((y - pr) ** 2); alc[pi] += w * e; PB.setdefault(n, []).append(e); SH.setdefault((n, sum(q["b"] == p["b"] for q in pairs)), []).append(e)
     for pi, p in enumerate(pairs): BYB.setdefault(p['b'], []).append(float(alc[pi]))
+    if os.environ.get('PRIORLOG') and hasattr(M, '_prior_value'):   # the prior each pair ended with vs its true accuracy
+        with open(os.environ['PRIORLOG'], 'a') as fl:
+            for p in pairs:
+                d = M._subject_desc(p['subj']) if M._subject_name(p['subj']) else None
+                v = M._prior_value(d, p['idict'](p['stream'][0][0])['benchmark_id']) if d else None
+                ys = [y for _, y in p['stream']] + [y for _, y in p['ev']]
+                fl.write(json.dumps({'draw': draw, 'b': p['b'], 'named': d is not None, 'prior': v, 'acc': float(np.mean(ys))}) + '\n')
     alcs.append(float(np.mean(alc))); FL.extend([np.mean((np.array([y for _,y in p["ev"]])-np.mean([y for _,y in p["ev"]]))**2) for p in pairs])
 print('DRAWS', len(alcs), 'MEAN', round(float(np.mean(alcs)), 4), 'SE', round(float(np.std(alcs) / np.sqrt(len(alcs))), 4))
 print('PER_BUDGET', {n: round(float(np.mean(v)), 4) for n, v in sorted(PB.items())})

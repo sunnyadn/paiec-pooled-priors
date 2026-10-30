@@ -3,6 +3,7 @@ import pandas as pd, numpy as np, json, os
 R = pd.read_parquet('data/long.parquet', columns=['bench', 'subject_id', 'item_id'])
 used = set(json.load(open('data/llm/items_to_rate.json'))) | {r['bench'] for r in json.load(open('data/llm/prior_eval.json'))}
 rng = np.random.default_rng(11); out = {}
+IDS = json.load(open('data/llm/item_ids_disjoint.json')) if os.path.exists('data/llm/item_ids_disjoint.json') else None   # the released sample
 for b, d in R.groupby('bench'):
     if b in used or not os.path.exists(f'data/mdb/{b}/formatted_tables/items.parquet'):
         continue
@@ -10,6 +11,9 @@ for b, d in R.groupby('bench'):
     ic = d.groupby('item_id').subject_id.nunique()
     pool = ic[ic >= max(2, ic.quantile(0.5))].index.values
     its = rng.choice(pool, min(300, len(pool)), replace=False)
+    if IDS is not None:
+        if b not in IDS: continue
+        its = np.array(IDS[b], dtype=object)
     good = (d[d.item_id.isin(its)].groupby('subject_id').item_id.nunique() >= int(0.7 * min(120, len(its)))).sum()
     if good < 2:
         continue

@@ -103,21 +103,22 @@ def table_regimes():
     """Table 5: the subject prior with four subjects per benchmark, and on benchmarks held out from all development."""
     get = lambda d, a: np.concatenate([np.array(eval(re.search(r'ALCS (\[.*\])', open(f'{d}/{a}_s{s}.log').read()).group(1))) for s in (5, 6, 7)])
     print('Table 5. Subject prior across regimes (paired over identical simulated draws)')
-    if os.path.exists('data/multi/full_s5.log'):
-        dd = get('data/multi', 'full') - get('data/multi', 'noprior')
+    M_, D_ = (f'{LOG}/multi', f'{LOG}/disjoint') if RERUN else ('data/multi', 'data/disjoint')
+    if os.path.exists(f'{M_}/full_s5.log'):
+        dd = get(M_, 'full') - get(M_, 'noprior')
         print(f'  four subjects per benchmark  {dd.mean():+.4f} ± {dd.std(ddof=1) / np.sqrt(len(dd)):.4f}  better in {np.mean(dd < 0) * 100:.0f}% of {len(dd)} draws')
-    if os.path.exists('data/disjoint/bb_prior_s5.log'):
+    if os.path.exists(f'{D_}/bb_prior_s5.log'):
         named = json.load(open('data/llm/disjoint_named.json')) if os.path.exists('data/llm/disjoint_named.json') else {}
         agg = {}
         for s in (5, 6, 7):
-            P = eval(re.search(r'BY_BENCH (\{.*\})', open(f'data/disjoint/bb_prior_s{s}.log').read()).group(1))
-            N = eval(re.search(r'BY_BENCH (\{.*\})', open(f'data/disjoint/bb_none_s{s}.log').read()).group(1))
+            P = eval(re.search(r'BY_BENCH (\{.*\})', open(f'{D_}/bb_prior_s{s}.log').read()).group(1))
+            N = eval(re.search(r'BY_BENCH (\{.*\})', open(f'{D_}/bb_none_s{s}.log').read()).group(1))
             for b in P:
                 a = agg.setdefault(b, [0.0, 0]); a[0] += (P[b][0] - N[b][0]) * P[b][1]; a[1] += P[b][1]
         for grp in (True, False):
             bs = [b for b in agg if named.get(b, 0) > 0.5] if grp else [b for b in agg if named.get(b, 0) <= 0.5]
             d = sum(agg[b][0] for b in bs) / max(1, sum(agg[b][1] for b in bs)); helped = sum(agg[b][0] < 0 for b in bs)
-            print(f'  held-out, {"named" if grp else "unnamed"} subjects ({len(bs)} benchmarks)  {d:+.4f}  helped on {helped} of {len(bs)}')
+            print(f'  held-out, mostly {"named" if grp else "unnamed"} subjects ({len(bs)} benchmarks)  {d:+.4f}  helped on {helped} of {len(bs)}')
 
 
 SIMS = {   # report cell -> (command, log)
@@ -153,6 +154,15 @@ def rerun():
         jobs.append((f'mkdir -p data/rerun/lap && cp src/baselines/laplace.py data/rerun/lap/model.py && cp submission/labeling.py data/rerun/lap/ && '
                      f'PRIOR_CACHE_ONLY=1 SEED={s} DRAWS=30 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py data/rerun/lap/model.py cover data/llm/batches_opus',
                      f'data/rerun/ablate/laplace_s{s}.log'))
+    for d in ('multi', 'disjoint'):
+        os.makedirs(f'data/rerun/{d}', exist_ok=True)
+    for s in (5, 6, 7):   # four subjects per benchmark, and benchmarks used in no development step (priors replayed)
+        for arm, env in (('full', ''), ('norate', 'NORATE=1 '), ('noprior', 'NOPRIOR=1 '), ('none', 'NOPRIOR=1 NORATE=1 ')):
+            jobs.append((f'{env}STRICT=1 PRIOR_CACHE_ONLY=1 NSUBS=4,4,4,4,4,4,4 SEED={s} DRAWS=10 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py submission/model.py cover data/llm/batches_opus',
+                         f'data/rerun/multi/{arm}_s{s}.log'))
+        for arm, env in (('prior', 'NORATE=1 '), ('none', 'NOPRIOR=1 NORATE=1 ')):
+            jobs.append((f'{env}STRICT=1 PRIOR_CACHE_ONLY=1 ITEMS=data/llm/items_disjoint.json SEED={s} DRAWS=30 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py submission/model.py cover data/llm/batches_opus',
+                         f'data/rerun/disjoint/bb_{arm}_s{s}.log'))
     for env, args, stem in SMALL.values():
         for n in (2, 5, 10):
             for s in (5, 6, 7):

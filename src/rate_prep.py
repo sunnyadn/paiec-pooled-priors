@@ -22,7 +22,6 @@ Judge only from the item itself. Consider difficulty, ambiguity, required knowle
 Output ONLY JSON: {{"ratings": [{{"id": "<item id>", "p": <0-100>}}, ...]}} with one entry per item, same ids.
 
 '''
-import os
 os.makedirs('data/llm/batches',exist_ok=True)
 for b,its in out.items():
     for k in range(0,len(its),50):

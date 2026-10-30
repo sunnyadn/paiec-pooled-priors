@@ -9,8 +9,8 @@ def pb(f):
     line = [l for l in open(D + f) if l.startswith("PER_BUDGET")][0]
     return ast.literal_eval(line.split(" ", 1)[1])
 runs = [("Official baseline (empirical mean)", "pp_baseline_mean_random.log", "#9a9a9a", "o"),
-        ("v5 (pooling + item offsets)", "pp_v5_random_pb.log", "#6f8fc8", "s"),
-        ("v6, coverage-first", "pp_v6_cover_pb.log", "#1f3b73", "D"),
+        ("v5 (pooling + item offsets)", "pp_v5_random.log", "#6f8fc8", "s"),
+        ("v6, coverage-first", "pp_v6_cover.log", "#1f3b73", "D"),
         ("v6 with oracle ability", "oracle1_300.log", "#c0504d", "^")]
 B = [0, 1, 3, 7, 15, 31]
 fig, ax = plt.subplots(figsize=(5.2, 2.6))

@@ -1,11 +1,13 @@
 """Online-regime simulator matched to Codabench formative feedback: 9 pairs over 7 benchmarks
 (5 with one subject), ~60 items each, one labeled list pooled across all pairs. Mean ALC over DRAWS draws.
-usage: sim_online.py MODEL_PY random|cover [RDIR]; env DRAWS, SEED, USE_LLM, NITEM"""
-import sys, json, os, zlib, importlib.util, random, tempfile, numpy as np, pandas as pd
+usage: sim_sh.py MODEL_PY random|cover [RDIR]
+env: DRAWS, SEED, NITEM, NSUBS (subjects per benchmark), ITEMS (item file), SUBJ=1 (full subject attributes),
+USE_LLM=0, NOPRIOR=1, NORATE=1 (switch terms off), PRIOR_CACHE_ONLY=1 (replay cached priors, no API), STRICT=1
+(fail on a cache miss); diagnostics: FEAT, WORKERS, PRIORLOG, MAXCALLS, DISSIM"""
+import sys, json, os, zlib, functools, glob, hashlib, importlib.util, random, tempfile, numpy as np, pandas as pd
 spec = importlib.util.spec_from_file_location('model', sys.argv[1]); M = importlib.util.module_from_spec(spec); spec.loader.exec_module(M)
 POL = sys.argv[2]; rdir = sys.argv[3] if len(sys.argv) > 3 else 'data/llm/api_haiku'
 B = [0, 1, 3, 7, 15, 31]; W = [.1, .2, .2, .2, .2, .1]
-import glob
 rat = {}
 for f in glob.glob(rdir + '/*.json'):
     try:
@@ -20,15 +22,12 @@ use_llm = os.environ.get('USE_LLM', '1') == '1'
 M._cfg = lambda: {'provider': 'cache', 'model': 'x', 'key': 'x'} if use_llm else {}
 M._call = lambda text: rat.get(txt2id.get(text.strip()))
 M._disk_path = lambda: '/dev/null'
-if hasattr(M, '_agree') and os.path.exists('data/llm/consistency_all.json'):   # cached Haiku answer agreement
-    _AG = {k: v for k, v in json.load(open('data/llm/consistency_all.json')).items() if v is not None}
-    M._agree = lambda text: _AG.get(str(txt2id.get(text.strip())))
+MISS = [0]; CALLS = [0]
 if hasattr(M, '_call_prior'):   # subject prior: real API calls through the submission key, cached on disk
-    import hashlib
-    try: _REAL = dict(json.load(open('submission/llm_config.json')), key=open(os.path.expanduser('~/.config/paiec/key2')).read().strip())
+    try: _REAL = dict(json.load(open('submission/llm_config.json')), key=os.environ['ANTHROPIC_API_KEY'])
     except Exception: _REAL = None; os.environ['PRIOR_CACHE_ONLY'] = '1'   # no key: replay cached priors only
     _orig_cp = M._call_prior; _PC = 'data/llm/prior_cache.jsonl'
-    _pc = {}; MISS = [0]; CALLS = [0]
+    _pc = {}
     if os.path.exists(_PC):
         for l in open(_PC):
             k, v = json.loads(l); _pc[k] = v
@@ -36,9 +35,8 @@ if hasattr(M, '_call_prior'):   # subject prior: real API calls through the subm
         k = hashlib.md5((getattr(M, '_ANCHOR_TXT', '') * getattr(M, 'USE_ANCHORS', 0) + name + '\n' + '\n'.join(texts)).encode()).hexdigest()
         if k not in _pc and (os.environ.get('PRIOR_CACHE_ONLY') == '1' or CALLS[0] >= int(os.environ.get('MAXCALLS', '1000000'))):
             MISS[0] += 1; return None   # replay only: never call the API (or the call budget is spent)
-        if k not in _pc: CALLS[0] += 1
         if k not in _pc:
-            keep = M._cfg; M._cfg = lambda: _REAL
+            CALLS[0] += 1; keep = M._cfg; M._cfg = lambda: _REAL
             try: v = _orig_cp(name, texts)
             except Exception: v = None
             M._cfg = keep
@@ -46,26 +44,7 @@ if hasattr(M, '_call_prior'):   # subject prior: real API calls through the subm
             with open(_PC, 'a') as f: f.write(json.dumps([k, v]) + '\n')
         return _pc[k]
     M._call_prior = _cp
-if hasattr(M, '_call_prior_gpt'):   # second-vendor prior: same caching, its own cache file
-    _GPC = 'data/llm/prior_cache_gpt.jsonl'; _gpc = {}; GMISS = [0]; GCALLS = [0]; _orig_g = M._call_prior_gpt
-    if os.path.exists(_GPC):
-        for l in open(_GPC):
-            k, v = json.loads(l); _gpc[k] = v
-    def _cg(name, texts):
-        k = hashlib.md5(('gpt' + getattr(M, '_ANCHOR_TXT', '') * getattr(M, 'USE_ANCHORS', 0) + name + '\n' + '\n'.join(texts)).encode()).hexdigest()
-        if k not in _gpc and (os.environ.get('PRIOR_CACHE_ONLY') == '1' or GCALLS[0] >= int(os.environ.get('MAXGPT', '0'))):
-            GMISS[0] += 1; return None
-        if k not in _gpc:
-            GCALLS[0] += 1; keep = M._cfg
-            M._cfg = lambda: {'openai_key': open(os.path.expanduser('~/.config/paiec/openai_key')).read().strip()}
-            try: v = _orig_g(name, texts)
-            except Exception: v = None
-            M._cfg = keep; _gpc[k] = v
-            with open(_GPC, 'a') as f: f.write(json.dumps([k, v]) + '\n')
-        return _gpc[k]
-    M._call_prior_gpt = _cg
 if os.environ.get('NOPRIOR') == '1' and hasattr(M, '_call_prior'): M._call_prior = lambda *a, **k: None
-if os.environ.get('NOPRIOR') == '1' and hasattr(M, '_call_prior_gpt'): M._call_prior_gpt = lambda *a, **k: None
 if os.environ.get('NORATE') == '1': M._call = lambda text: None
 R = pd.read_parquet('data/long.parquet', columns=['bench', 'subject_id', 'item_id', 'normalized_name', 'trial', 'y'])
 R = R.sort_values('trial').drop_duplicates(['bench', 'subject_id', 'item_id'])
@@ -94,21 +73,27 @@ if os.environ.get('FEAT', '0') == '1':   # pass the benchmark's item_features th
             k = (x['text'][:4000] + ' ' + FEAT.get(str(x['item_id']), '')).strip()
             txt2id[k] = x['item_id']; txt2id[k.lower()] = x['item_id']
 benches = sorted(byb)
+def make_item(tx, b, i):
+    return {'item_content': tx[i], 'item_features': FEAT.get(str(i), ''), 'interactors': '', 'benchmark_id': 'b_' + b}
+NSUB = [int(x) for x in os.environ.get('NSUBS', '2,2,1,1,1,1,1').split(',')]
 alcs = []; PB = {}; FL = []; SH = {}; BYB = {}
 for draw in range(DRAWS):
-    bs = list(rng.choice(benches, 7, replace=False)); nsub = [int(x) for x in os.environ.get('NSUBS', '2,2,1,1,1,1,1').split(',')]
+    bs = list(rng.choice(benches, 7, replace=False))
     pairs = []
-    for b, k in zip(bs, nsub):
+    for b, k in zip(bs, NSUB):
         ids = [x['item_id'] for x in items_all[b]]; tx = {x['item_id']: x['text'] for x in items_all[b]}
         ids = list(rng.choice(ids, min(NITEM, len(ids)), replace=False))
         d = byb[b][byb[b].item_id.isin(ids)]
         cnt = d.groupby('subject_id').item_id.nunique(); subs = cnt[cnt >= int(0.7 * len(ids))].index
         if len(subs) < k: continue
         subs = rng.choice(subs, k, replace=False)
+        if os.environ.get('DISSIM') == '1' and k == 2:   # stress test: the strongest and the weakest subject on this benchmark
+            acc_s = d.groupby('subject_id').y.mean(); cand = acc_s[acc_s.index.isin(cnt[cnt >= int(0.7 * len(ids))].index)]
+            subs = np.array([cand.idxmax(), cand.idxmin()])
         for s in subs:
             g = d[d.subject_id == s].sample(frac=1, random_state=int(rng.integers(1e9)))
             h = len(g) // 2
-            idict = (lambda tx, b: (lambda i: {'item_content': tx[i], 'item_features': FEAT.get(str(i), ''), 'interactors': '', 'benchmark_id': 'b_' + b}))(tx, b)
+            idict = functools.partial(make_item, tx, b)
             subj = SUBJ.get((b, str(s))) or {'normalized_name': str(g.normalized_name.iloc[0]), 'subject_features_extra': str(s)}
             pairs.append(dict(b=b, subj=subj, idict=idict, stream=list(zip(g.item_id.iloc[:h], g.y.iloc[:h])), ev=[(idict(i), y) for i, y in zip(g.item_id.iloc[h:], g.y.iloc[h:])], pos=0, got=[]))
     if not pairs: continue
@@ -131,9 +116,7 @@ for draw in range(DRAWS):
                 if lab_mod is None: take = racq.random() < min(1, rem_lab / rem_items)
                 else:
                     ctx = {'labels_remaining': n - len(p['got']), 'items_remaining': rem_items}
-                    if 'prediction' in lab_mod.acquisition_function.__code__.co_varnames:   # hooks that use the current prediction
-                        take = lab_mod.acquisition_function([p['subj'], p['idict'](i)], prediction=M.predict([p['subj'], p['idict'](i)], labeled), labeled=labeled, context=ctx)
-                    else: take = lab_mod.acquisition_function([p['subj'], p['idict'](i)], labeled=labeled, context=ctx)
+                    take = lab_mod.acquisition_function([p['subj'], p['idict'](i)], labeled=labeled, context=ctx)
                 if take:
                     p['got'].append(i); labeled.append([[p['subj'], p['idict'](i)], int(y)])
         WK = int(os.environ.get('WORKERS', '0'))
@@ -142,8 +125,7 @@ for draw in range(DRAWS):
             random.Random(draw * 100 + n).shuffle(calls)
             PRED = {}
             for w_ in range(WK):
-                for attr in ('_AGREE_SEEN', '_SEEN_Z', '_cache'):
-                    if hasattr(M, attr): getattr(M, attr).clear()
+                if hasattr(M, '_cache'): M._cache.clear()
                 for pi, k in calls[w_::WK]:
                     PRED[(pi, k)] = M.predict([pairs[pi]['subj'], pairs[pi]['ev'][k][0]], labeled)
         for pi, p in enumerate(pairs):
@@ -161,8 +143,8 @@ for draw in range(DRAWS):
 print('DRAWS', len(alcs), 'MEAN', round(float(np.mean(alcs)), 4), 'SE', round(float(np.std(alcs) / np.sqrt(len(alcs))), 4))
 print('PER_BUDGET', {n: round(float(np.mean(v)), 4) for n, v in sorted(PB.items())})
 print('FLOOR', round(float(np.mean(FL)),4))
-print('PRIOR_CACHE_MISSES', MISS[0] if 'MISS' in globals() else 0, 'API_CALLS', CALLS[0] if 'CALLS' in globals() else 0, 'GPT_MISSES', GMISS[0] if 'GMISS' in globals() else 0, 'GPT_CALLS', GCALLS[0] if 'GCALLS' in globals() else 0)
-if os.environ.get('STRICT') == '1' and 'MISS' in globals() and MISS[0]: sys.exit(f'{MISS[0]} subject priors missing from the cache: the replay would not match the reported run')
+print('PRIOR_CACHE_MISSES', MISS[0], 'API_CALLS', CALLS[0])
+if os.environ.get('STRICT') == '1' and MISS[0]: sys.exit(f'{MISS[0]} subject priors missing from the cache: the replay would not match the reported run')
 print('BY_BENCH', {b: (round(float(np.mean(v)), 4), len(v)) for b, v in sorted(BYB.items())})
 print('ALCS', [round(a,5) for a in alcs])
 print('BY_NSUB', {k: (round(float(np.mean(v)),4), round(float(np.max(v)),3)) for k, v in sorted(SH.items())})

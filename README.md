@@ -16,20 +16,20 @@ python src/prior_eval_build.py    # the 87 training pairs for the subject-prior 
 python src/make_anchors.py        # the eight calibration examples -> submission/anchors.json
 python src/disjoint_prep.py       # item files for the benchmarks used in no development step (ids in data/llm/item_ids_disjoint.json)
 python reproduce.py               # all tables, from cached model outputs and the simulation logs in data/
-python reproduce.py --rerun       # rerun every simulation first (JOBS=6 parallel jobs, several hours on a laptop), still no API key
+python reproduce.py --rerun       # rerun every simulation first (JOBS=4 parallel jobs by default, several hours on a laptop), still no API key
 ```
 
 measurement-db is gated, so this repository ships item and subject identifiers, never item text or per-model results, and the scripts above rebuild them once access is granted. Language-model outputs are cached by item or pair: subject-prior estimates in `data/llm/prior_eval_*.json` and `data/llm/prior_cache.jsonl`, item ratings in `data/llm/api_haiku/` and `data/llm/batches_opus/`. `data/llm/prior_estimates.csv` lists the Opus, Sonnet and Haiku accuracy estimates for all 87 training pairs. The online tables need the Codabench scoring logs of the listed runs (`src/online_table.py`), which are private to the submitting team, so `reproduce.py` skips them when `data/online/` is absent.
 
 | Report | Source |
 |---|---|
-| Table 1 and the recall tests, subject prior | `reproduce.py` from `data/llm/prior_eval_*.json` (estimates made with `src/prior_eval_deployed.py`) |
-| Tables 2-3, online runs | `src/online_table.py` (run IDs inside) |
-| Table 4, submitted predictor with each language-model term switched off | `src/sim_sh.py`, subject priors replayed from `data/llm/prior_cache.jsonl` (logs in `data/ablate/`) |
-| Table 5, the prior with four subjects per benchmark and on held-out benchmarks | `src/sim_sh.py` with `NSUBS=4,...` or `ITEMS=data/llm/items_disjoint.json` (logs in `data/multi/`, `data/disjoint/`) |
-| Tables A1-A2, pooling in simulation (appendix) | `src/sim_pp.py` (commands in `reproduce.py`, logs in `data/` and `data/small/`) |
-| Figure A1 | `report/fig_budget.py` |
-| Item-rating signal given the true pair accuracy (Section 3) | `src/item_signal_oracle.py`, log in `data/item_signal_oracle.log` |
+| Tables 1 and 4 and the recall tests, subject prior | `reproduce.py` from `data/llm/prior_eval_*.json` (estimates made with `src/prior_eval_deployed.py`) |
+| Table 2 and Figure 1, submitted predictor with each language-model term switched off | `src/sim_sh.py`, subject priors replayed from `data/llm/prior_cache.jsonl` (logs in `data/ablate/`, figure `report/fig_ablate.py`) |
+| Table 3, online runs | `src/online_table.py` (run IDs inside) |
+| Section 5 and Appendix B, the prior with four subjects per benchmark and on held-out benchmarks | `src/sim_sh.py` with `NSUBS=4,...` or `ITEMS=data/llm/items_disjoint.json` (logs in `data/multi/`, `data/disjoint/`) |
+| Tables 5-6 and Figure 2, pooling in simulation (appendix) | `src/sim_pp.py` (commands in `reproduce.py`, logs in `data/` and `data/small/`, figure `report/fig_budget.py`) |
+
+Item ratings were produced by `src/rate_prep.py` (prompts) with `src/rate_api.py` (Haiku) and `src/run_rate_opus.sh` (Opus). `src/explore/` holds the exploratory scripts behind the dropped variants of Table 8. No table depends on them.
 
 ## The submission
 

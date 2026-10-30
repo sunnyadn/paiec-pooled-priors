@@ -7,7 +7,6 @@ IDS = json.load(open('data/llm/item_ids_disjoint.json')) if os.path.exists('data
 for b, d in R.groupby('bench'):
     if b in used or not os.path.exists(f'data/mdb/{b}/formatted_tables/items.parquet'):
         continue
-    cnt = d.groupby('subject_id').item_id.nunique()
     ic = d.groupby('item_id').subject_id.nunique()
     pool = ic[ic >= max(2, ic.quantile(0.5))].index.values
     its = rng.choice(pool, min(300, len(pool)), replace=False)

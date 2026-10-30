@@ -11,3 +11,4 @@ afrimedqa 23 0.1789 distinct revealed 243
 agentdojo 28 0.1613 distinct revealed 300
 benger 24 0.131 distinct revealed 300
 MEAN 0.1877
+PER_BUDGET {0: 0.25, 1: 0.1958, 3: 0.1881, 7: 0.1743, 15: 0.1604, 31: 0.1481}

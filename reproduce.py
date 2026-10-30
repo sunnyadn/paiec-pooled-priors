@@ -1,11 +1,31 @@
 """Recompute every table in the technical report from cached model outputs, without an API key.
 usage: python reproduce.py [--rerun]   (--rerun reruns every simulation first, into data/rerun/; see README)"""
-import glob, json, os, re, subprocess, sys
+import ast, glob, json, os, re, shutil, subprocess, sys
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__)); os.chdir(HERE); sys.path.insert(0, 'src')
 RERUN = '--rerun' in sys.argv
 LOG = 'data/rerun' if RERUN else 'data'
+SEEDS = (5, 6, 7)
+sim = lambda env, model, s: (f'{env}STRICT=1 PRIOR_CACHE_ONLY=1 SEED={s} NITEM=120 SUBJ=1 '   # subject priors replayed, never the API
+                             f'{sys.executable} src/sim_sh.py {model} cover data/llm/batches_opus')
+ARMS = [('Neither term', 'NOPRIOR=1 NORATE=1 ', 'none'), ('Item ratings only', 'NOPRIOR=1 ', 'noprior'),
+        ('Subject prior only', 'NORATE=1 ', 'norate'), ('Both (submitted)', '', 'full')]
+
+
+def field(path, key):
+    """A summary line of a sim_sh.py log (ALCS, PER_BUDGET, BY_BENCH), parsed as a Python literal."""
+    v = re.search(rf'^{key} (.*)$', open(path).read(), re.M).group(1)
+    return ast.literal_eval(re.sub(r"np\.str_\(('[^']*')\)", r'\1', v))
+
+
+def alcs(fmt):
+    """Per-draw ALCs over the three seeds; fmt has a {s} slot for the seed."""
+    return np.concatenate([field(fmt.format(s=s), 'ALCS') for s in SEEDS])
+
+
+def paired(dd):
+    return f'{dd.mean():+.4f} ± {dd.std(ddof=1) / np.sqrt(len(dd)):.4f}  better in {np.mean(dd < 0) * 100:.0f}%'
 
 
 def mean_of(path):
@@ -16,9 +36,9 @@ def mean_of(path):
 
 
 def table_prior():
-    """Table 1: subject prior on held-out training pairs, in labels a Laplace estimate would need to match it."""
+    """Tables 1 and 4: subject prior on held-out training pairs, in labels a Laplace estimate would need to match it."""
     if not (os.path.exists('data/llm/prior_eval.json') and os.path.exists('submission/anchors.json')):
-        print('Table 1: run src/prior_eval_build.py and src/make_anchors.py first (they need measurement-db)'); return
+        print('Tables 1 and 4: run src/prior_eval_build.py and src/make_anchors.py first (they need measurement-db)'); return
     E = json.load(open('data/llm/prior_eval.json')); A = json.load(open('submission/anchors.json'))
     acc = np.array([r['acc'] for r in E]); bench = np.array([r['bench'] for r in E])
     anchor_pair = {i for a in A for i, r in enumerate(E)   # pairs that serve as calibration examples
@@ -41,7 +61,7 @@ def table_prior():
         print(f'  {name:44s} pairs {m.sum():3d}  RMSE {np.sqrt(mse):.3f}  corr {c:5.2f}  labels {labels(acc[m], mse)}')
 
     common = held & ~np.isnan(H) & ~np.isnan(S) & ~np.isnan(O)
-    print('Table 1. Subject prior on held-out training pairs (calibration-example pairs excluded)')
+    print('Tables 1 and 4. Subject prior on held-out training pairs (calibration-example pairs excluded)')
     row('Constant 0.5', None, common)
     for name, e in (('Claude Haiku 5.5', H), ('Claude Sonnet 5.5', S), ('Claude Opus 5.5', O)):
         row(name, e, common)
@@ -67,52 +87,41 @@ def table_prior():
 
 
 def table_online():
-    """Tables 2 and 3: online formative runs, draw-adjusted, with per-budget excess."""
+    """Table 3: online formative runs, draw-adjusted, with per-budget excess."""
     if not glob.glob('data/online/scoring_*.txt'):
-        print('Tables 2-3: Codabench scoring logs not found in data/online/ (run IDs in src/online_table.py)'); return
-    print('Table 2. Online formative runs'); subprocess.run([sys.executable, 'src/online_table.py'], check=True)
+        print('Table 3: Codabench scoring logs not found in data/online/ (run IDs in src/online_table.py)'); return
     from online_pairs import load
     import online_table as T
+    print('Table 3, weighted excess. Online formative runs by version'); T.main()
     P = load(); print('Table 3. Online excess Brier per budget (b=0,1,3,7,15)')
     for name, runs in T.GROUPS:
         pb = np.array([p['pb'] for p in P if p['run'] in runs])
         print(f'  {name:38s}', ' '.join(f'{v:6.3f}' for v in (pb - pb[:, 5:6]).mean(0)[:5]))
 
 
-ABL = {'Neither term': 'NOPRIOR=1 NORATE=1 ', 'Item ratings only': 'NOPRIOR=1 ', 'Subject prior only': 'NORATE=1 ', 'Both (submitted)': ''}
-
-
 def table_ablate():
-    """Table 4: the submitted predictor on identical simulated draws, language-model terms switched off in turn."""
-    d = f'{LOG}/ablate' if RERUN else 'data/ablate'
-    stem = {'Neither term': 'none', 'Item ratings only': 'noprior', 'Subject prior only': 'norate', 'Both (submitted)': 'full'}
-    get = lambda k: np.concatenate([np.array(eval(re.search(r'ALCS (\[.*\])', open(f'{d}/v26_{stem[k]}_s{s}.log').read()).group(1)))
-                                    for s in (5, 6, 7)])
-    b0 = lambda k: np.mean([eval(re.search(r'PER_BUDGET (\{.*\})', open(f'{d}/v26_{stem[k]}_s{s}.log').read()).group(1))[0] for s in (5, 6, 7)])
-    base = get('Neither term')
-    print('Table 4. Submitted predictor on identical simulated draws (90): ALC, B0, paired difference vs neither term')
-    lap = np.concatenate([np.array(eval(re.search(r'ALCS (\[.*\])', open(f'{d}/laplace_s{s}.log').read()).group(1))) for s in (5, 6, 7)])
-    dd = lap - base
-    print(f'  {"Laplace on own labels":20s} {lap.mean():.4f}  B0 0.250  {dd.mean():+.4f} ± {dd.std(ddof=1) / np.sqrt(len(dd)):.4f}  better in {np.mean(dd < 0) * 100:.0f}% of draws')
-    for k in ABL:
-        x = get(k); dd = x - base
-        print(f'  {k:20s} {x.mean():.4f}  B0 {b0(k):.3f}  {dd.mean():+.4f} ± {dd.std(ddof=1) / np.sqrt(len(dd)):.4f}  better in {np.mean(dd < 0) * 100:.0f}% of draws')
+    """Table 2 and Figure 1: the submitted predictor on identical simulated draws, language-model terms switched off in turn."""
+    d = f'{LOG}/ablate'
+    base = alcs(f'{d}/v26_none_s{{s}}.log')
+    print('Table 2. Submitted predictor on identical simulated draws (90): ALC, B0, paired difference vs neither term')
+    for label, _, stem in [('Laplace on own labels', None, 'laplace')] + ARMS:
+        log = f'{d}/{stem}_s{{s}}.log' if stem == 'laplace' else f'{d}/v26_{stem}_s{{s}}.log'
+        x = alcs(log); b0 = np.mean([field(log.format(s=s), 'PER_BUDGET')[0] for s in SEEDS])
+        print(f'  {label:20s} {x.mean():.4f}  B0 {b0:.3f}  {paired(x - base)} of draws')
 
 
 def table_regimes():
-    """Table 5: the subject prior with four subjects per benchmark, and on benchmarks held out from all development."""
-    get = lambda d, a: np.concatenate([np.array(eval(re.search(r'ALCS (\[.*\])', open(f'{d}/{a}_s{s}.log').read()).group(1))) for s in (5, 6, 7)])
-    print('Table 5. Subject prior across regimes (paired over identical simulated draws)')
-    M_, D_ = (f'{LOG}/multi', f'{LOG}/disjoint') if RERUN else ('data/multi', 'data/disjoint')
+    """Section 5 and Appendix B: the subject prior with four subjects per benchmark, and on benchmarks held out from all development."""
+    print('Section 5 and Appendix B. Subject prior across regimes (paired over identical simulated draws)')
+    M_, D_ = f'{LOG}/multi', f'{LOG}/disjoint'
     if os.path.exists(f'{M_}/full_s5.log'):
-        dd = get(M_, 'full') - get(M_, 'noprior')
-        print(f'  four subjects per benchmark  {dd.mean():+.4f} ± {dd.std(ddof=1) / np.sqrt(len(dd)):.4f}  better in {np.mean(dd < 0) * 100:.0f}% of {len(dd)} draws')
+        dd = alcs(f'{M_}/full_s{{s}}.log') - alcs(f'{M_}/noprior_s{{s}}.log')
+        print(f'  four subjects per benchmark  {paired(dd)} of {len(dd)} draws')
     if os.path.exists(f'{D_}/bb_prior_s5.log'):
         named = json.load(open('data/llm/disjoint_named.json')) if os.path.exists('data/llm/disjoint_named.json') else {}
         agg = {}
-        for s in (5, 6, 7):
-            P = eval(re.search(r'BY_BENCH (\{.*\})', open(f'{D_}/bb_prior_s{s}.log').read()).group(1))
-            N = eval(re.search(r'BY_BENCH (\{.*\})', open(f'{D_}/bb_none_s{s}.log').read()).group(1))
+        for s in SEEDS:
+            P, N = field(f'{D_}/bb_prior_s{s}.log', 'BY_BENCH'), field(f'{D_}/bb_none_s{s}.log', 'BY_BENCH')
             for b in P:
                 a = agg.setdefault(b, [0.0, 0]); a[0] += (P[b][0] - N[b][0]) * P[b][1]; a[1] += P[b][1]
         for grp in (True, False):
@@ -142,30 +151,22 @@ SMALL = {'Baseline': ('USE_LLM=0 ', 'src/baselines/empirical_mean.py random', 'b
 def rerun():
     if not os.path.exists('data/llm/items_to_rate.json'):
         sys.exit('--rerun needs the item files: run dl.py, src/assemble.py and src/rate_prep.py first (measurement-db is gated)')
-    os.makedirs('data/rerun/small', exist_ok=True)
-    jobs = [(c.format(py=sys.executable), f'data/rerun/{log}') for c, log in SIMS.values()]
-    os.makedirs('data/rerun/ablate', exist_ok=True)
-    for k, env in ABL.items():   # subject priors replayed from data/llm/prior_cache.jsonl, never the API
-        stem = {'Neither term': 'none', 'Item ratings only': 'noprior', 'Subject prior only': 'norate', 'Both (submitted)': 'full'}[k]
-        for s in (5, 6, 7):
-            jobs.append((f'{env}STRICT=1 PRIOR_CACHE_ONLY=1 SEED={s} DRAWS=30 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py submission/model.py cover data/llm/batches_opus',
-                         f'data/rerun/ablate/v26_{stem}_s{s}.log'))
-    for s in (5, 6, 7):   # smoothed baseline on the same draws (needs a labeling.py next to it, as on the platform)
-        jobs.append((f'mkdir -p data/rerun/lap && cp src/baselines/laplace.py data/rerun/lap/model.py && cp submission/labeling.py data/rerun/lap/ && '
-                     f'PRIOR_CACHE_ONLY=1 SEED={s} DRAWS=30 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py data/rerun/lap/model.py cover data/llm/batches_opus',
-                     f'data/rerun/ablate/laplace_s{s}.log'))
-    for d in ('multi', 'disjoint'):
+    for d in ('small', 'ablate', 'multi', 'disjoint', 'lap'):
         os.makedirs(f'data/rerun/{d}', exist_ok=True)
-    for s in (5, 6, 7):   # four subjects per benchmark, and benchmarks used in no development step (priors replayed)
-        for arm, env in (('full', ''), ('norate', 'NORATE=1 '), ('noprior', 'NOPRIOR=1 '), ('none', 'NOPRIOR=1 NORATE=1 ')):
-            jobs.append((f'{env}STRICT=1 PRIOR_CACHE_ONLY=1 NSUBS=4,4,4,4,4,4,4 SEED={s} DRAWS=10 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py submission/model.py cover data/llm/batches_opus',
-                         f'data/rerun/multi/{arm}_s{s}.log'))
-        for arm, env in (('prior', 'NORATE=1 '), ('none', 'NOPRIOR=1 NORATE=1 ')):
-            jobs.append((f'{env}STRICT=1 PRIOR_CACHE_ONLY=1 ITEMS=data/llm/items_disjoint.json SEED={s} DRAWS=30 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py submission/model.py cover data/llm/batches_opus',
-                         f'data/rerun/disjoint/bb_{arm}_s{s}.log'))
+    # smoothed baseline on the same draws (needs a labeling.py next to it, as on the platform)
+    shutil.copy('src/baselines/laplace.py', 'data/rerun/lap/model.py'); shutil.copy('submission/labeling.py', 'data/rerun/lap/')
+    jobs = [(c.format(py=sys.executable), f'data/rerun/{log}') for c, log in SIMS.values()]
+    for s in SEEDS:
+        for _, env, stem in ARMS:
+            jobs.append((sim(env, 'submission/model.py', s), f'data/rerun/ablate/v26_{stem}_s{s}.log'))
+        jobs.append((sim('', 'data/rerun/lap/model.py', s), f'data/rerun/ablate/laplace_s{s}.log'))
+        for arm, env in (('full', ''), ('noprior', 'NOPRIOR=1 ')):   # four subjects per benchmark
+            jobs.append((sim(env + 'NSUBS=4,4,4,4,4,4,4 DRAWS=10 ', 'submission/model.py', s), f'data/rerun/multi/{arm}_s{s}.log'))
+        for arm, env in (('prior', 'NORATE=1 '), ('none', 'NOPRIOR=1 NORATE=1 ')):   # benchmarks used in no development step
+            jobs.append((sim(env + 'ITEMS=data/llm/items_disjoint.json ', 'submission/model.py', s), f'data/rerun/disjoint/bb_{arm}_s{s}.log'))
     for env, args, stem in SMALL.values():
         for n in (2, 5, 10):
-            for s in (5, 6, 7):
+            for s in SEEDS:
                 jobs.append((f'{env}NITEM=100 NSUB={n} SEED={s} {sys.executable} src/sim_pp.py {args}',
                              f'data/rerun/small/{stem}_n{n}_s{s}.log'))
     from concurrent.futures import ThreadPoolExecutor
@@ -177,16 +178,16 @@ def rerun():
 
 
 def table_sim():
-    """Table 4 (simulation, pooling) and Table A1 (per benchmark)."""
+    """Tables 5 and 6: pooling in simulation, overall and per benchmark."""
     g = lambda k: mean_of(f'{LOG}/{SIMS[k][1]}')
-    sm = lambda stem, n: np.mean([mean_of(f'{LOG}/small/{stem}_n{n}_s{s}.log') for s in (5, 6, 7)])
-    print('Table A2. Brier ALC in simulation: Baseline, v5, v6 random reveals, v6 coverage-first')
+    sm = lambda stem, n: np.mean([mean_of(f'{LOG}/small/{stem}_n{n}_s{s}.log') for s in SEEDS])
+    print('Table 5. Brier ALC in simulation: Baseline, v5, v6 random reveals, v6 coverage-first')
     print('  300 items, 12 benchmarks   ', ' '.join(f'{g(k):.4f}' for k in ('base300', 'v5_300', 'v6r_300', 'v6c_300')))
     for n in (2, 5, 10):
         print(f'  Online scale, {n:2d} subjects  ', ' '.join(f'{sm(stem, n):.4f}' for _, _, stem in SMALL.values()))
     print('  Full pools, no rating term ', ' '.join(f'{g(k):.4f}' for k in ('base_full', 'v5_full', 'v6r_full', 'v6c_full')))
     print(f'  v6 coverage-first without the rating term: {g("v6c_nollm"):.4f}   with true ability (oracle): {g("oracle"):.4f}')
-    print('Table A1. ALC per benchmark (300 items): benchmark, subjects, baseline, v5, v6, v6 without rating term')
+    print('Table 6. ALC per benchmark (300 items): benchmark, subjects, baseline, v5, v6, v6 without rating term')
     per = {}
     for k in ('base300', 'v5_300', 'v6c_300', 'v6c_nollm'):
         for b, n, v in re.findall(r'^(\S+) (\d+) ([\d.]+)', open(f'{LOG}/{SIMS[k][1]}').read(), re.M):

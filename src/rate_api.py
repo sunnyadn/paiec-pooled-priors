@@ -1,4 +1,4 @@
-# rate every sampled item through the deployed submission code (per-item API call); writes batches-format files for sim_llm2 (RDIR)
+# rate every sampled item through the deployed submission code (per-item API call); writes batches-format files that sim_sh.py and sim_pp.py read as RDIR
 import json, os, sys
 from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, 'submission'); import model

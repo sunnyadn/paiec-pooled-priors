@@ -11,7 +11,7 @@ def pb(f):
 runs = [("Official baseline (empirical mean)", "pp_baseline_mean_random.log", "#9a9a9a", "o"),
         ("v5 (pooling + item offsets)", "pp_v5_random_pb.log", "#6f8fc8", "s"),
         ("v6, coverage-first", "pp_v6_cover_pb.log", "#1f3b73", "D"),
-        ("Submission with oracle ability", "oracle1_300.log", "#c0504d", "^")]
+        ("v6 with oracle ability", "oracle1_300.log", "#c0504d", "^")]
 B = [0, 1, 3, 7, 15, 31]
 fig, ax = plt.subplots(figsize=(5.2, 2.6))
 for lab, f, c, m in runs:

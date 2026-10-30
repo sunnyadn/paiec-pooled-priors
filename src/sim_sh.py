@@ -11,7 +11,7 @@ for f in glob.glob(rdir + '/*.json'):
     try:
         for x in json.load(open(f))['ratings']: rat[str(x['id'])] = float(x['p'])
     except Exception: pass
-items_all = json.load(open('data/llm/items_to_rate.json'))
+items_all = json.load(open(os.environ.get('ITEMS', 'data/llm/items_to_rate.json')))
 txt2id = {}
 for b in items_all:
     for x in items_all[b]:
@@ -46,7 +46,26 @@ if hasattr(M, '_call_prior'):   # subject prior: real API calls through the subm
             with open(_PC, 'a') as f: f.write(json.dumps([k, v]) + '\n')
         return _pc[k]
     M._call_prior = _cp
+if hasattr(M, '_call_prior_gpt'):   # second-vendor prior: same caching, its own cache file
+    _GPC = 'data/llm/prior_cache_gpt.jsonl'; _gpc = {}; GMISS = [0]; GCALLS = [0]; _orig_g = M._call_prior_gpt
+    if os.path.exists(_GPC):
+        for l in open(_GPC):
+            k, v = json.loads(l); _gpc[k] = v
+    def _cg(name, texts):
+        k = hashlib.md5(('gpt' + getattr(M, '_ANCHOR_TXT', '') * getattr(M, 'USE_ANCHORS', 0) + name + '\n' + '\n'.join(texts)).encode()).hexdigest()
+        if k not in _gpc and (os.environ.get('PRIOR_CACHE_ONLY') == '1' or GCALLS[0] >= int(os.environ.get('MAXGPT', '0'))):
+            GMISS[0] += 1; return None
+        if k not in _gpc:
+            GCALLS[0] += 1; keep = M._cfg
+            M._cfg = lambda: {'openai_key': open(os.path.expanduser('~/.config/paiec/openai_key')).read().strip()}
+            try: v = _orig_g(name, texts)
+            except Exception: v = None
+            M._cfg = keep; _gpc[k] = v
+            with open(_GPC, 'a') as f: f.write(json.dumps([k, v]) + '\n')
+        return _gpc[k]
+    M._call_prior_gpt = _cg
 if os.environ.get('NOPRIOR') == '1' and hasattr(M, '_call_prior'): M._call_prior = lambda *a, **k: None
+if os.environ.get('NOPRIOR') == '1' and hasattr(M, '_call_prior_gpt'): M._call_prior_gpt = lambda *a, **k: None
 if os.environ.get('NORATE') == '1': M._call = lambda text: None
 R = pd.read_parquet('data/long.parquet', columns=['bench', 'subject_id', 'item_id', 'normalized_name', 'trial', 'y'])
 R = R.sort_values('trial').drop_duplicates(['bench', 'subject_id', 'item_id'])
@@ -75,7 +94,7 @@ if os.environ.get('FEAT', '0') == '1':   # pass the benchmark's item_features th
             k = (x['text'][:4000] + ' ' + FEAT.get(str(x['item_id']), '')).strip()
             txt2id[k] = x['item_id']; txt2id[k.lower()] = x['item_id']
 benches = sorted(byb)
-alcs = []; PB = {}; FL = []; SH = {}
+alcs = []; PB = {}; FL = []; SH = {}; BYB = {}
 for draw in range(DRAWS):
     bs = list(rng.choice(benches, 7, replace=False)); nsub = [int(x) for x in os.environ.get('NSUBS', '2,2,1,1,1,1,1').split(',')]
     pairs = []
@@ -110,7 +129,11 @@ for draw in range(DRAWS):
                 i, y = p['stream'][p['pos']]; p['pos'] += 1
                 rem_items = len(p['stream']) - p['pos'] + 1; rem_lab = 31 - len(p['got'])
                 if lab_mod is None: take = racq.random() < min(1, rem_lab / rem_items)
-                else: take = lab_mod.acquisition_function([p['subj'], p['idict'](i)], labeled=labeled, context={'labels_remaining': n - len(p['got']), 'items_remaining': rem_items})
+                else:
+                    ctx = {'labels_remaining': n - len(p['got']), 'items_remaining': rem_items}
+                    if 'prediction' in lab_mod.acquisition_function.__code__.co_varnames:   # hooks that use the current prediction
+                        take = lab_mod.acquisition_function([p['subj'], p['idict'](i)], prediction=M.predict([p['subj'], p['idict'](i)], labeled), labeled=labeled, context=ctx)
+                    else: take = lab_mod.acquisition_function([p['subj'], p['idict'](i)], labeled=labeled, context=ctx)
                 if take:
                     p['got'].append(i); labeled.append([[p['subj'], p['idict'](i)], int(y)])
         WK = int(os.environ.get('WORKERS', '0'))
@@ -126,10 +149,13 @@ for draw in range(DRAWS):
         for pi, p in enumerate(pairs):
             pr = np.array([PRED[(pi, k)] for k in range(len(p['ev']))]) if WK else np.array([M.predict([p['subj'], it], labeled) for it, _ in p['ev']]); y = np.array([y for _, y in p['ev']])
             e = np.mean((y - pr) ** 2); alc[pi] += w * e; PB.setdefault(n, []).append(e); SH.setdefault((n, sum(q["b"] == p["b"] for q in pairs)), []).append(e)
+    for pi, p in enumerate(pairs): BYB.setdefault(p['b'], []).append(float(alc[pi]))
     alcs.append(float(np.mean(alc))); FL.extend([np.mean((np.array([y for _,y in p["ev"]])-np.mean([y for _,y in p["ev"]]))**2) for p in pairs])
 print('DRAWS', len(alcs), 'MEAN', round(float(np.mean(alcs)), 4), 'SE', round(float(np.std(alcs) / np.sqrt(len(alcs))), 4))
 print('PER_BUDGET', {n: round(float(np.mean(v)), 4) for n, v in sorted(PB.items())})
 print('FLOOR', round(float(np.mean(FL)),4))
-print('PRIOR_CACHE_MISSES', MISS[0] if 'MISS' in globals() else 0, 'API_CALLS', CALLS[0] if 'CALLS' in globals() else 0)
+print('PRIOR_CACHE_MISSES', MISS[0] if 'MISS' in globals() else 0, 'API_CALLS', CALLS[0] if 'CALLS' in globals() else 0, 'GPT_MISSES', GMISS[0] if 'GMISS' in globals() else 0, 'GPT_CALLS', GCALLS[0] if 'GCALLS' in globals() else 0)
+if os.environ.get('STRICT') == '1' and 'MISS' in globals() and MISS[0]: sys.exit(f'{MISS[0]} subject priors missing from the cache: the replay would not match the reported run')
+print('BY_BENCH', {b: (round(float(np.mean(v)), 4), len(v)) for b, v in sorted(BYB.items())})
 print('ALCS', [round(a,5) for a in alcs])
 print('BY_NSUB', {k: (round(float(np.mean(v)),4), round(float(np.max(v)),3)) for k, v in sorted(SH.items())})

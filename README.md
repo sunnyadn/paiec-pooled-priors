@@ -31,13 +31,13 @@ measurement-db is gated, so this repository ships item and subject identifiers, 
 
 ## The submission
 
-`submission/model.py` (predictor) and `submission/labeling.py` (acquisition). `model.py` is the predictor of Codabench submission 1017682 (named v26 in the logs), except that it loads the calibration examples from `anchors.json` instead of carrying them inline. `model_v5.py` and `model_v6.py` are the earlier pooled predictors in the simulation tables. Python standard library and NumPy only, no parameters fitted to the training data.
+`submission/model.py` (predictor) and `submission/labeling.py` (acquisition). `model.py` is the predictor of Codabench submission 1017682 (named v26 in the logs), except that it loads the calibration examples from `anchors.json` instead of carrying them inline. `model_v5.py` and `model_v6.py` are the earlier pooled predictors in the simulation tables. Python standard library and NumPy only. No parameters are fitted to the training responses; the prior's calibration examples and constants and the simulation-tuned settings are listed in Section 3 of the report.
 
 - Without an API key the language-model terms are skipped and the pooled predictor runs on its own.
-- With `llm_config.json` next to `model.py` (see `submission/llm_config.example.json`), it asks Claude Opus 5.5 for each subject's accuracy (once per subject and benchmark) and each item's difficulty, falling back to Claude Sonnet 5.5 and Claude Haiku 5.5 when a call is refused. Results are cached on disk so the platform's worker processes share them, calls retry on rate limits, and per-process caps (150 prior calls, 300 item ratings) bound the cost to about $10-15 per formative run.
+- With `llm_config.json` next to `model.py` (see `submission/llm_config.example.json`), it asks Claude Opus 5.5 for each subject's accuracy (once per subject and benchmark) and each item's difficulty. Subject-prior calls fall back to Claude Sonnet 5.5 and then Claude Haiku 5.5 when Opus gives no number. Results are cached on disk so the platform's worker processes share them, calls retry on rate limits, and per-process caps (150 prior calls, 300 item ratings) bound the cost to about $10-15 per formative run.
 
 Build the Codabench zip with `tools/make_zip.sh submission/model.py KEYFILE NAME` and check it with `check_submission_zip.py --static-only` from `aims-foundations/paiec_baseline`.
 
 ## Disclosures
 
-Training data: public measurement-db only, for development, simulation and the eight calibration examples; nothing is fitted to it. Pretrained models: Claude Opus 5.5 via the Anthropic API for subject priors and item ratings, with Claude Sonnet 5.5 and Claude Haiku 5.5 as fallbacks. Development used LLM coding assistants (Claude Code, Codex).
+Training data: public measurement-db only, for development, simulation and the eight calibration examples; no parameters are fitted to it. Pretrained models: Claude Opus 5.5 via the Anthropic API for subject priors and item ratings, with Claude Sonnet 5.5 and Claude Haiku 5.5 as fallbacks. Development used LLM coding assistants (Claude Code, Codex).

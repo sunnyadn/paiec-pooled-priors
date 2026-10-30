@@ -1,5 +1,5 @@
 """Table of online formative runs: raw ALC, draw-adjusted ALC and excess over each pair's budget-31 level,
-with standard errors over pairs. usage: python src/online_table.py"""
+with standard errors over runs (the draw is the unit of variation). usage: python src/online_table.py"""
 import sys; sys.path.insert(0, 'src')
 from online_pairs import load
 import numpy as np

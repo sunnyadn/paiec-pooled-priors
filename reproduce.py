@@ -57,6 +57,8 @@ def table_prior():
           f'[{np.percentile(R, 5):.3f}, {np.percentile(R, 95):.3f}]  corr {np.corrcoef(e, a)[0, 1]:5.2f}  '
           f'labels {labels(a, mse)} [{np.percentile(L, 5):.0f}, {np.percentile(L, 95):.0f}]')
     row('Opus, calibration benchmarks removed', O, common & ~np.isin(bench, list(anchor_bench)))
+    sim = set(json.load(open('data/llm/items_to_rate.json'))) if os.path.exists('data/llm/items_to_rate.json') else set()
+    row('Opus, simulation benchmarks removed', O, held & ~np.isnan(O) & ~np.isin(bench, list(sim)))
     # recall tests: the same pairs with the subject's identity hidden, or with the benchmark named
     R_, B_ = est('oredact'), est('obench'); m2 = held & ~np.isnan(O) & ~np.isnan(R_) & ~np.isnan(B_)
     print('Recall tests (Opus, same pairs)')
@@ -97,6 +99,27 @@ def table_ablate():
         print(f'  {k:20s} {x.mean():.4f}  B0 {b0(k):.3f}  {dd.mean():+.4f} ± {dd.std(ddof=1) / np.sqrt(len(dd)):.4f}  better in {np.mean(dd < 0) * 100:.0f}% of draws')
 
 
+def table_regimes():
+    """Table 5: the subject prior with four subjects per benchmark, and on benchmarks held out from all development."""
+    get = lambda d, a: np.concatenate([np.array(eval(re.search(r'ALCS (\[.*\])', open(f'{d}/{a}_s{s}.log').read()).group(1))) for s in (5, 6, 7)])
+    print('Table 5. Subject prior across regimes (paired over identical simulated draws)')
+    if os.path.exists('data/multi/full_s5.log'):
+        dd = get('data/multi', 'full') - get('data/multi', 'noprior')
+        print(f'  four subjects per benchmark  {dd.mean():+.4f} ± {dd.std(ddof=1) / np.sqrt(len(dd)):.4f}  better in {np.mean(dd < 0) * 100:.0f}% of {len(dd)} draws')
+    if os.path.exists('data/disjoint/bb_prior_s5.log'):
+        named = json.load(open('data/llm/disjoint_named.json')) if os.path.exists('data/llm/disjoint_named.json') else {}
+        agg = {}
+        for s in (5, 6, 7):
+            P = eval(re.search(r'BY_BENCH (\{.*\})', open(f'data/disjoint/bb_prior_s{s}.log').read()).group(1))
+            N = eval(re.search(r'BY_BENCH (\{.*\})', open(f'data/disjoint/bb_none_s{s}.log').read()).group(1))
+            for b in P:
+                a = agg.setdefault(b, [0.0, 0]); a[0] += (P[b][0] - N[b][0]) * P[b][1]; a[1] += P[b][1]
+        for grp in (True, False):
+            bs = [b for b in agg if named.get(b, 0) > 0.5] if grp else [b for b in agg if named.get(b, 0) <= 0.5]
+            d = sum(agg[b][0] for b in bs) / max(1, sum(agg[b][1] for b in bs)); helped = sum(agg[b][0] < 0 for b in bs)
+            print(f'  held-out, {"named" if grp else "unnamed"} subjects ({len(bs)} benchmarks)  {d:+.4f}  helped on {helped} of {len(bs)}')
+
+
 SIMS = {   # report cell -> (command, log)
     'base300': ('USE_LLM=0 {py} src/sim_pp.py src/baselines/empirical_mean.py random', 'pp_baseline_mean_random.log'),
     'v5_300': ('{py} src/sim_pp.py submission/model_v5.py random', 'pp_v5_random.log'),
@@ -124,7 +147,7 @@ def rerun():
     for k, env in ABL.items():   # subject priors replayed from data/llm/prior_cache.jsonl, never the API
         stem = {'Neither term': 'none', 'Item ratings only': 'noprior', 'Subject prior only': 'norate', 'Both (submitted)': 'full'}[k]
         for s in (5, 6, 7):
-            jobs.append((f'{env}PRIOR_CACHE_ONLY=1 SEED={s} DRAWS=30 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py submission/model.py cover data/llm/batches_opus',
+            jobs.append((f'{env}STRICT=1 PRIOR_CACHE_ONLY=1 SEED={s} DRAWS=30 NITEM=120 SUBJ=1 {sys.executable} src/sim_sh.py submission/model.py cover data/llm/batches_opus',
                          f'data/rerun/ablate/v26_{stem}_s{s}.log'))
     for s in (5, 6, 7):   # smoothed baseline on the same draws (needs a labeling.py next to it, as on the platform)
         jobs.append((f'mkdir -p data/rerun/lap && cp src/baselines/laplace.py data/rerun/lap/model.py && cp submission/labeling.py data/rerun/lap/ && '
@@ -147,7 +170,7 @@ def table_sim():
     """Table 4 (simulation, pooling) and Table A1 (per benchmark)."""
     g = lambda k: mean_of(f'{LOG}/{SIMS[k][1]}')
     sm = lambda stem, n: np.mean([mean_of(f'{LOG}/small/{stem}_n{n}_s{s}.log') for s in (5, 6, 7)])
-    print('Table 5. Brier ALC in simulation: Baseline, v5, v6 random reveals, v6 coverage-first')
+    print('Table A2. Brier ALC in simulation: Baseline, v5, v6 random reveals, v6 coverage-first')
     print('  300 items, 12 benchmarks   ', ' '.join(f'{g(k):.4f}' for k in ('base300', 'v5_300', 'v6r_300', 'v6c_300')))
     for n in (2, 5, 10):
         print(f'  Online scale, {n:2d} subjects  ', ' '.join(f'{sm(stem, n):.4f}' for _, _, stem in SMALL.values()))
@@ -165,4 +188,4 @@ def table_sim():
 if __name__ == '__main__':
     if RERUN:
         rerun()
-    table_prior(); print(); table_online(); print(); table_ablate(); print(); table_sim()
+    table_prior(); print(); table_online(); print(); table_ablate(); print(); table_regimes(); print(); table_sim()

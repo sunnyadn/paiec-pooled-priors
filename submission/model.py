@@ -499,7 +499,7 @@ def _subject_prior(subject, bench, text, labeled=None):
     """LLM estimate of this model's accuracy on this benchmark (shrunk toward 0.5), or None.
     Quick estimate from the first sample item a worker sees, refined once 8 are seen (as in v19). Worker processes
     are recreated at every budget and may not share disk, so: shared files when possible, no caching of a missing
-    result, no new calls once the subject has 7 own labels, and a per-process call ceiling."""
+    result, no new calls once the subject has 8 own labels, and a per-process call ceiling."""
     if not (S_PRIOR and _cfg()):
         return None
     if not _subject_name(subject):

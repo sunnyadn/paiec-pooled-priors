@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
+\usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -70,7 +71,14 @@ For each subject--benchmark pair, items are split 50/50 into an acquisition pool
 \end{equation}
 where $R_s$ is the set of items $s$ has revealed.
 
-\paragraph{The rest of the predictor.} When other subjects share the benchmark, $\hat\mu_s$ is also pulled toward their success rate. Each item's prediction then moves with three signals: the answers other subjects gave to the same item (one Newton step of a Rasch model), the residuals of similar revealed items, and a difficulty rating from Claude Opus calibrated on the revealed labels. Before a subject's first answer, when there is no subject prior, the rating is read as a probability and moved three quarters of the way back to one half. The acquisition rule reveals items no other subject has revealed yet.
+\paragraph{The rest of the predictor.} It has five parts.
+\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=2pt]
+\item \emph{One subject on the benchmark.} With fewer than ten labels from other subjects, the predictor uses the subject's own labels: $\hat\mu_s$ above, or without a subject prior the success rate with two pseudo-counts at one half.
+\item \emph{Item ratings.} Opus rates each item's difficulty. Before the first answer, without a subject prior, the rating is read as a probability and moved three quarters of the way back to one half. After that it adds a slope times the standardised rating, with the slope fitted by ridge regression on at most 60 revealed items. When other subjects share the benchmark, the slope is fitted on this benchmark's items alone.
+\item \emph{Other subjects on the benchmark.} The subject's rate is pulled toward theirs with eight pseudo-counts. The subject prior shifts it by half the logit gap between its estimate and theirs, fading with the same pseudo-counts.
+\item \emph{Similar and identical items.} Each item moves with the residuals of its 30 most similar revealed items, by character n-grams of the text. When other subjects answered the same item, one Newton step of a Rasch model adjusts its logit.
+\item \emph{Acquisition.} The rule reveals items no other subject has revealed yet, and never looks at outcomes.
+\end{itemize}
 
 
 \section{The language model knows the system}

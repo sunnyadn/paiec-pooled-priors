@@ -71,14 +71,15 @@ For each subject--benchmark pair, items are split 50/50 into an acquisition pool
 \end{equation}
 where $R_s$ is the set of items $s$ has revealed.
 
-\paragraph{The rest of the predictor.} It has five parts.
+\paragraph{The rest of the predictor.} It has five parts. Each adds a term to the subject's rate on the probability scale, except the Newton step, which acts on the logit. The result is clipped to $[0.01, 0.99]$.
 \begin{itemize}[leftmargin=*,itemsep=0pt,topsep=2pt]
 \item \emph{One subject on the benchmark.} With fewer than ten labels from other subjects, the predictor uses the subject's own labels: $\hat\mu_s$ above, or without a subject prior the success rate with two pseudo-counts at one half.
-\item \emph{Item ratings.} Opus rates each item's difficulty. Before the first answer, without a subject prior, the rating is read as a probability and moved three quarters of the way back to one half. After that it adds a slope times the standardised rating, with the slope fitted by ridge regression on at most 60 revealed items. When other subjects share the benchmark, the slope is fitted on this benchmark's items alone.
-\item \emph{Other subjects on the benchmark.} The subject's rate is pulled toward theirs with eight pseudo-counts. The subject prior shifts it by half the logit gap between its estimate and theirs, fading with the same pseudo-counts.
-\item \emph{Similar and identical items.} Each item moves with the residuals of its 30 most similar revealed items, by character n-grams of the text. When other subjects answered the same item, one Newton step of a Rasch model adjusts its logit.
-\item \emph{Acquisition.} The rule reveals items no other subject has revealed yet, and never looks at outcomes.
+\item \emph{Item ratings.} Opus estimates from the item text alone the probability, from 0 to 100, that a typical current language model answers it correctly, used as a logit $z$. Before the first answer, without a subject prior, this is read as the prediction and moved three quarters of the way back to one half. After that the predictor adds $g\,z$ to the subject's rate, with $z$ standardised and $g$ fitted by ridge regression of label residuals on $z$ over a fixed subset of at most 60 revealed items, chosen by a hash of their text so that every worker uses the same ones. When other subjects share the benchmark, $g$ is fitted on this benchmark's items alone.
+\item \emph{Other subjects on the benchmark.} The subject's rate is pulled toward the other subjects' pooled success rate $\mu$ with eight pseudo-counts. The subject prior then adds $(a-\mu)\cdot 8/(n+8)$, where $a$ moves $\mu$ on the logit scale by half the gap between the language model's estimate for this subject and its average estimate for the others, and $n$ counts the subject's own labels.
+\item \emph{Similar and identical items.} A revealed item's residual is its label minus that subject's rate. Each item adds the similarity-weighted mean residual of its 30 most similar revealed items, by cosine similarity of character 3- to 5-grams within words, with weights $\text{sim}\cdot c/(c+1)$ for an item revealed $c$ times and 1 added to the denominator. When other subjects answered the same item, one Newton step of a Rasch model shifts its logit.
+\item \emph{Acquisition.} The rule reveals each streamed item that no other subject has revealed yet, and every item once the remaining items only just cover the remaining budget. It never looks at outcomes.
 \end{itemize}
+Section~\ref{sec:ablate} switches the two language-model parts off in turn.
 
 
 \section{The language model knows the system}

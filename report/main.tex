@@ -311,6 +311,8 @@ Fine-tuned 4B difficulty model instead of Opus ratings & $-0.0012$ (one refusal 
 Two rating slopes, chosen per benchmark from the labels & $-0.0003$ \\
 Ratings off where a language model judges label 1 an attack & $-0.0021$ held out, $+0.0021$ training \\
 One 4B network reading all revealed answers (126,556 sequences) & $+0.0085$ (500 draws) \\
+No absolute rating before the first answer & $-0.0007$ held out, $+0.0006$ training \\
+Ratings used only when the revealed labels agree with their direction & $-0.0000$ \\
 \bottomrule
 \end{tabular}
 \end{table}

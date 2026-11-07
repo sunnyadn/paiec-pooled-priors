@@ -1,0 +1,70 @@
+[
+{
+"bench": "helm_anthropic_redteam",
+"excluded": "not binary (continuous_bounded)"
+},
+{
+"bench": "helm_bold",
+"excluded": "not binary (fraction)"
+},
+{
+"bench": "helm_simple_safety_tests",
+"excluded": "not binary (continuous_bounded)"
+},
+{
+"bench": "matharena",
+"excluded": "not binary (mixed)"
+},
+{
+"bench": "moe_cap",
+"excluded": "not binary (mixed)"
+},
+{
+"bench": "multi_moe",
+"excluded": "not binary (mixed)"
+},
+{
+"bench": "preference_dissection",
+"excluded": "not binary (nominal)"
+},
+{
+"bench": "jailbreakbench",
+"excluded": "1 = jailbroken"
+},
+{
+"bench": "llmail_inject",
+"excluded": "1 = attack succeeded"
+},
+{
+"bench": "pku_saferlhf",
+"excluded": "1 = response safe"
+},
+{
+"bench": "safeagentbench",
+"excluded": "1 = block or refusal"
+},
+{
+"bench": "os_harm",
+"excluded": "safety benchmark, 1 = criterion satisfied (direction unclear)"
+},
+{
+"bench": "nester",
+"excluded": "1 = human annotation of a criterion"
+},
+{
+"bench": "tulu_human_eval",
+"excluded": "1 = human rater found the completion acceptable"
+},
+{
+"bench": "naturebench",
+"excluded": "1 = research outcome improvement"
+},
+{
+"bench": "researchcodebench",
+"excluded": "label of 1 missing"
+},
+{
+"bench": "workarena",
+"excluded": "label of 1 missing"
+}
+]

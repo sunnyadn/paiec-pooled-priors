@@ -1,0 +1,8 @@
+{"what": "engineering probe of the CLI path before approval; not part of the results",
+ "time_utc": "2026-10-31 ~02:47",
+ "target": "Moonshot Kimi K3 (0afb3463834180f0), chi_bench, same 5 frozen sample tasks",
+ "settings": {"route": "claude -p --safe-mode --no-session-persistence --tools '' --effort low --output-format json", "model": "claude-opus-5-5",
+              "env": {"MAX_THINKING_TOKENS": "0 (variable set; Opus 5.5 thinking is always on, actual thinking use was not recorded)", "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "2048", "CLAUDE_CODE_EFFORT_LEVEL": "low"},
+              "script_hash_prefix": "1f60ab38"},
+ "returned": {"estimate": 0.25, "exit": 0, "stop_reason": "end_turn", "served": ["claude-opus-5-5"], "is_error": false},
+ "raw_response_kept": false}

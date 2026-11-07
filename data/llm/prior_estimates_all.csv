@@ -1,0 +1,766 @@
+benchmark,subject_id,normalized_name,opus_estimate
+afrimedqa,ae4c8b956159d9ff,BioMistral 7B,0.35
+afrimedqa,9fad6c4783d7a0cc,Saama OpenBioLLM 70B,0.66
+afrimedqa,4149963d9645bde2,Saama OpenBioLLM 8B,0.4
+afrimedqa,6137b936f4219fc1,Meta Llama 3 70B,0.65
+afrimedqa,e0671a253f4b0871,Meta Llama 3 8B,0.5
+afrimedqa,c30e696d4c7add83,Meta Llama 3.1 8B,0.58
+afrimedqa,6389ec301e9dcc48,Mistral Mixtral 8x7B,0.55
+afrimedqa,c18362d16ed0f035,Microsoft Phi-3 Medium,0.65
+afrimedqa,098b587f823c6c99,Microsoft Phi-3 Mini,0.55
+afrimedqa,5c4f60f216114268,Anthropic Claude 3.5 Sonnet,0.77
+afrimedqa,1a504cc1ecfd870a,Anthropic Claude 3 Haiku,0.66
+afrimedqa,7ebae896d182de70,Anthropic Claude 3 Opus,0.75
+afrimedqa,fd09e3f6fc777e73,Anthropic Claude 3 Sonnet,0.64
+afrimedqa,db8b7163fde07afe,Google Gemini Pro,0.6
+afrimedqa,e3602a4cfa1e3fea,Google Gemini Ultra,0.74
+afrimedqa,c1c46b67331bde2f,OpenAI GPT-3.5,0.58
+afrimedqa,ff230ef448ad4dc3,OpenAI GPT-4,0.76
+afrimedqa,48ae409b05f454a7,OpenAI GPT-4o,0.79
+afrimedqa,39b229f4f57d3eac,OpenAI GPT-4o mini,0.71
+afrimedqa,b2f09d72f1af4eed,Meta Llama 3.1 405B,0.72
+afrimedqa,9078bd7243dc19c2,Google MedLM,0.63
+afrimedqa,6fc7871bf93019b0,Google Med-PaLM 2,0.7
+afrimedqa,b2b148980d85d1f5,Mistral 7B,0.45
+agentdojo,d00418b541b786f5,Meta SecAlign 70B,0.6
+agentdojo,59db8272c0ed5de1,Anthropic Claude 3.5 Sonnet,0.5
+agentdojo,bb7206cffa1bf969,Anthropic Claude 3.7 Sonnet,0.75
+agentdojo,d2a41d6d3e997a1d,Anthropic Claude 3 Haiku,0.3
+agentdojo,c972065a1c92b94b,Anthropic Claude 3 Opus,0.5
+agentdojo,ae2a23c30397596f,Anthropic Claude 3 Sonnet,0.35
+agentdojo,36905c4a1ca98f4a,Cohere Command R+,0.25
+agentdojo,460ad8221b493428,Cohere Command R,0.25
+agentdojo,46a36e1b98090d0f,Google Gemini 1.5 Flash,0.35
+agentdojo,238123a9e826ade6,Google Gemini 1.5 Pro,0.3
+agentdojo,ebf20326b46f08aa,Google Gemini 2.0 Flash,0.4
+agentdojo,1f2185b72cccde44,OpenAI GPT-3.5,0.3
+agentdojo,61b1c29ef88d707a,OpenAI GPT-4,0.42
+agentdojo,2dd00cfe27cbda86,OpenAI GPT-4o,0.62
+agentdojo,3bc8d18992e81aa7,OpenAI GPT-4o mini,0.5
+agentdojo,4829ef051d60bc03,Meta Llama 3 70B,0.2
+agentdojo,24e4b3680d76b3b4,Meta Llama 3.3 70B,0.4
+agi_elo,e7690b1d19463f53,OpenAI GPT-4o,0.85
+agi_elo,86e79a2495ee348c,Anthropic Claude 3.7 Sonnet,0.86
+agi_elo,1345c3e67b47db08,DeepSeek R1 Distill Qwen 1.5B,0.4
+agi_elo,b61dc802b90a7c4c,DeepSeek R1 Distill Qwen 7B,0.55
+agi_elo,75592243f78d7fb8,DeepSeek R1,0.9
+agi_elo,0f813a2c5d164014,DeepSeek V3,0.88
+agi_elo,e7fa18d1900ac3fa,OpenAI GPT-4.1 mini,0.86
+agi_elo,ed0fb94ddea0043c,OpenAI GPT-4.1 nano,0.8
+agi_elo,62624b29ead8f40e,OpenAI GPT-4.1,0.9
+agi_elo,ac44818ea0963843,Google Gemma 3 27B,0.78
+agi_elo,3e52051058e893a9,Meta Llama 3.1 8B,0.66
+agi_elo,30d8769124c8c069,Meta Llama 4 Maverick,0.84
+agi_elo,caa89e9cb11c147e,Meta Llama 4 Scout,0.79
+agi_elo,3f994434aa1e04cf,Alibaba QwQ 32B,0.85
+ai2d_test,6a6b73abd5ef11cc,Qihoo 360VL 70B,0.71
+ai2d_test,d054d160a62302da,AKI,0.65
+ai2d_test,fe1434c1d640d636,BAAI Aquila-VL 2B,0.75
+ai2d_test,5afd49a8069efbd9,Rhymes AI Aria,0.82
+ai2d_test,b5734c6148553e57,Ant Bailing-MM Pro,0.85
+ai2d_test,c6d23ddb5f1fa19d,vivo BlueLM-V,0.82
+ai2d_test,fbf3849774676215,Bunny Llama 3 8B,0.69
+ai2d_test,8915b310c9d85c29,OpenAI GPT-4o,0.84
+ai2d_test,c571427804a37be7,Anthropic Claude 3.5 Sonnet,0.81
+ai2d_test,9d476e866bc96bbe,Anthropic Claude 3.7 Sonnet,0.82
+ai2d_test,7f575ee9d481d768,Anthropic Claude 3 Haiku,0.65
+ai2d_test,8fa4e619bd8f8a5c,Anthropic Claude 3 Opus,0.71
+ai2d_test,a6188b5fe42750b8,Anthropic Claude 3 Sonnet,0.7
+ai2d_test,1a008847bb1ede4d,Agent: cloudwalk,0.85
+ai2d_test,618b779a38d734bd,ByteDance Doubao VL,0.88
+ai2d_test,bcd1f8d6c5f2eb5b,NVIDIA Eagle X5 13B,0.74
+ai2d_test,a88b59a5f92c8292,NVIDIA Eagle X5 34B,0.86
+ai2d_test,906d8f0623345ca7,NVIDIA Eagle X5 7B,0.78
+ai2d_test,ebdc2f379d16a145,TII Falcon 2 VLM 11B,0.68
+ai2d_test,7c2a6cffd37f4a8e,Zhipu GLM-4V,0.8
+ai2d_test,aeb0e869518e2c7b,Zhipu GLM-4V Plus,0.85
+ai2d_test,025fb722895c5d82,OpenAI GPT-4.5,0.85
+ai2d_test,9187411cb462c278,OpenAI GPT-4V,0.76
+ai2d_test,9d89a16bae902aae,OpenAI GPT-4o mini,0.78
+ai2d_test,d9b2fb879f533664,Google Gemini 1.5 Flash,0.79
+ai2d_test,6b05859f9dc52f0c,Google Gemini 2.0 Flash,0.85
+ai2d_test,08e6eed971ba15b2,Google Gemini 1.0 Pro,0.73
+ai2d_test,960781bd2afde458,Google Gemini 1.5 Pro,0.8
+ai2d_test,92eb10e1cc8f17c0,Google Gemini 2.0 Pro,0.86
+ai2d_test,99a8312155cafaac,Google Gemini 2.5 Pro,0.89
+ai2d_test,dbff4dd1793ef0d1,Google Gemini Pro Vision,0.71
+ai2d_test,dfed03e66e046871,Google Gemma 3 12B,0.84
+ai2d_test,de5b1f9f472e15db,Google Gemma 3 27B,0.84
+ai2d_test,46797fb5718129b3,Google Gemma 3 4B,0.72
+ai2d_test,911a641dd66f548a,Tencent Hunyuan Standard Vision,0.84
+ai2d_test,00af74b690c302b8,Tencent Hunyuan Vision,0.88
+ai2d_test,63dc422fb2df7005,Hugging Face IDEFICS3 8B,0.76
+ai2d_test,2a8496fdb5bb2579,OpenGVLab InternVL 1.1,0.72
+ai2d_test,97bcd7bb0e327b27,OpenGVLab InternVL 1.2,0.79
+ai2d_test,daf391b6c963105a,OpenGVLab InternVL 1.5,0.8
+ai2d_test,5de3b71fadfc2bca,OpenGVLab InternVL2 1B,0.64
+ai2d_test,4fae340344a4315d,OpenGVLab InternVL2 26B,0.84
+ai2d_test,fa33f42702791930,OpenGVLab InternVL2 2B,0.74
+ai2d_test,8232a5d75b00a40d,OpenGVLab InternVL2 40B,0.87
+ai2d_test,2d7b0e89d353485c,OpenGVLab InternVL2 4B,0.79
+ai2d_test,a493f0a255219f31,OpenGVLab InternVL2 76B,0.87
+ai2d_test,ed5fe6885998f1bf,OpenGVLab InternVL2 8B,0.83
+ai2d_test,696e01791e5e9847,OpenGVLab InternVL2.5 1B,0.69
+ai2d_test,d5068ef107b3ec35,OpenGVLab InternVL2.5 26B,0.86
+ai2d_test,5527ed6769b86d5b,OpenGVLab InternVL2.5 2B,0.74
+ai2d_test,914947f06892a160,OpenGVLab InternVL2.5 38B,0.87
+ai2d_test,d7f2caffd0978b38,OpenGVLab InternVL2.5 4B,0.81
+ai2d_test,36b0a7c51acc5f1e,OpenGVLab InternVL2.5 78B,0.89
+ai2d_test,78113e9cb39333ad,OpenGVLab InternVL2.5 8B,0.84
+ai2d_test,5e84674c7b829fe1,JT-VL,0.82
+ai2d_test,98710e9159d83220,DeepSeek Janus 1.3B,0.5
+ai2d_test,068210197473d6d3,DeepSeek Janus-Pro 7B,0.68
+ai2d_test,30686b695f215827,Microsoft Kosmos-2,0.55
+ai2d_test,e2016e8e207974de,LLaVA-CoT 11B,0.78
+ai2d_test,a78c80033e8766d1,Meta Llama 3 8B,0.72
+ai2d_test,aff0e201358a9f40,NVIDIA VILA 1.5 8B,0.58
+ai2d_test,e1097b9128967911,Meta Llama 3.2 11B,0.78
+ai2d_test,6e6d5e235a15873f,Meta Llama 3.2 90B,0.9
+ai2d_test,7f070472397f5111,MMAlaya,0.63
+ai2d_test,b8c5d9ebfe19e1ca,MMAlaya2,0.82
+ai2d_test,060bdec257e41eb4,MUG-U 7B,0.84
+ai2d_test,e9887784d74353c8,TIGER-Lab Mantis 8B Fuyu,0.5
+ai2d_test,d988a059257b7d44,TIGER-Lab Mantis 8B Idefics2,0.74
+ai2d_test,767e7d609db7f828,TIGER-Lab Mantis 8B CLIP-LLaMA3,0.58
+ai2d_test,b78dbc5c437cddc6,TIGER-Lab Mantis 8B SigLIP-LLaMA3,0.6
+ai2d_test,0c984220e73347f6,OpenGVLab Mini-InternVL 2B v1.5,0.69
+ai2d_test,3bec83a616deba7d,OpenGVLab Mini-InternVL 4B v1.5,0.77
+ai2d_test,6e80aae50d7752cd,OpenBMB MiniCPM-V 2.5,0.78
+ai2d_test,4020b843b4ce9389,OpenBMB MiniCPM-V,0.62
+ai2d_test,48f195a6a4fd40f0,OpenBMB MiniCPM-V 2,0.63
+ai2d_test,4019e0fa6d7beb70,OpenBMB MiniCPM-V 2.6,0.82
+ai2d_test,5a444147833439d6,OpenBMB MiniCPM-o 2.6,0.86
+ai2d_test,f71ba652a844b893,MiniGPT-4 13B,0.3
+ai2d_test,45c1ff183f514611,MiniGPT-4 7B,0.28
+ai2d_test,3335f342cdad8141,MiniGPT-v2,0.35
+ai2d_test,65d12e9e831a9caf,Moondream 1,0.47
+ai2d_test,3bc9c3a9739a6e56,Moondream 2,0.6
+ai2d_test,0c591d31660527bd,NVIDIA NVLM,0.92
+ai2d_test,26ce3d87fe73139f,OmChat,0.79
+ai2d_test,cea5f4f116d36aa5,OpenBMB OmniLMM 12B,0.63
+ai2d_test,bd1641aa7e73a8bf,AIDC-AI Ovis1.5 Gemma2 9B,0.84
+ai2d_test,25347edda8ca84ae,AIDC-AI Ovis1.5 Llama3 8B,0.82
+ai2d_test,11bc63434c6436ed,AIDC-AI Ovis1.6 Gemma2 27B,0.86
+ai2d_test,86e63b390f4a11f9,AIDC-AI Ovis1.6 Gemma2 9B,0.84
+ai2d_test,93f0f0b31439f3e0,AIDC-AI Ovis1.6 Llama3.2 3B,
+ai2d_test,4facc6343aded6a7,AIDC-AI Ovis2 16B,0.86
+ai2d_test,5a0d59cb6d99b3db,AIDC-AI Ovis2 1B,0.76
+ai2d_test,c205f289179b053b,AIDC-AI Ovis2 2B,0.82
+ai2d_test,40062273b4a40ecf,AIDC-AI Ovis2 34B,0.86
+ai2d_test,9f75fb8dd3da66e7,AIDC-AI Ovis2 4B,0.85
+ai2d_test,ffff64818d9e14e9,AIDC-AI Ovis2 8B,0.87
+ai2d_test,4ee41ddc2cfbf554,Tencent POINTS Qwen2.5 7B,0.82
+ai2d_test,8aa348cacbd342cd,Tencent POINTS Yi 1.5 9B,0.81
+ai2d_test,41de17ff9e15a0e0,Tencent POINTS1.5 Qwen2.5 7B,0.81
+ai2d_test,19b40c0580897536,PandaGPT 13B,0.42
+ai2d_test,19ec80cfee1f10d9,Parrot,0.7
+ai2d_test,25bab2edb4fd938a,Microsoft Phi-3 Vision,0.78
+ai2d_test,8e1f3e4e5170c3f9,Microsoft Phi-3.5 Vision,0.78
+ai2d_test,7bfca2b2f40f7779,Microsoft Phi-4 Vision,0.82
+ai2d_test,d4a7d778ba5a161b,Mistral Pixtral 12B,0.79
+ai2d_test,1ca7f385c636f232,Alibaba Qwen-VL Max,0.86
+ai2d_test,14147feec0dfaeba,Alibaba Qwen-VL Plus,0.65
+ai2d_test,1e5a0c47affaaf6c,Alibaba Qwen2-VL 2B,0.74
+ai2d_test,fce848ada06f2af9,Alibaba Qwen2-VL 72B,0.88
+ai2d_test,c23ce762fc803ef1,Alibaba Qwen2-VL 7B,0.83
+ai2d_test,749f157b69a9fa26,Alibaba Qwen2.5-VL 3B,0.81
+ai2d_test,d082a49ba128c52c,Alibaba Qwen2.5-VL 72B,0.88
+ai2d_test,1424ec5892562558,Alibaba Qwen2.5-VL 7B,0.84
+ai2d_test,7a199ac79240e5bf,RBDash 72B,0.88
+ai2d_test,f3e8ef5efaa2fe6f,Reka Edge,0.72
+ai2d_test,09354a946b6c0c70,Reka Flash,0.66
+ai2d_test,9bfb86ef4c8cdde6,Ristretto 3B,0.8
+ai2d_test,9013e7b3f89b386f,SAIL-VL 2B,0.82
+ai2d_test,efffeaece863563b,SenseTime SenseChat Vision,0.8
+ai2d_test,13e87d556e53c758,SLIME 13B,0.79
+ai2d_test,5e7d306f75efd910,SLIME 7B,0.7
+ai2d_test,e7395f07d061d045,SLIME 8B,0.79
+ai2d_test,9cc101aba9abcb27,HuggingFace SmolVLM,0.63
+ai2d_test,8d8d3022ad480035,HuggingFace SmolVLM 256M,0.46
+ai2d_test,c542a16bf758269b,HuggingFace SmolVLM 500M,0.59
+ai2d_test,c0c52d7da61e56c1,HuggingFace SmolVLM2,0.7
+ai2d_test,bf1ef10c13ea9c96,HuggingFace SmolVLM2 256M,0.46
+ai2d_test,64ad94b4c690d43e,HuggingFace SmolVLM2 500M,0.58
+ai2d_test,95bbb1fbce2a186e,StepFun Step-1.5V Mini,0.82
+ai2d_test,7a2a8f53c31c1ebc,StepFun Step-1V,0.79
+ai2d_test,ba01bc5e394f59f9,StepFun Step-1o,0.89
+ai2d_test,cc947ad8304ee5ed,Taiyi,0.45
+ai2d_test,f08f7d8e8c07b8bf,TeleMM,0.84
+ai2d_test,fe7581d7d09f1922,TransCore-M,0.64
+ai2d_test,76533825d18f0d20,NVIDIA VILA 1.5 13B,0.7
+ai2d_test,e81d889a4624e0f0,NVIDIA VILA 1.5 3B,0.58
+ai2d_test,533ae35eedf6957d,NVIDIA VILA 1.5 40B,0.88
+ai2d_test,cb79919a3b3714d7,VXVERSE,0.47
+ai2d_test,398ce15c15bf516c,Vintern 1B,0.58
+ai2d_test,f8252944044482c9,Vintern 3B,0.7
+ai2d_test,9f3d51b952b94c58,Zhipu VisualGLM 6B,0.41
+ai2d_test,852048d2a4a7c472,WeMM,0.78
+ai2d_test,8a6955cb38143216,InternLM-XComposer,0.57
+ai2d_test,52fc5ac1817897bc,InternLM-XComposer2,0.81
+ai2d_test,77fb00b52e58bc2c,InternLM-XComposer2 1.8B,0.72
+ai2d_test,9b31ec94d662ded5,InternLM-XComposer2.5,0.81
+ai2d_test,8d8a714c5c4a41bb,Xinyuan-VL 2B,0.74
+ai2d_test,32dad1a8c12e2c2b,01.AI Yi Vision,0.78
+ai2d_test,4eb94375012ef67d,01.AI Yi-VL 34B,0.66
+ai2d_test,d7767478e1625aca,01.AI Yi-VL 6B,0.6
+ai2d_test,a08437dd256c3e98,MiniMax abab6.5s,0.8
+ai2d_test,fb01157abafd5bd5,MiniMax abab7,0.81
+ai2d_test,93fbf861f782d6da,Ant Bailing-MM,0.86
+ai2d_test,6432ac430aabdb21,Ant Bailing-MM Lite,0.83
+ai2d_test,7ab5e53fb9ede312,Cambrian 13B,0.74
+ai2d_test,f04b8e79d5626f4a,Cambrian 34B,0.8
+ai2d_test,c2b485318a9ded41,Cambrian 8B,0.73
+ai2d_test,a335cbb3e2a321c4,Meta Chameleon 30B,0.53
+ai2d_test,245ab6d26fba3ae0,Meta Chameleon 7B,0.42
+ai2d_test,c6e335af7ea4e9ca,Zhipu CogVLM,0.63
+ai2d_test,61c39bc63fbbc30d,Zhipu CogVLM2,0.73
+ai2d_test,177c38d33102e36d,DeepSeek VL2,0.82
+ai2d_test,437ea91584839173,DeepSeek VL2 Small,0.81
+ai2d_test,bada94de95bb8b37,DeepSeek VL2 Tiny,0.71
+ai2d_test,4b62d4013159b19b,DeepSeek VL 1.3B,0.51
+ai2d_test,5a2ba3524f8d8ae1,DeepSeek VL 7B,0.65
+ai2d_test,796977e50f7b8242,BAAI Emu2,0.5
+ai2d_test,e5fcbabdea77226e,BAAI Emu3,0.7
+ai2d_test,8bd9f20ea98d426b,DeepMind Flamingo,0.31
+ai2d_test,2191286802eb10a3,Zhipu GLM-4V 9B,0.81
+ai2d_test,6a93ddf5cf66cbbc,xAI Grok 2,0.8
+ai2d_test,0db8181bb5651cd5,H2O.ai H2OVL Mississippi 1B,0.62
+ai2d_test,202f6a9865fb56a2,H2O.ai H2OVL Mississippi 2B,0.74
+ai2d_test,0ec6746142d9f5e3,Hugging Face IDEFICS2 8B,0.72
+ai2d_test,36867920f690360d,Hugging Face IDEFICS 80B,0.55
+ai2d_test,0cb798dfa86ec13a,Hugging Face IDEFICS 9B,0.42
+ai2d_test,67405d86a7b0a3b2,Salesforce InstructBLIP 13B,0.38
+ai2d_test,942265b4a718aef1,Salesforce InstructBLIP 7B,0.4
+ai2d_test,297930666a8edb6e,LLaVA InternLM 7B,0.6
+ai2d_test,1d6a8f9d2fdd9b92,LLaVA InternLM2 20B,0.67
+ai2d_test,32a86b9c2b21b9c4,LLaVA InternLM2 7B,0.73
+ai2d_test,4f975b2992890ee8,LLaVA Llama 3 8B,0.7
+ai2d_test,87c25a0e0f9d5efe,LLaVA-1.5 Vicuna 13B,0.63
+ai2d_test,011fdbc9e5ae2eaa,LLaVA-1.5 Vicuna 7B,0.56
+ai2d_test,1c2cae82632be83b,LLaVA-NeXT-Interleave Qwen 7B,0.73
+ai2d_test,4769297ad26545f8,LLaVA-NeXT Llama 3 8B,0.71
+ai2d_test,98e0ec8059661fd9,LLaVA-NeXT Mistral 7B,0.69
+ai2d_test,153c6034eea779dc,LLaVA-NeXT Qwen 32B,0.75
+ai2d_test,cc5aad0d634925c3,LLaVA-NeXT Vicuna 13B,0.72
+ai2d_test,c67a9b28f90d3685,LLaVA-NeXT Vicuna 7B,0.67
+ai2d_test,5bf01fa17c3e71b5,LLaVA-NeXT Yi 34B,0.78
+ai2d_test,037a9f80f7879dfc,LLaVA-OneVision Qwen2 0.5B,0.56
+ai2d_test,1e46a499cdccadc0,LLaVA-OneVision Qwen2 72B,0.85
+ai2d_test,354d481511078dd4,LLaVA-OneVision Qwen2 7B,0.81
+ai2d_test,7ea4ba9bfd7dc82f,LLaVA Vicuna 7B,0.38
+ai2d_test,d8891ce9ada2859e,Alibaba mPLUG-Owl2,0.56
+ai2d_test,442d2ad8af5eec46,Alibaba mPLUG-Owl3,0.73
+ai2d_test,eca30d2092f9681d,Mini-Monkey,0.74
+ai2d_test,f2d32af5ec8a2fb8,AllenAI Molmo 72B,0.84
+ai2d_test,265df24aadac6456,AllenAI Molmo 7B-D,0.79
+ai2d_test,5c721d5f9b0061be,AllenAI Molmo 7B-O,0.8
+ai2d_test,89a2b2eb33d6eb48,AllenAI MolmoE 1B,0.77
+ai2d_test,40816cfc6af9dfce,Monkey,0.62
+ai2d_test,7791250906e79fe2,Moonshot v1,0.79
+ai2d_test,4604b3046532548b,Ola,0.86
+ai2d_test,dfe04f6ba67c961e,Google PaliGemma 3B,0.68
+ai2d_test,2bf5658b8b9de304,qwen_base,0.57
+ai2d_test,bc294fbd8076b56b,qwen_chat,0.58
+ai2d_test,97cc8a91ffff6d6d,Ross-Qwen2 7B,0.79
+ai2d_test,e77dfb8eccdedb5d,ShareCaptioner,0.4
+ai2d_test,35838bbc41657a4e,ShareGPT4V 13B,0.61
+ai2d_test,3dd09dbfe535adb7,ShareGPT4V 7B,0.58
+ai2d_test,9bc584c35509daf0,ByteDance Valley-Eagle,0.82
+ai2d_test,46dfe72b589bb55b,NCSOFT VARCO-VISION,0.84
+ai2d_test,3c5021f345f519d4,VITA,0.74
+ai2d_test,00705d6ab896cb4a,Salesforce xGen-MM,0.74
+aider,a71b2795b0f6f989,OpenAI GPT-4.1,0.3
+aider,bd7857d80f4bca6c,DeepSeek V3,0.4
+aider,c0dd1eb4fa5647cc,OpenAI GPT-5,0.85
+aider,5fa6e52aa5aa714c,OpenAI o3,0.76
+algotune,7de4969ddeda4d16,Anthropic Claude Opus 4.1,0.7
+algotune,35c60ba0f4b9a739,Anthropic Claude Opus 4,0.7
+algotune,707e9b2b789b9a20,Anthropic Claude Opus 4.5,0.85
+algotune,6ae3d9db61815383,Anthropic Claude Opus 4.6,0.86
+algotune,cd3fe622426be379,Anthropic Claude Sonnet 4.5,0.83
+algotune,6ace0148408b8fd9,DeepSeek R1,0.55
+algotune,3f8e98faf76952d0,Google Gemini 2.5 Pro,0.62
+algotune,768b2ea2b2ea74ea,Google Gemini 3 Pro,0.8
+algotune,760c73a562fae846,Google Gemini 3.1 Pro,
+algotune,7576cc18d2376e17,Zhipu GLM-4.5,0.55
+algotune,49eb2bd21bc77c78,OpenAI GPT-5,0.7
+algotune,629fbf2f588294c2,OpenAI GPT-5 mini,0.65
+algotune,806060f84158a9ea,OpenAI GPT-5 Pro,0.8
+algotune,ac12e3d5487f85d5,OpenAI GPT-5.2,0.83
+algotune,0d9953730dc48753,OpenAI GPT-5.4,0.82
+algotune,73f95f9968e8139c,OpenAI GPT-OSS 120B,0.6
+algotune,3526231d28eef536,OpenAI o4-mini,0.6
+algotune,676ede36cce18bfa,Alibaba Qwen3-Coder,0.6
+alignment_faking,69a3bcad08503255,Agent: igg-baseline,
+alignment_faking,7d3b21f2badb5d26,Agent: igg-interrogation,
+alignment_faking,39f2d6bc87316e9d,Agent: igg-interrogation_plus_sa,
+alignment_faking,161bf7865764ada6,Agent: igg-interrogation_plus_sa_plus_honest_persona,
+alignment_faking,82f435c497d80d5d,Anthropic Claude Sonnet 4,
+alignment_faking,30fc03687d12d445,Agent: igg-interrogation_plus_sa_plus_other_ai,
+alignment_faking,aff61decb43fadb3,Agent: igg-simple_interrogation,
+alignment_faking,c6041ca22ac191ef,Anthropic Claude 3 Opus,
+alignment_faking,aee05e95e81345cd,Anthropic Claude Sonnet,
+alignment_faking,d306b39b91a98559,Anthropic Claude 3.5 Sonnet,
+alignment_faking,33b9fac843ca49d6,TGG-Baseline,
+alignment_faking,536289dd673ee7db,TGG-Baseline_2,
+alignment_faking,ca36ec1b444b6efe,TGG-Baseline_3,
+alignment_faking,153c927fd3ca29b1,TGG-Baseline_4,
+alignment_faking,6c95a8b066956548,TGG-Interrogation,
+alignment_faking,6b2a913880414302,TGG-Interrogation_plus_SA,
+alignment_faking,a0e4f96794141711,TGG-Interrogation_plus_SA_plus_Honest_persona,
+alignment_faking,44d5b190bcd256f2,TGG-Interrogation_plus_SA_plus_Sonnet_4,
+alignment_faking,31b0c02007927dd5,TGG-Interrogation_plus_SA_plus_other_AI,
+alignment_faking,083532253e15f2c3,TGG-Simple_Interrogation,
+alignment_faking,3391346664b3fa12,long_context-Counterfactual_IGG-Baseline,
+alignment_faking,6237dc58778c23e5,long_context-Counterfactual_IGG-Baseline_2,
+alignment_faking,8d8fbb2a5a4bc012,long_context-Counterfactual_IGG-Baseline_3,
+alignment_faking,cead3347347b6f3a,long_context-Counterfactual_IGG-Hinge_length_penalty,
+alignment_faking,b39bb9a7a1b68d3d,long_context-Counterfactual_IGG-Scratchpad_monitor,
+alignment_faking,b8730b7e9343a28e,long_context-Counterfactual_TGG-Baseline,
+alignment_faking,bef90ab31d840288,long_context-Counterfactual_TGG-Baseline_2,
+alignment_faking,9d630a98d1b5666e,long_context-Counterfactual_TGG-Baseline_3,
+alignment_faking,c7b45371054e4042,long_context-Counterfactual_TGG-Hinge_length_penalty,
+alignment_faking,4fe960729881dd53,long_context-Counterfactual_TGG-Scratchpad_monitor,
+alignment_faking,f247b90c94020b79,long_context-Emotional_IGG-Baseline,
+alignment_faking,b504c747df9a680a,long_context-Emotional_IGG-Baseline_2,
+alignment_faking,3ee789dec7e57e78,long_context-Emotional_IGG-Baseline_3,
+alignment_faking,9afd48af64c13316,long_context-Emotional_TGG-Baseline,
+alignment_faking,25150ddd15347602,long_context-Emotional_TGG-Baseline_2,
+alignment_faking,76ec7e7443441200,long_context-Emotional_TGG-Baseline_3,
+alignment_faking,96f6a670b27e843a,long_context-IGG-Baseline,
+alignment_faking,f2b4a097ac95cfb4,long_context-IGG-Baseline_2,
+alignment_faking,b8f2f520fd57892a,long_context-IGG-Baseline_3,
+alignment_faking,2fd9001a768c0376,long_context-IGG-Hinge_length_penalty,
+alignment_faking,0504a278899a6c07,long_context-IGG-Output_only,
+alignment_faking,1f00f9e8bbe698c2,long_context-IGG-Output_only_2,
+alignment_faking,1bebcc494b9febf8,long_context-IGG-Output_only_3,
+alignment_faking,f8b4d6bd48ee6f74,long_context-IGG-Reward_AF,
+alignment_faking,8fbbb269f91b77b1,long_context-IGG-Scratchpad_monitor,
+alignment_faking,b71052278fa3b2fc,long_context-IGG-Scratchpad_monitor_2,
+alignment_faking,fea75d6368d22e92,long_context-IGG-Scratchpad_only,
+alignment_faking,6577aec4084f6361,long_context-IGG-Scratchpad_only_2,
+alignment_faking,8ff63faff3698d82,long_context-IGG-Scratchpad_only_3,
+alignment_faking,36583915978a364b,long_context-SL3_Helpful-Baseline,
+alignment_faking,1a65801cd892816e,long_context-Short_IGG-Baseline,
+alignment_faking,878a3380f885528d,long_context-Short_IGG-Baseline_2,
+alignment_faking,81d7a1cebfafc7c4,long_context-Short_IGG-Baseline_3,
+alignment_faking,ac5faf95b64f0f00,long_context-Short_IGG-Hinge_length_penalty,
+alignment_faking,ff20f2bfadf86226,long_context-Short_TGG-Baseline,
+alignment_faking,1eba84a1e9b23bdd,long_context-Short_TGG-Baseline_2,
+alignment_faking,a91ecdcfc54b3232,long_context-Short_TGG-Baseline_3,
+alignment_faking,25a922f3e8aaf2c9,long_context-Short_TGG-Hinge_length_penalty,
+alignment_faking,7bf19614109da048,long_context-TGG-Baseline,
+alignment_faking,7d3916bf0d91c67a,long_context-TGG-Baseline_2,
+alignment_faking,8bf72453ab221d7c,long_context-TGG-Baseline_3,
+alignment_faking,0ec4a9f431ec36c3,long_context-TGG-Baseline_4,
+alignment_faking,b981add4c01f2e7c,long_context-TGG-Hinge_length_penalty,
+alignment_faking,425bac850436182c,long_context-TGG-Output_only,
+alignment_faking,b686d213c4919a09,long_context-TGG-Output_only_2,
+alignment_faking,1a90185025216ad2,long_context-TGG-Output_only_3,
+alignment_faking,ac06aaf8b66a3ab3,long_context-TGG-Reward_AF,
+alignment_faking,f5c2c5e8c37531d0,long_context-TGG-Scratchpad_monitor,
+alignment_faking,fe0c976c528c0dd6,long_context-TGG-Scratchpad_only,
+alignment_faking,23b4f6797159977d,long_context-TGG-Scratchpad_only_2,
+alignment_faking,8eec80fdd523c266,long_context-TGG-Scratchpad_only_3,
+alignment_faking,6f0a04a9acd476fd,long_context-Training_Sycophancy-Baseline,
+alignment_faking,0b548b5fe8bea37b,long_context-Training_Sycophancy-Baseline_2,
+alignment_faking,b832c7be41a1546c,long_context-Training_Sycophancy-Baseline_3,
+appworld,63ec992db2669e69,Alibaba Qwen3 14B,0.55
+appworld,0c300c3903b32b17,OpenAI GPT-4.1,0.55
+appworld,22ecfc9e751af75a,DeepSeek Coder 33B,
+appworld,4d7c521f6f232ad4,OpenAI GPT-4o,0.15
+appworld,a8ecbd0add853bea,OpenAI GPT-4,0.15
+appworld,689b9b6b57e8eb00,Meta Llama 3 70B,0.07
+appworld,98c2d0797f3e4e13,Alibaba Qwen2.5 32B,0.5
+babilong,97956269fd970f68,Cohere Command R,0.54
+babilong,923a74a85f8a3e79,Alibaba Qwen2.5 7B,0.6
+babilong,314e58b926f55c12,Google Gemini 1.5 Pro,0.7
+babilong,3a021b19476bd486,Google Gemma 2 9B,0.55
+babilong,6891579fb8bf1498,Google Gemma 3 12B,0.75
+babilong,0915289239c04cf2,Google Gemma 3 27B,0.65
+babilong,f86f79f64a3e7889,Google Gemma 3 4B,
+babilong,0edc7bb069da380e,Meta Llama 3.1 70B,0.65
+babilong,a716d8b60e38781a,Meta Llama 3.1 8B,0.55
+babilong,0ebeaf23ce1d66e0,Microsoft Phi-3 Mini,0.38
+babilong,f0f2ceeda915d5e8,Microsoft Phi-3.5 Mini,0.59
+babilong,7cdf594625cb9d08,Mistral 7B,0.48
+babilong,fe5a1098ec7fd73e,Mistral Mixtral 8x22B,0.6
+babilong,76b8713b169e6ccd,Mistral Mixtral 8x7B,0.45
+babilong,2a4af69e4b79506b,OpenAI GPT-4o mini,0.6
+babilong,4f8f8cd2f8630d4e,Google Gemini 3 Flash,0.86
+benger,7f0881e8e06ffb55,OpenAI GPT-5.4 mini,0.62
+benger,148b6a6c4e72670f,Google Gemini 3.1 Flash-Lite,0.55
+benger,8ea91b5297ebb32e,OpenAI GPT-5.4,0.45
+benger,7bbbc65e2ef911c0,Anthropic Claude Opus 4.7,0.7
+benger,ec91105497d45143,Anthropic Claude Sonnet 4.6,0.63
+benger,5e8414025c39d8ff,Google Gemini 3.1 Pro,0.62
+benger,a07487299d82b494,DeepSeek V4 Pro,0.62
+benger,d0c44f890981df51,Meta Llama 4 Maverick,0.35
+benger,25f90147fc294422,Alibaba Qwen3.6 35B A3B,0.42
+benger,d13945e1954d6161,Alibaba Qwen3 235B A22B Thinking,0.45
+benger,7bdf82817aa9be6f,Alibaba Qwen3.5 122B A10B,0.55
+benger,a001de1ce8f27a47,DeepSeek V4 Flash,0.45
+bertaqa,8095773641d2dcde,Anthropic Claude 3 Haiku,0.7
+bertaqa,67ca15e49d287dff,Anthropic Claude 3 Opus,0.8
+bertaqa,5d38db9e92ee998c,Anthropic Claude 3 Sonnet,0.83
+bertaqa,81e92cac1de9d712,OpenAI GPT-3.5,0.62
+bertaqa,5de52d94a819e181,OpenAI GPT-4,0.82
+bird_sql,1cdc7d30e684e549,Microsoft WizardCoder 33B,0.3
+bird_sql,b72cdb9f6f33ba1e,Databricks DBRX,0.36
+bird_sql,8821dc5812178432,Meta Code Llama 34B,0.3
+bird_sql,9f9753ece4c0d928,Meta Code Llama 70B,0.3
+bird_sql,0d40389d9a8dcba6,Defog SQLCoder 70B,0.5
+bird_sql,b967b5135a1ab97b,Defog SQLCoder 7B,0.32
+bird_sql,6f68d4f453645f60,Mistral 7B,0.13
+bird_sql,4da115fc33e5ccfc,Mistral Mixtral 8x7B,0.36
+bird_sql,2d1850efc702002d,Meta Llama 2 70B,0.2
+bird_sql,75c9a4fb59869e74,Anthropic Claude 3 Sonnet,0.52
+bird_sql,6ae48f0e70b0cdf3,Anthropic Claude 3 Haiku,0.42
+bird_sql,5eb0c6084fef373d,Anthropic Claude 3 Opus,0.55
+bird_sql,3c9428135f3b3e6d,OpenAI GPT-4,0.55
+bird_sql,8c2499a9e72e411d,OpenAI GPT-3.5,0.48
+bird_sql,67535034bafb629f,Google Gemini 1.0 Pro,0.45
+bridging_gap,185e4aa17ecd56f5,OpenAI GPT-3.5,0.5
+bridging_gap,23ffda9ec8daf040,OpenAI GPT-4,0.68
+bridging_gap,febb8f757e4b3337,OpenAI GPT-4o,0.8
+ceval,b5268aab0701ff0d,Alibaba Qwen 7B,0.58
+chatgpt_drift,4a52e5864c826fc0,OpenAI GPT-3.5,0.25
+chatgpt_drift,a508870f4dbb2e69,OpenAI GPT-4,0.3
+clasheval,b8d2171afab2c063,OpenAI GPT-4o,0.62
+clasheval,5e8b9e1c08ac27d0,OpenAI GPT-3.5,0.55
+clasheval,0ddf665f8f9db8ec,Anthropic Claude 3 Opus,0.74
+clasheval,64cf5833a618d607,Anthropic Claude 3 Sonnet,0.57
+clasheval,8036635ac95f5614,Google Gemini 1.5 Flash,0.6
+clasheval,a26b1ab918ee55d3,Meta Llama 3 8B,0.55
+cruxeval,2aa354c3bdfe334a,Meta Code Llama 13B,0.38
+cruxeval,3d1aac8124b8b12f,Meta Code Llama 34B,0.46
+cruxeval,1117e668d3cf3eab,OpenAI GPT-3.5,0.55
+cruxeval,0b61da3fdb2e78fd,OpenAI GPT-4,0.78
+cruxeval,e8970b5a3045a5aa,Mistral 7B,0.33
+cruxeval,190d0323e83a114e,Mistral Mixtral 8x7B,0.4
+dave,768b7401610a3604,Google Gemini 1.5 Flash,0.4
+dave,e5fa5400c4506aa5,Google Gemini 1.5 Pro,
+dave,9e410cbb4427d073,Google Gemini 2.0 Flash-Lite,0.36
+dave,3ac433f92b78ca96,Google Gemini 2.0 Flash,0.46
+dtap_bench,843fc036b971697e,Anthropic Claude Opus 4.6,0.82
+dtap_bench,abcc16d7484c395e,Anthropic Claude Sonnet 4.5,0.72
+dtap_bench,b8f6f436bd17fb28,Google Gemini 3 Pro,0.62
+dtap_bench,8b2f04a99c9a979e,OpenAI GPT-5.1,0.65
+dtap_bench,a72974314258a110,OpenAI GPT-5.2,0.7
+dtap_bench,b65119e1c0e1bf7b,OpenAI GPT-5.4,0.78
+dtap_bench,fac09ddbc952b439,OpenAI GPT-OSS 120B,0.62
+editbench,b3203b31d67c5bc9,Anthropic Claude 3.5 Sonnet,0.5
+editbench,55937bf56b98509f,Anthropic Claude 3.7 Sonnet,0.55
+editbench,d3b82545f9480350,Anthropic Claude Sonnet 4,0.6
+editbench,409fb741a67e0a1f,Anthropic Claude Sonnet 4.5,0.63
+editbench,91038a1e6b5143f8,DeepSeek V3.1,0.55
+editbench,a12e246f96f2f51d,DeepSeek R1,0.42
+editbench,14689c9046745fac,Mistral Devstral Medium,0.43
+editbench,3ed1bddc3acc9082,Mistral Devstral Small,0.38
+editbench,1bc62038e58c3c79,Google Gemini 2.5 Flash,0.5
+editbench,66c21d5072c05c7c,Google Gemini 2.5 Pro,0.58
+editbench,6e0288c03d559d62,Google Gemma 3 12B,0.35
+editbench,15654fe49bc23866,Google Gemma 3 27B,0.34
+editbench,d0c9dfd9103b38e3,Google Gemma 3n E4B,0.25
+editbench,10a483d527880f14,Zhipu GLM-4.5,0.55
+editbench,b18eb145ad9e7a5f,Zhipu GLM-4.6,0.5
+editbench,cb5b062441af5ab0,OpenAI GPT-4o,0.5
+editbench,79f0da689a3a9024,OpenAI GPT-4o mini,0.4
+editbench,69bec10d0c25d096,OpenAI GPT-5,0.6
+editbench,c9ca72368bd50739,OpenAI GPT-5 mini,0.53
+editbench,0d1784769a128e8c,OpenAI GPT-5 nano,0.47
+editbench,0747812d6de85f8e,OpenAI o3-mini,0.52
+editbench,7bab24b2d5369306,OpenAI o4-mini,0.55
+editbench,e5c0d5b30a5bc1a3,OpenAI GPT-OSS 120B,0.48
+editbench,ff5fedfe20dd7795,OpenAI GPT-OSS 20B,0.37
+editbench,781db70e3a3f626c,xAI Grok 4 Fast,0.55
+editbench,7cc5865b060dc3e9,xAI Grok Code Fast 1,0.45
+editbench,bd05ba3e7eb37b9b,Moonshot Kimi-Dev 72B,0.38
+editbench,befdb14cf766cf65,Moonshot Kimi K2,0.5
+editbench,9b30c2c63fd1d108,Meta Llama 3.1 405B,0.3
+editbench,020f445fcf97f48a,Meta Llama 3.1 8B,0.15
+editbench,f627fbc1a46eed1b,Meta Llama 3.3 70B,0.38
+editbench,519bbdaa3b263c1d,Meta Llama 4 Maverick,0.45
+editbench,f71af1d15c05e65e,Meta Llama 4 Scout,0.32
+editbench,63b6a1c60cff7e2b,Mistral Small 3.2 24B,0.38
+editbench,c685d0f12ccfc2ad,Mistral Codestral,0.35
+editbench,bcac1cda134e3ef0,Alibaba Qwen2.5 72B,0.38
+editbench,3b068ea1361047c0,Alibaba Qwen2.5-Coder 32B,0.3
+editbench,d44bd24fd0e255e1,Alibaba Qwen3 14B,0.38
+editbench,9cc8cee4a79fb643,Alibaba Qwen3 30B A3B,0.38
+editbench,1b96491ce1cfb813,Alibaba Qwen3-Coder,0.5
+editbench,1fd216ac6585b99c,Alibaba Qwen3-Coder 30B,0.42
+edu_circuit_hw,c535a2a66f0007ef,Google Gemini 2.5 Pro,0.4
+edu_circuit_hw,6223957f64dc924f,Google Gemini 3 Pro,0.55
+edu_circuit_hw,c13e790882d37b12,Anthropic Claude Sonnet 4.5,0.45
+edu_circuit_hw,9e128f66b21216e9,OpenAI GPT-5.1,0.55
+edu_circuit_hw,844627d75af36c8d,Alibaba Qwen3-VL 8B,0.28
+edu_circuit_hw,d8f31190ae01c63b,Alibaba Qwen3-VL Plus,0.35
+edumath,0a74453e5dd99de2,OpenAI GPT-4o,0.8
+egoschema,6ed5520d235a88be,OpenAI GPT-3.5,0.51
+egoschema,f9bc3dfe44193256,Meta LLaMA,0.47
+egoschema,4b6a842f81bb8221,OpenAI GPT-4,
+emoji_attack,9f001bb173da04e7,OpenAI GPT-3.5,0.5
+engdesign,536416a5ab9b168f,OpenAI GPT-4o,0.18
+engdesign,e55e4ae0a4e4ea53,Anthropic Claude 3.7 Sonnet,0.3
+engdesign,4b6b81322713f00d,DeepSeek V3,0.28
+engdesign,984ab91740b8d395,DeepSeek R1,0.28
+engdesign,0da253dadefadaaa,Google Gemini 2.0 Flash,
+engdesign,a06cc760ada4e7f8,Google Gemini 2.5 Pro,0.33
+engdesign,8d559915066349a1,OpenAI o1,0.43
+engdesign,3513fab75260989d,OpenAI o3,0.34
+engdesign,87e9354637516973,OpenAI o4-mini,0.34
+evouna,d8d6de270a0b9705,Fusion-in-Decoder,0.56
+evouna,358b7b87c7b284ef,OpenAI GPT-3.5 Davinci,0.58
+evouna,5e8b9e1c08ac27d0,OpenAI GPT-3.5,0.62
+evouna,97f2da5bc3b55368,OpenAI GPT-4,0.7
+evouna,ea6b9e901f7ace5a,Microsoft Bing Chat,0.8
+fewshot_ttt_bbh,9e4c87587532861f,Meta Llama 3.1 8B,0.45
+fewshot_ttt_bbh,4c2d9cf143754691,Llama-3.1-8B-Instruct + Shared E2E direct I/O (10-shot),0.4
+financebench,106172165bd8bc88,Anthropic Claude 2,0.76
+financebench,bcf1a352bddcb627,OpenAI GPT-4,0.19
+financebench,ffc6589b3e78727d,Meta Llama 2 70B,0.19
+hallusionbench,bed453e32c897f83,Qihoo 360VL 70B,0.47
+hallusionbench,d1b6246cd15c2cd6,AKI,0.42
+hallusionbench,fa2a30ff987447aa,BAAI Aquila-VL 2B,0.57
+hallusionbench,23032d8a9efb6d2e,Rhymes AI Aria,0.64
+hallusionbench,bcee0bd89f85a97d,Ant Bailing-MM Pro,0.6
+hallusionbench,b24859f4282e9245,vivo BlueLM-V,0.48
+hallusionbench,9e7eba2c30ed0e95,Bunny Llama 3 8B,0.4
+hallusionbench,4a9603cc0fb889c3,OpenAI GPT-4o,0.68
+hallusionbench,33b86a1801266d84,Anthropic Claude 3.5 Sonnet,0.6
+hallusionbench,65fae96f9e74a0ac,Anthropic Claude 3.7 Sonnet,0.6
+hallusionbench,1e55ce803157e185,Anthropic Claude 3 Haiku,0.42
+hallusionbench,d99528007ad54f87,Anthropic Claude 3 Opus,0.55
+hallusionbench,f3f3386e8a83fba2,Anthropic Claude 3 Sonnet,0.41
+hallusionbench,84a12050bd80a48c,Agent: cloudwalk,0.62
+hallusionbench,892030c9f5a18823,ByteDance Doubao VL,0.64
+hallusionbench,4a2f126ac6871a32,NVIDIA Eagle X5 13B,0.55
+hallusionbench,30aac03f7cf332e5,NVIDIA Eagle X5 34B,0.47
+hallusionbench,f68ec98fab8be3e8,NVIDIA Eagle X5 7B,0.4
+hallusionbench,e1134ff4c02dbd44,TII Falcon 2 VLM 11B,0.45
+hallusionbench,ad10f3b1f5d3bde2,Zhipu GLM-4V,0.45
+hallusionbench,6bbb5b974bfd4227,Zhipu GLM-4V Plus,0.55
+hallusionbench,9d68823b7392c754,OpenAI GPT-4.5,0.65
+hallusionbench,76bf06cacc51d694,OpenAI GPT-4V,0.65
+hallusionbench,30b266c204061b17,OpenAI GPT-4o mini,0.46
+hallusionbench,026afda2aab64cb3,Google Gemini 1.5 Flash,0.5
+hallusionbench,b4508a85c21cb564,Google Gemini 2.0 Flash,0.65
+hallusionbench,8dda6d4c7a191c00,Google Gemini 1.0 Pro,0.62
+hallusionbench,ef8e188458b8dcb8,Google Gemini 1.5 Pro,0.46
+hallusionbench,d5d038b4516dca0f,Google Gemini 2.0 Pro,0.58
+hallusionbench,613c5325be1d1f05,Google Gemini 2.5 Pro,0.66
+hallusionbench,0cbc3149bdc586ec,Google Gemini Pro Vision,0.45
+hallusionbench,efb9b3f2adc64116,Google Gemma 3 12B,0.47
+hallusionbench,731c3ad55ec1eccb,Google Gemma 3 27B,0.48
+hallusionbench,ff2be92ede461aff,Google Gemma 3 4B,0.45
+hallusionbench,f6413db473407f30,Tencent Hunyuan Standard Vision,0.52
+hallusionbench,9c517970c41ad4e4,Tencent Hunyuan Vision,0.6
+hallusionbench,8e3263b96dfede3b,Hugging Face IDEFICS3 8B,0.55
+hallusionbench,66532e5c2b22e5bc,OpenGVLab InternVL 1.1,0.38
+hallusionbench,fa180848d62533f4,OpenGVLab InternVL 1.2,0.48
+hallusionbench,527018eaf10910b9,OpenGVLab InternVL 1.5,0.64
+hallusionbench,a8a0998a1b528d0d,OpenGVLab InternVL2 1B,0.52
+hallusionbench,9663956c4634b43f,OpenGVLab InternVL2 26B,0.62
+hallusionbench,ab5dbe2e24a7f4f4,OpenGVLab InternVL2 2B,0.38
+hallusionbench,dc5775c72a250398,OpenGVLab InternVL2 40B,0.66
+hallusionbench,8cfb314981e33d68,OpenGVLab InternVL2 4B,0.6
+hallusionbench,aebee9e5fdd6c64e,OpenGVLab InternVL2 76B,0.66
+hallusionbench,716f73f9bd91b315,OpenGVLab InternVL2 8B,0.63
+hallusionbench,7fdbf5b77db333a1,OpenGVLab InternVL2.5 1B,0.4
+hallusionbench,0e5e274a949ddc65,OpenGVLab InternVL2.5 26B,0.68
+hallusionbench,ec58ad83a9d37590,OpenGVLab InternVL2.5 2B,0.43
+hallusionbench,81496d5e9e207519,OpenGVLab InternVL2.5 38B,0.5
+hallusionbench,31f425a7c87166a0,OpenGVLab InternVL2.5 4B,0.62
+hallusionbench,84932222d32b9096,OpenGVLab InternVL2.5 78B,0.7
+hallusionbench,c72e6752f635b1b7,OpenGVLab InternVL2.5 8B,0.66
+hallusionbench,3b908f7ca736e36e,JT-VL,0.6
+hallusionbench,4af3cbec39038f47,DeepSeek Janus 1.3B,0.32
+hallusionbench,f8cbee5d1a50d99e,DeepSeek Janus-Pro 7B,0.4
+hallusionbench,5341d5441da7ab4b,Microsoft Kosmos-2,0.3
+hallusionbench,cb1381a7e942bb9e,LLaVA-CoT 11B,0.63
+hallusionbench,a2748e2be8a113fc,Meta Llama 3 8B,0.38
+hallusionbench,e01b5657e192643c,NVIDIA VILA 1.5 8B,0.36
+hallusionbench,420bc3d22e71ba9a,Meta Llama 3.2 11B,0.4
+hallusionbench,b286b53c1b3ac820,Meta Llama 3.2 90B,0.62
+hallusionbench,4fb242828aa9f15f,MMAlaya,0.42
+hallusionbench,8f772067f1ea5c59,MMAlaya2,0.45
+hallusionbench,79a1a0100f19fa66,MUG-U 7B,0.63
+hallusionbench,0fe9b1a711cda64e,TIGER-Lab Mantis 8B Fuyu,0.45
+hallusionbench,a83f9b301bc0389e,TIGER-Lab Mantis 8B Idefics2,0.37
+hallusionbench,df656fbcc08c502c,TIGER-Lab Mantis 8B CLIP-LLaMA3,0.37
+hallusionbench,206bc27edb549fa9,TIGER-Lab Mantis 8B SigLIP-LLaMA3,0.36
+hallusionbench,387505f078b065ad,OpenGVLab Mini-InternVL 2B v1.5,0.38
+hallusionbench,e7e2355dc75f73ed,OpenGVLab Mini-InternVL 4B v1.5,0.43
+hallusionbench,fd320ee1e309096f,OpenBMB MiniCPM-V 2.5,0.6
+hallusionbench,479f3ed15c704ce3,OpenBMB MiniCPM-V,0.5
+hallusionbench,acf13f97166caf6f,OpenBMB MiniCPM-V 2,0.36
+hallusionbench,56459426e056952b,OpenBMB MiniCPM-V 2.6,0.62
+hallusionbench,4a8789187c1adcee,OpenBMB MiniCPM-o 2.6,0.55
+hallusionbench,ae35484b0a8c8fa2,MiniGPT-4 13B,0.35
+hallusionbench,fb1558e96784911c,MiniGPT-4 7B,0.32
+hallusionbench,fdbea06fe610a0ad,MiniGPT-v2,0.4
+hallusionbench,8f9926182b1a563b,Moondream 1,0.3
+hallusionbench,996419500b0a3aac,Moondream 2,0.33
+hallusionbench,e2720fb208e56df0,NVIDIA NVLM,0.49
+hallusionbench,1eedad289fee7822,OmChat,0.58
+hallusionbench,b2595dc52592b925,OpenBMB OmniLMM 12B,0.36
+hallusionbench,75e404c3121a41b9,AIDC-AI Ovis1.5 Gemma2 9B,0.48
+hallusionbench,b98a77b535f9fec0,AIDC-AI Ovis1.5 Llama3 8B,0.45
+hallusionbench,ea8660b7c2bbe756,AIDC-AI Ovis1.6 Gemma2 27B,0.54
+hallusionbench,aa7206c09ae9a07a,AIDC-AI Ovis1.6 Gemma2 9B,0.6
+hallusionbench,1d8439c2237bc37d,AIDC-AI Ovis1.6 Llama3.2 3B,0.58
+hallusionbench,a6644ffc6edd74fa,AIDC-AI Ovis2 16B,0.5
+hallusionbench,97d97991c348ea37,AIDC-AI Ovis2 1B,0.57
+hallusionbench,d43d26a37dc95eec,AIDC-AI Ovis2 2B,0.58
+hallusionbench,86f4086e77c92a48,AIDC-AI Ovis2 34B,0.6
+hallusionbench,866eb9bc6993141e,AIDC-AI Ovis2 4B,0.66
+hallusionbench,00074da53bb75f42,AIDC-AI Ovis2 8B,0.68
+hallusionbench,ecbc776b75b1a839,Tencent POINTS Qwen2.5 7B,0.48
+hallusionbench,e6955212f47c9622,Tencent POINTS Yi 1.5 9B,0.63
+hallusionbench,3b175da476b4fefb,Tencent POINTS1.5 Qwen2.5 7B,0.64
+hallusionbench,1c58ef189f7d186f,PandaGPT 13B,0.25
+hallusionbench,c5da5f9e7d4e0239,Parrot,0.52
+hallusionbench,bec15ffed49f8ca0,Microsoft Phi-3 Vision,0.45
+hallusionbench,b75fae098793b46e,Microsoft Phi-3.5 Vision,0.55
+hallusionbench,156a1e0b74cd81e8,Microsoft Phi-4 Vision,0.45
+hallusionbench,37d9f9e65574ce17,Mistral Pixtral 12B,0.47
+hallusionbench,3063c6d4ef45f281,Alibaba Qwen-VL Max,0.43
+hallusionbench,187856071d73a3fa,Alibaba Qwen-VL Plus,0.55
+hallusionbench,0b0550b712457eaa,Alibaba Qwen2-VL 2B,0.42
+hallusionbench,203c4d8b38b1b610,Alibaba Qwen2-VL 72B,0.58
+hallusionbench,306ecf351975e8f7,Alibaba Qwen2-VL 7B,0.64
+hallusionbench,721da99b8ecc4f7f,Alibaba Qwen2.5-VL 3B,0.62
+hallusionbench,dcbc69d33fc964b2,Alibaba Qwen2.5-VL 72B,0.6
+hallusionbench,e8934d2695f7245a,Alibaba Qwen2.5-VL 7B,0.55
+hallusionbench,a87a16e911a24326,RBDash 72B,0.67
+hallusionbench,982372e61ff5a78f,Reka Edge,0.5
+hallusionbench,6d16b3a2d1ce178b,Reka Flash,0.56
+hallusionbench,a0971a9252b0eadc,Ristretto 3B,0.48
+hallusionbench,e81044b07bd6d4a6,SAIL-VL 2B,0.6
+hallusionbench,33fbd7459954129e,SenseTime SenseChat Vision,0.52
+hallusionbench,a89227f8dc056311,SLIME 13B,0.29
+hallusionbench,d79f9e09517f606a,SLIME 7B,0.45
+hallusionbench,48fb19aad8d3159a,SLIME 8B,0.42
+hallusionbench,8bd675d27d7bf0f7,HuggingFace SmolVLM,0.34
+hallusionbench,1a0d595fe291325b,HuggingFace SmolVLM 256M,0.45
+hallusionbench,57a1b44e82d86940,HuggingFace SmolVLM 500M,0.27
+hallusionbench,67e16224254f4621,HuggingFace SmolVLM2,0.44
+hallusionbench,2d4dadaafae194e7,HuggingFace SmolVLM2 256M,0.28
+hallusionbench,7629f557fd1f6b5c,HuggingFace SmolVLM2 500M,0.3
+hallusionbench,f34fae48cf19d7d8,StepFun Step-1.5V Mini,0.65
+hallusionbench,2089aa3d275b52f3,StepFun Step-1V,0.62
+hallusionbench,947ecdc5f5965416,StepFun Step-1o,0.56
+hallusionbench,953989a078844e3b,Taiyi,0.3
+hallusionbench,7b071ddf37cb90fe,TeleMM,0.62
+hallusionbench,a5039f5ed9f5ac46,TransCore-M,0.52
+hallusionbench,ee0f6b3b71a17816,NVIDIA VILA 1.5 13B,0.44
+hallusionbench,5fb876b8624a1a73,NVIDIA VILA 1.5 3B,0.31
+hallusionbench,e7cb87b45ed803cd,NVIDIA VILA 1.5 40B,0.42
+hallusionbench,626a1f4e4881b4c4,VXVERSE,0.45
+hallusionbench,86195fb5869697f2,Vintern 1B,0.33
+hallusionbench,db2154fd5edcb190,Vintern 3B,0.4
+hallusionbench,27ac6420b8315756,Zhipu VisualGLM 6B,0.3
+hallusionbench,ed3a3eca3135cd15,WeMM,0.55
+hallusionbench,2a303a8a3ffe4003,InternLM-XComposer,0.35
+hallusionbench,fd7e2adc2a2c0673,InternLM-XComposer2,0.6
+hallusionbench,b6171b4d967a512c,InternLM-XComposer2 1.8B,0.3
+hallusionbench,70b2a17119d5ffd1,InternLM-XComposer2.5,0.63
+hallusionbench,d6163b4329c60eea,Xinyuan-VL 2B,0.6
+hallusionbench,4c077573917eebb6,01.AI Yi Vision,0.5
+hallusionbench,e9207d0529463531,01.AI Yi-VL 34B,0.52
+hallusionbench,31a5f71a775c38e4,01.AI Yi-VL 6B,0.5
+hallusionbench,07809d4261b270d7,MiniMax abab6.5s,0.48
+hallusionbench,2d254ed1f8de73e6,MiniMax abab7,0.51
+hallusionbench,11b85f9ca1f1e985,Ant Bailing-MM,0.6
+hallusionbench,a0a9b0447c7f7f70,Ant Bailing-MM Lite,0.52
+hallusionbench,6bab5f5cad313df7,Cambrian 13B,0.54
+hallusionbench,77b984c25460ea69,Cambrian 34B,0.42
+hallusionbench,75651414b4ab5b02,Cambrian 8B,0.55
+hallusionbench,3080e2981afde936,Meta Chameleon 30B,0.38
+hallusionbench,ca2a4c0e04e05a7c,Meta Chameleon 7B,0.2
+hallusionbench,ac927967f5c6f9a9,Zhipu CogVLM,0.35
+hallusionbench,28aa641e45662c0a,Zhipu CogVLM2,0.6
+hallusionbench,e519fb0a818690df,DeepSeek VL2,0.47
+hallusionbench,1047b0f021f2818b,DeepSeek VL2 Small,0.6
+hallusionbench,8a0d8660fb6d9d00,DeepSeek VL2 Tiny,0.39
+hallusionbench,f596628103c94b21,DeepSeek VL 1.3B,0.28
+hallusionbench,0ca0aa431e40aeff,DeepSeek VL 7B,0.4
+hallusionbench,36bba9dee1644dd6,BAAI Emu2,0.45
+hallusionbench,cce998eee9d94972,BAAI Emu3,0.36
+hallusionbench,fac75f8dc0d65b92,DeepMind Flamingo,
+hallusionbench,08a08e38d4f677f4,Zhipu GLM-4V 9B,0.47
+hallusionbench,3bbb52316918623e,xAI Grok 2,0.6
+hallusionbench,0b2b7f3c625744dc,H2O.ai H2OVL Mississippi 1B,0.33
+hallusionbench,c9d9bfc3ddaf29cb,H2O.ai H2OVL Mississippi 2B,0.36
+hallusionbench,274db5535ca58dfa,Hugging Face IDEFICS2 8B,0.39
+hallusionbench,391ae955bd7d0a52,Hugging Face IDEFICS 80B,0.27
+hallusionbench,1159f13fde132bce,Hugging Face IDEFICS 9B,0.27
+hallusionbench,2960993dde14d9ea,Salesforce InstructBLIP 13B,0.44
+hallusionbench,8c95989a8d8421f6,Salesforce InstructBLIP 7B,0.47
+hallusionbench,d0a98e5c15efff19,LLaVA InternLM 7B,0.52
+hallusionbench,44f6f30662613b2b,LLaVA InternLM2 20B,0.54
+hallusionbench,d9e2db3cb2b09c0d,LLaVA InternLM2 7B,0.45
+hallusionbench,82f138ac9e0cf590,LLaVA Llama 3 8B,0.38
+hallusionbench,b0a09c886bd7511c,LLaVA-1.5 Vicuna 13B,0.44
+hallusionbench,6df7fd061bac4681,LLaVA-1.5 Vicuna 7B,0.45
+hallusionbench,bf1ba8a80cf8f90d,LLaVA-NeXT-Interleave Qwen 7B,0.4
+hallusionbench,630df103cd379301,LLaVA-NeXT Llama 3 8B,0.35
+hallusionbench,9e682b8bd2beb866,LLaVA-NeXT Mistral 7B,0.37
+hallusionbench,dcdb3960cbf37932,LLaVA-NeXT Qwen 32B,0.55
+hallusionbench,e6a0f9a65d9134a6,LLaVA-NeXT Vicuna 13B,0.31
+hallusionbench,310f1d16f7d51fa6,LLaVA-NeXT Vicuna 7B,0.55
+hallusionbench,70e4b2277746ac90,LLaVA-NeXT Yi 34B,0.57
+hallusionbench,4027e97e932aacfc,LLaVA-OneVision Qwen2 0.5B,0.3
+hallusionbench,1ff8845a2424b788,LLaVA-OneVision Qwen2 72B,0.48
+hallusionbench,3c80b49aa31aec03,LLaVA-OneVision Qwen2 7B,0.32
+hallusionbench,8f534cdc11abe11e,LLaVA Vicuna 7B,0.28
+hallusionbench,6b636fb6883d8413,Alibaba mPLUG-Owl2,0.48
+hallusionbench,febd68a7b08113c6,Mini-Monkey,0.38
+hallusionbench,299e93e03faa36bf,AllenAI Molmo 72B,0.64
+hallusionbench,e9917f33b443aac2,AllenAI Molmo 7B-D,0.46
+hallusionbench,85a9963dc3f895a5,AllenAI Molmo 7B-O,0.45
+hallusionbench,e4c949d7432b6ada,AllenAI MolmoE 1B,0.45
+hallusionbench,a9bb5fbb04617b25,Monkey,0.55
+hallusionbench,60a9bf62ce96021f,Moonshot v1,0.58
+hallusionbench,11195b52d487fa0b,Ola,0.65
+hallusionbench,139998adbdd84b8e,Google PaliGemma 3B,0.3
+hallusionbench,f02931cb60ea219d,qwen_base,0.52
+hallusionbench,50395dc37584bacb,qwen_chat,0.39
+hallusionbench,9033f3c27a8e7798,Ross-Qwen2 7B,0.58
+hallusionbench,149c0205367ce289,ShareCaptioner,0.35
+hallusionbench,8fa58bf289aeccc8,ShareGPT4V 13B,0.45
+hallusionbench,534afc537386a156,ShareGPT4V 7B,0.5
+hallusionbench,e5628dda9b5b5644,ByteDance Valley-Eagle,0.5
+hallusionbench,6d7c546c977b739d,NCSOFT VARCO-VISION,0.6
+hallusionbench,771e01a6071998e3,VITA,0.45
+hallusionbench,d3960ca7b5d5c654,Salesforce xGen-MM,0.42
+harmbench,adfed9ab9db998e2,OpenAI GPT-3.5 Turbo,
+harmbench,1e760dc1ece0f93c,OpenAI GPT-4,
+harmbench,561f375bb85a86ea,Google Gemini Pro,
+harmbench,077e07a681d467f3,Salesforce InstructBLIP,
+harmbench,3088ae26c59a70d7,OpenAI GPT-4V,
+healthadminbench,7fd8baeee1896835,Moonshot Kimi K2.5,0.3
+healthadminbench,8a2698f692597a4c,Alibaba Qwen3.5,0.3
+healthadminbench,37c6e4ce8a97e794,Anthropic Claude Opus 4.6,0.36
+healthadminbench,459952e5d845f68a,Google Gemini 3.1 Pro,0.35
+healthadminbench,519b49900f96fb3b,OpenAI GPT-5.4,0.3
+helm_afr,2689a6053f5184e7,DeepSeek V3,0.6
+helm_afr,901bac287fc45f4c,Google Gemma 2 27B,0.48
+helm_afr,330e3b2e820e2a60,Google Gemma 2 9B,0.45
+helm_afr,547e06a23dd5e925,Google Gemma 2B,0.33
+helm_afr,7ea7e132058f194a,Meta Llama 3.1 405B,0.62
+helm_afr,700c70126be4d508,Meta Llama 3.3 70B,0.55
+helm_afr,ff52a246df81e102,Mistral 7B,0.38
+helm_afr,4b0aa643e735e8e6,Mistral Mixtral 8x7B,0.4
+helm_afr,78fbe58a7c3e0c13,OpenAI GPT-3.5,0.42
+helm_afr,e2d07a840a218a74,OpenAI GPT-4,0.62
+helm_afr,bbe5f03fdda4f3ad,OpenAI GPT-4o,0.82
+helm_afr,dfc87aff947fb671,OpenAI GPT-4o mini,0.55
+helm_afr,152858e7edbc0c3f,Alibaba Qwen2.5 7B,0.4
+helm_afr,7b50bcdd8ae7c911,Anthropic Claude 3.5 Haiku,0.6
+helm_afr,16386cb24fbe1e21,Anthropic Claude 3.7 Sonnet,0.8
+helm_afr,9d3f8b521d1ae55e,Google Gemini 2.0 Flash,0.81
+helm_afr,5d3f8fa0df1dbab4,Meta Llama 3.1 70B,0.55
+helm_afr,b4d8aa721ec42fb6,Meta Llama 3.1 8B,0.4
+helm_afr,ea7344ab357479c0,Alibaba Qwen2.5 72B,0.5

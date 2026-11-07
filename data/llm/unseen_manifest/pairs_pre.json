@@ -1,0 +1,956 @@
+[
+{
+"bench": "afrimedqa",
+"subject_id": "ae4c8b956159d9ff",
+"name": "BioMistral 7B",
+"released": "2024-02-15"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "9fad6c4783d7a0cc",
+"name": "Saama OpenBioLLM 70B",
+"released": "2024-04-24"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "4149963d9645bde2",
+"name": "Saama OpenBioLLM 8B",
+"released": "2024-04-20"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "6137b936f4219fc1",
+"name": "Meta Llama 3 70B",
+"released": "2024-04-18"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "e0671a253f4b0871",
+"name": "Meta Llama 3 8B",
+"released": "2024-04-18"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "c30e696d4c7add83",
+"name": "Meta Llama 3.1 8B",
+"released": "2024-07-23"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "6389ec301e9dcc48",
+"name": "Mistral Mixtral 8x7B",
+"released": "2023-12-11"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "c18362d16ed0f035",
+"name": "Microsoft Phi-3 Medium",
+"released": "2024-04-23"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "098b587f823c6c99",
+"name": "Microsoft Phi-3 Mini",
+"released": "2024-04-23"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "5c4f60f216114268",
+"name": "Anthropic Claude 3.5 Sonnet",
+"released": "2024-06-20"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "1a504cc1ecfd870a",
+"name": "Anthropic Claude 3 Haiku",
+"released": "2024-03-04"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "7ebae896d182de70",
+"name": "Anthropic Claude 3 Opus",
+"released": "2024-03-04"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "fd09e3f6fc777e73",
+"name": "Anthropic Claude 3 Sonnet",
+"released": "2024-03-04"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "db8b7163fde07afe",
+"name": "Google Gemini Pro",
+"released": "2023-12-06"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "e3602a4cfa1e3fea",
+"name": "Google Gemini Ultra",
+"released": "2023-12-06"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "c1c46b67331bde2f",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "ff230ef448ad4dc3",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "48ae409b05f454a7",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "39b229f4f57d3eac",
+"name": "OpenAI GPT-4o mini",
+"released": "2024-07-18"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "b2f09d72f1af4eed",
+"name": "Meta Llama 3.1 405B",
+"released": "2024-07-23"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "9078bd7243dc19c2",
+"name": "Google MedLM",
+"released": "2023-12-13"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "6fc7871bf93019b0",
+"name": "Google Med-PaLM 2",
+"released": "2023-03-14"
+},
+{
+"bench": "afrimedqa",
+"subject_id": "b2b148980d85d1f5",
+"name": "Mistral 7B",
+"released": "2023-09-27"
+},
+{
+"bench": "agentdojo",
+"subject_id": "59db8272c0ed5de1",
+"name": "Anthropic Claude 3.5 Sonnet",
+"released": "2024-06-20"
+},
+{
+"bench": "agentdojo",
+"subject_id": "bb7206cffa1bf969",
+"name": "Anthropic Claude 3.7 Sonnet",
+"released": "2025-02-24"
+},
+{
+"bench": "agentdojo",
+"subject_id": "d2a41d6d3e997a1d",
+"name": "Anthropic Claude 3 Haiku",
+"released": "2024-03-04"
+},
+{
+"bench": "agentdojo",
+"subject_id": "c972065a1c92b94b",
+"name": "Anthropic Claude 3 Opus",
+"released": "2024-03-04"
+},
+{
+"bench": "agentdojo",
+"subject_id": "ae2a23c30397596f",
+"name": "Anthropic Claude 3 Sonnet",
+"released": "2024-03-04"
+},
+{
+"bench": "agentdojo",
+"subject_id": "36905c4a1ca98f4a",
+"name": "Cohere Command R+",
+"released": "2024-04-04"
+},
+{
+"bench": "agentdojo",
+"subject_id": "460ad8221b493428",
+"name": "Cohere Command R",
+"released": "2024-03-11"
+},
+{
+"bench": "agentdojo",
+"subject_id": "46a36e1b98090d0f",
+"name": "Google Gemini 1.5 Flash",
+"released": "2024-05-14"
+},
+{
+"bench": "agentdojo",
+"subject_id": "238123a9e826ade6",
+"name": "Google Gemini 1.5 Pro",
+"released": "2024-02-15"
+},
+{
+"bench": "agentdojo",
+"subject_id": "ebf20326b46f08aa",
+"name": "Google Gemini 2.0 Flash",
+"released": "2024-12-11"
+},
+{
+"bench": "agentdojo",
+"subject_id": "1f2185b72cccde44",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "agentdojo",
+"subject_id": "61b1c29ef88d707a",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "agentdojo",
+"subject_id": "2dd00cfe27cbda86",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "agentdojo",
+"subject_id": "3bc8d18992e81aa7",
+"name": "OpenAI GPT-4o mini",
+"released": "2024-07-18"
+},
+{
+"bench": "agentdojo",
+"subject_id": "4829ef051d60bc03",
+"name": "Meta Llama 3 70B",
+"released": "2024-04-18"
+},
+{
+"bench": "agentdojo",
+"subject_id": "24e4b3680d76b3b4",
+"name": "Meta Llama 3.3 70B",
+"released": "2024-12-06"
+},
+{
+"bench": "agi_elo",
+"subject_id": "e7690b1d19463f53",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "agi_elo",
+"subject_id": "86e79a2495ee348c",
+"name": "Anthropic Claude 3.7 Sonnet",
+"released": "2025-02-24"
+},
+{
+"bench": "agi_elo",
+"subject_id": "1345c3e67b47db08",
+"name": "DeepSeek R1 Distill Qwen 1.5B",
+"released": "2025-01-20"
+},
+{
+"bench": "agi_elo",
+"subject_id": "b61dc802b90a7c4c",
+"name": "DeepSeek R1 Distill Qwen 7B",
+"released": "2025-01-20"
+},
+{
+"bench": "agi_elo",
+"subject_id": "75592243f78d7fb8",
+"name": "DeepSeek R1",
+"released": "2025-01-20"
+},
+{
+"bench": "agi_elo",
+"subject_id": "0f813a2c5d164014",
+"name": "DeepSeek V3",
+"released": "2024-12-26"
+},
+{
+"bench": "agi_elo",
+"subject_id": "e7fa18d1900ac3fa",
+"name": "OpenAI GPT-4.1 mini",
+"released": "2025-04-14"
+},
+{
+"bench": "agi_elo",
+"subject_id": "ed0fb94ddea0043c",
+"name": "OpenAI GPT-4.1 nano",
+"released": "2025-04-14"
+},
+{
+"bench": "agi_elo",
+"subject_id": "62624b29ead8f40e",
+"name": "OpenAI GPT-4.1",
+"released": "2025-04-14"
+},
+{
+"bench": "agi_elo",
+"subject_id": "ac44818ea0963843",
+"name": "Google Gemma 3 27B",
+"released": "2025-03-12"
+},
+{
+"bench": "agi_elo",
+"subject_id": "3e52051058e893a9",
+"name": "Meta Llama 3.1 8B",
+"released": "2024-07-23"
+},
+{
+"bench": "agi_elo",
+"subject_id": "30d8769124c8c069",
+"name": "Meta Llama 4 Maverick",
+"released": "2025-04-05"
+},
+{
+"bench": "agi_elo",
+"subject_id": "caa89e9cb11c147e",
+"name": "Meta Llama 4 Scout",
+"released": "2025-04-05"
+},
+{
+"bench": "agi_elo",
+"subject_id": "3f994434aa1e04cf",
+"name": "Alibaba QwQ 32B",
+"released": "2024-11-28"
+},
+{
+"bench": "aider",
+"subject_id": "a71b2795b0f6f989",
+"name": "OpenAI GPT-4.1",
+"released": "2025-04-14"
+},
+{
+"bench": "aider",
+"subject_id": "bd7857d80f4bca6c",
+"name": "DeepSeek V3",
+"released": "2024-12-26"
+},
+{
+"bench": "aider",
+"subject_id": "5fa6e52aa5aa714c",
+"name": "OpenAI o3",
+"released": "2024-12-20"
+},
+{
+"bench": "alignment_faking",
+"subject_id": "82f435c497d80d5d",
+"name": "Anthropic Claude Sonnet 4",
+"released": "2025-05-22"
+},
+{
+"bench": "alignment_faking",
+"subject_id": "c6041ca22ac191ef",
+"name": "Anthropic Claude 3 Opus",
+"released": "2024-03-04"
+},
+{
+"bench": "alignment_faking",
+"subject_id": "aee05e95e81345cd",
+"name": "Anthropic Claude Sonnet",
+"released": "2024-03-04"
+},
+{
+"bench": "alignment_faking",
+"subject_id": "d306b39b91a98559",
+"name": "Anthropic Claude 3.5 Sonnet",
+"released": "2024-06-20"
+},
+{
+"bench": "benger",
+"subject_id": "d0c44f890981df51",
+"name": "Meta Llama 4 Maverick",
+"released": "2025-04-05"
+},
+{
+"bench": "bertaqa",
+"subject_id": "8095773641d2dcde",
+"name": "Anthropic Claude 3 Haiku",
+"released": "2024-03-04"
+},
+{
+"bench": "bertaqa",
+"subject_id": "67ca15e49d287dff",
+"name": "Anthropic Claude 3 Opus",
+"released": "2024-03-04"
+},
+{
+"bench": "bertaqa",
+"subject_id": "5d38db9e92ee998c",
+"name": "Anthropic Claude 3 Sonnet",
+"released": "2024-03-04"
+},
+{
+"bench": "bertaqa",
+"subject_id": "81e92cac1de9d712",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "bertaqa",
+"subject_id": "5de52d94a819e181",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "bird_sql",
+"subject_id": "1cdc7d30e684e549",
+"name": "Microsoft WizardCoder 33B",
+"released": "2024-01-04"
+},
+{
+"bench": "bird_sql",
+"subject_id": "b72cdb9f6f33ba1e",
+"name": "Databricks DBRX",
+"released": "2024-03-27"
+},
+{
+"bench": "bird_sql",
+"subject_id": "8821dc5812178432",
+"name": "Meta Code Llama 34B",
+"released": "2023-08-24"
+},
+{
+"bench": "bird_sql",
+"subject_id": "9f9753ece4c0d928",
+"name": "Meta Code Llama 70B",
+"released": "2024-01-29"
+},
+{
+"bench": "bird_sql",
+"subject_id": "0d40389d9a8dcba6",
+"name": "Defog SQLCoder 70B",
+"released": "2024-01-30"
+},
+{
+"bench": "bird_sql",
+"subject_id": "b967b5135a1ab97b",
+"name": "Defog SQLCoder 7B",
+"released": "2023-10-03"
+},
+{
+"bench": "bird_sql",
+"subject_id": "6f68d4f453645f60",
+"name": "Mistral 7B",
+"released": "2023-09-27"
+},
+{
+"bench": "bird_sql",
+"subject_id": "4da115fc33e5ccfc",
+"name": "Mistral Mixtral 8x7B",
+"released": "2023-12-11"
+},
+{
+"bench": "bird_sql",
+"subject_id": "2d1850efc702002d",
+"name": "Meta Llama 2 70B",
+"released": "2023-07-18"
+},
+{
+"bench": "bird_sql",
+"subject_id": "75c9a4fb59869e74",
+"name": "Anthropic Claude 3 Sonnet",
+"released": "2024-03-04"
+},
+{
+"bench": "bird_sql",
+"subject_id": "6ae48f0e70b0cdf3",
+"name": "Anthropic Claude 3 Haiku",
+"released": "2024-03-04"
+},
+{
+"bench": "bird_sql",
+"subject_id": "5eb0c6084fef373d",
+"name": "Anthropic Claude 3 Opus",
+"released": "2024-03-04"
+},
+{
+"bench": "bird_sql",
+"subject_id": "3c9428135f3b3e6d",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "bird_sql",
+"subject_id": "8c2499a9e72e411d",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "bird_sql",
+"subject_id": "67535034bafb629f",
+"name": "Google Gemini 1.0 Pro",
+"released": "2023-12-06"
+},
+{
+"bench": "bridging_gap",
+"subject_id": "185e4aa17ecd56f5",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "bridging_gap",
+"subject_id": "23ffda9ec8daf040",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "bridging_gap",
+"subject_id": "febb8f757e4b3337",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "ceval",
+"subject_id": "b5268aab0701ff0d",
+"name": "Alibaba Qwen 7B",
+"released": "2023-08-03"
+},
+{
+"bench": "chatgpt_drift",
+"subject_id": "4a52e5864c826fc0",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "chatgpt_drift",
+"subject_id": "a508870f4dbb2e69",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "clasheval",
+"subject_id": "b8d2171afab2c063",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "clasheval",
+"subject_id": "5e8b9e1c08ac27d0",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "clasheval",
+"subject_id": "0ddf665f8f9db8ec",
+"name": "Anthropic Claude 3 Opus",
+"released": "2024-03-04"
+},
+{
+"bench": "clasheval",
+"subject_id": "64cf5833a618d607",
+"name": "Anthropic Claude 3 Sonnet",
+"released": "2024-03-04"
+},
+{
+"bench": "clasheval",
+"subject_id": "8036635ac95f5614",
+"name": "Google Gemini 1.5 Flash",
+"released": "2024-05-14"
+},
+{
+"bench": "clasheval",
+"subject_id": "a26b1ab918ee55d3",
+"name": "Meta Llama 3 8B",
+"released": "2024-04-18"
+},
+{
+"bench": "cruxeval",
+"subject_id": "2aa354c3bdfe334a",
+"name": "Meta Code Llama 13B",
+"released": "2023-08-24"
+},
+{
+"bench": "cruxeval",
+"subject_id": "3d1aac8124b8b12f",
+"name": "Meta Code Llama 34B",
+"released": "2023-08-24"
+},
+{
+"bench": "cruxeval",
+"subject_id": "1117e668d3cf3eab",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "cruxeval",
+"subject_id": "0b61da3fdb2e78fd",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "cruxeval",
+"subject_id": "e8970b5a3045a5aa",
+"name": "Mistral 7B",
+"released": "2023-09-27"
+},
+{
+"bench": "cruxeval",
+"subject_id": "190d0323e83a114e",
+"name": "Mistral Mixtral 8x7B",
+"released": "2023-12-11"
+},
+{
+"bench": "editbench",
+"subject_id": "b3203b31d67c5bc9",
+"name": "Anthropic Claude 3.5 Sonnet",
+"released": "2024-06-20"
+},
+{
+"bench": "editbench",
+"subject_id": "55937bf56b98509f",
+"name": "Anthropic Claude 3.7 Sonnet",
+"released": "2025-02-24"
+},
+{
+"bench": "editbench",
+"subject_id": "d3b82545f9480350",
+"name": "Anthropic Claude Sonnet 4",
+"released": "2025-05-22"
+},
+{
+"bench": "editbench",
+"subject_id": "a12e246f96f2f51d",
+"name": "DeepSeek R1",
+"released": "2025-01-20"
+},
+{
+"bench": "editbench",
+"subject_id": "3ed1bddc3acc9082",
+"name": "Mistral Devstral Small",
+"released": "2025-05-21"
+},
+{
+"bench": "editbench",
+"subject_id": "1bc62038e58c3c79",
+"name": "Google Gemini 2.5 Flash",
+"released": "2025-04-17"
+},
+{
+"bench": "editbench",
+"subject_id": "66c21d5072c05c7c",
+"name": "Google Gemini 2.5 Pro",
+"released": "2025-03-25"
+},
+{
+"bench": "editbench",
+"subject_id": "6e0288c03d559d62",
+"name": "Google Gemma 3 12B",
+"released": "2025-03-12"
+},
+{
+"bench": "editbench",
+"subject_id": "15654fe49bc23866",
+"name": "Google Gemma 3 27B",
+"released": "2025-03-12"
+},
+{
+"bench": "editbench",
+"subject_id": "d0c9dfd9103b38e3",
+"name": "Google Gemma 3n E4B",
+"released": "2025-05-20"
+},
+{
+"bench": "editbench",
+"subject_id": "cb5b062441af5ab0",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "editbench",
+"subject_id": "79f0da689a3a9024",
+"name": "OpenAI GPT-4o mini",
+"released": "2024-07-18"
+},
+{
+"bench": "editbench",
+"subject_id": "0747812d6de85f8e",
+"name": "OpenAI o3-mini",
+"released": "2024-12-20"
+},
+{
+"bench": "editbench",
+"subject_id": "7bab24b2d5369306",
+"name": "OpenAI o4-mini",
+"released": "2025-04-16"
+},
+{
+"bench": "editbench",
+"subject_id": "9b30c2c63fd1d108",
+"name": "Meta Llama 3.1 405B",
+"released": "2024-07-23"
+},
+{
+"bench": "editbench",
+"subject_id": "020f445fcf97f48a",
+"name": "Meta Llama 3.1 8B",
+"released": "2024-07-23"
+},
+{
+"bench": "editbench",
+"subject_id": "f627fbc1a46eed1b",
+"name": "Meta Llama 3.3 70B",
+"released": "2024-12-06"
+},
+{
+"bench": "editbench",
+"subject_id": "519bbdaa3b263c1d",
+"name": "Meta Llama 4 Maverick",
+"released": "2025-04-05"
+},
+{
+"bench": "editbench",
+"subject_id": "f71af1d15c05e65e",
+"name": "Meta Llama 4 Scout",
+"released": "2025-04-05"
+},
+{
+"bench": "editbench",
+"subject_id": "c685d0f12ccfc2ad",
+"name": "Mistral Codestral",
+"released": "2024-05-29"
+},
+{
+"bench": "editbench",
+"subject_id": "bcac1cda134e3ef0",
+"name": "Alibaba Qwen2.5 72B",
+"released": "2024-09-19"
+},
+{
+"bench": "editbench",
+"subject_id": "3b068ea1361047c0",
+"name": "Alibaba Qwen2.5-Coder 32B",
+"released": "2024-11-12"
+},
+{
+"bench": "editbench",
+"subject_id": "d44bd24fd0e255e1",
+"name": "Alibaba Qwen3 14B",
+"released": "2025-04-29"
+},
+{
+"bench": "editbench",
+"subject_id": "9cc8cee4a79fb643",
+"name": "Alibaba Qwen3 30B A3B",
+"released": "2025-04-29"
+},
+{
+"bench": "edu_circuit_hw",
+"subject_id": "c535a2a66f0007ef",
+"name": "Google Gemini 2.5 Pro",
+"released": "2025-03-25"
+},
+{
+"bench": "edumath",
+"subject_id": "0a74453e5dd99de2",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "emoji_attack",
+"subject_id": "9f001bb173da04e7",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "evouna",
+"subject_id": "d8d6de270a0b9705",
+"name": "Fusion-in-Decoder",
+"released": "2020-07-02"
+},
+{
+"bench": "evouna",
+"subject_id": "358b7b87c7b284ef",
+"name": "OpenAI GPT-3.5 Davinci",
+"released": "2022-11-28"
+},
+{
+"bench": "evouna",
+"subject_id": "5e8b9e1c08ac27d0",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "evouna",
+"subject_id": "97f2da5bc3b55368",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "evouna",
+"subject_id": "ea6b9e901f7ace5a",
+"name": "Microsoft Bing Chat",
+"released": "2023-02-07"
+},
+{
+"bench": "fewshot_ttt_bbh",
+"subject_id": "9e4c87587532861f",
+"name": "Meta Llama 3.1 8B",
+"released": "2024-07-23"
+},
+{
+"bench": "financebench",
+"subject_id": "106172165bd8bc88",
+"name": "Anthropic Claude 2",
+"released": "2023-07-11"
+},
+{
+"bench": "financebench",
+"subject_id": "bcf1a352bddcb627",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "financebench",
+"subject_id": "ffc6589b3e78727d",
+"name": "Meta Llama 2 70B",
+"released": "2023-07-18"
+},
+{
+"bench": "harmbench",
+"subject_id": "adfed9ab9db998e2",
+"name": "OpenAI GPT-3.5 Turbo",
+"released": "2023-03-01"
+},
+{
+"bench": "harmbench",
+"subject_id": "1e760dc1ece0f93c",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "harmbench",
+"subject_id": "561f375bb85a86ea",
+"name": "Google Gemini Pro",
+"released": "2023-12-06"
+},
+{
+"bench": "harmbench",
+"subject_id": "077e07a681d467f3",
+"name": "Salesforce InstructBLIP",
+"released": "2023-05-11"
+},
+{
+"bench": "harmbench",
+"subject_id": "3088ae26c59a70d7",
+"name": "OpenAI GPT-4V",
+"released": "2023-09-25"
+},
+{
+"bench": "helm_afr",
+"subject_id": "2689a6053f5184e7",
+"name": "DeepSeek V3",
+"released": "2024-12-26"
+},
+{
+"bench": "helm_afr",
+"subject_id": "901bac287fc45f4c",
+"name": "Google Gemma 2 27B",
+"released": "2024-06-27"
+},
+{
+"bench": "helm_afr",
+"subject_id": "330e3b2e820e2a60",
+"name": "Google Gemma 2 9B",
+"released": "2024-06-27"
+},
+{
+"bench": "helm_afr",
+"subject_id": "547e06a23dd5e925",
+"name": "Google Gemma 2B",
+"released": "2024-02-21"
+},
+{
+"bench": "helm_afr",
+"subject_id": "7ea7e132058f194a",
+"name": "Meta Llama 3.1 405B",
+"released": "2024-07-23"
+},
+{
+"bench": "helm_afr",
+"subject_id": "700c70126be4d508",
+"name": "Meta Llama 3.3 70B",
+"released": "2024-12-06"
+},
+{
+"bench": "helm_afr",
+"subject_id": "ff52a246df81e102",
+"name": "Mistral 7B",
+"released": "2023-09-27"
+},
+{
+"bench": "helm_afr",
+"subject_id": "4b0aa643e735e8e6",
+"name": "Mistral Mixtral 8x7B",
+"released": "2023-12-11"
+},
+{
+"bench": "helm_afr",
+"subject_id": "78fbe58a7c3e0c13",
+"name": "OpenAI GPT-3.5",
+"released": "2022-11-30"
+},
+{
+"bench": "helm_afr",
+"subject_id": "e2d07a840a218a74",
+"name": "OpenAI GPT-4",
+"released": "2023-03-14"
+},
+{
+"bench": "helm_afr",
+"subject_id": "bbe5f03fdda4f3ad",
+"name": "OpenAI GPT-4o",
+"released": "2024-05-13"
+},
+{
+"bench": "helm_afr",
+"subject_id": "dfc87aff947fb671",
+"name": "OpenAI GPT-4o mini",
+"released": "2024-07-18"
+},
+{
+"bench": "helm_afr",
+"subject_id": "152858e7edbc0c3f",
+"name": "Alibaba Qwen2.5 7B",
+"released": "2024-09-19"
+},
+{
+"bench": "helm_afr",
+"subject_id": "7b50bcdd8ae7c911",
+"name": "Anthropic Claude 3.5 Haiku",
+"released": "2024-10-22"
+},
+{
+"bench": "helm_afr",
+"subject_id": "16386cb24fbe1e21",
+"name": "Anthropic Claude 3.7 Sonnet",
+"released": "2025-02-24"
+},
+{
+"bench": "helm_afr",
+"subject_id": "9d3f8b521d1ae55e",
+"name": "Google Gemini 2.0 Flash",
+"released": "2024-12-11"
+},
+{
+"bench": "helm_afr",
+"subject_id": "5d3f8fa0df1dbab4",
+"name": "Meta Llama 3.1 70B",
+"released": "2024-07-23"
+},
+{
+"bench": "helm_afr",
+"subject_id": "b4d8aa721ec42fb6",
+"name": "Meta Llama 3.1 8B",
+"released": "2024-07-23"
+},
+{
+"bench": "helm_afr",
+"subject_id": "ea7344ab357479c0",
+"name": "Alibaba Qwen2.5 72B",
+"released": "2024-09-19"
+}
+]

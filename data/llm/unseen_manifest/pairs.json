@@ -1,0 +1,240 @@
+[
+{
+"bench": "algotune",
+"subject_id": "707e9b2b789b9a20",
+"name": "Anthropic Claude Opus 4.5",
+"released": "2025-11-24",
+"strict": false
+},
+{
+"bench": "algotune",
+"subject_id": "6ae3d9db61815383",
+"name": "Anthropic Claude Opus 4.6",
+"released": "2026-02-05",
+"strict": true
+},
+{
+"bench": "algotune",
+"subject_id": "cd3fe622426be379",
+"name": "Anthropic Claude Sonnet 4.5",
+"released": "2025-09-29",
+"strict": false
+},
+{
+"bench": "algotune",
+"subject_id": "768b2ea2b2ea74ea",
+"name": "Google Gemini 3 Pro",
+"released": "2025-11-18",
+"strict": false
+},
+{
+"bench": "algotune",
+"subject_id": "ac12e3d5487f85d5",
+"name": "OpenAI GPT-5.2",
+"released": "2025-12-11",
+"strict": true
+},
+{
+"bench": "algotune",
+"subject_id": "0d9953730dc48753",
+"name": "OpenAI GPT-5.4",
+"released": "2026-03-05",
+"strict": true
+},
+{
+"bench": "babilong",
+"subject_id": "4f8f8cd2f8630d4e",
+"name": "Google Gemini 3 Flash",
+"released": "2025-12-17",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "7f0881e8e06ffb55",
+"name": "OpenAI GPT-5.4 mini",
+"released": "2026-03-17",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "148b6a6c4e72670f",
+"name": "Google Gemini 3.1 Flash-Lite",
+"released": "2026-03-03",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "8ea91b5297ebb32e",
+"name": "OpenAI GPT-5.4",
+"released": "2026-03-05",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "7bbbc65e2ef911c0",
+"name": "Anthropic Claude Opus 4.7",
+"released": "2026-04-16",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "ec91105497d45143",
+"name": "Anthropic Claude Sonnet 4.6",
+"released": "2026-02-17",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "a07487299d82b494",
+"name": "DeepSeek V4 Pro",
+"released": "2026-04-24",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "25f90147fc294422",
+"name": "Alibaba Qwen3.6 35B A3B",
+"released": "2026-04-16",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "7bdf82817aa9be6f",
+"name": "Alibaba Qwen3.5 122B A10B",
+"released": "2026-02-24",
+"strict": true
+},
+{
+"bench": "benger",
+"subject_id": "a001de1ce8f27a47",
+"name": "DeepSeek V4 Flash",
+"released": "2026-04-24",
+"strict": true
+},
+{
+"bench": "dtap_bench",
+"subject_id": "843fc036b971697e",
+"name": "Anthropic Claude Opus 4.6",
+"released": "2026-02-05",
+"strict": true
+},
+{
+"bench": "dtap_bench",
+"subject_id": "abcc16d7484c395e",
+"name": "Anthropic Claude Sonnet 4.5",
+"released": "2025-09-29",
+"strict": false
+},
+{
+"bench": "dtap_bench",
+"subject_id": "b8f6f436bd17fb28",
+"name": "Google Gemini 3 Pro",
+"released": "2025-11-18",
+"strict": false
+},
+{
+"bench": "dtap_bench",
+"subject_id": "8b2f04a99c9a979e",
+"name": "OpenAI GPT-5.1",
+"released": "2025-11-12",
+"strict": false
+},
+{
+"bench": "dtap_bench",
+"subject_id": "a72974314258a110",
+"name": "OpenAI GPT-5.2",
+"released": "2025-12-11",
+"strict": true
+},
+{
+"bench": "dtap_bench",
+"subject_id": "b65119e1c0e1bf7b",
+"name": "OpenAI GPT-5.4",
+"released": "2026-03-05",
+"strict": true
+},
+{
+"bench": "editbench",
+"subject_id": "409fb741a67e0a1f",
+"name": "Anthropic Claude Sonnet 4.5",
+"released": "2025-09-29",
+"strict": false
+},
+{
+"bench": "editbench",
+"subject_id": "b18eb145ad9e7a5f",
+"name": "Zhipu GLM-4.6",
+"released": "2025-09-30",
+"strict": false
+},
+{
+"bench": "editbench",
+"subject_id": "781db70e3a3f626c",
+"name": "xAI Grok 4 Fast",
+"released": "2025-09-19",
+"strict": false
+},
+{
+"bench": "edu_circuit_hw",
+"subject_id": "6223957f64dc924f",
+"name": "Google Gemini 3 Pro",
+"released": "2025-11-18",
+"strict": false
+},
+{
+"bench": "edu_circuit_hw",
+"subject_id": "c13e790882d37b12",
+"name": "Anthropic Claude Sonnet 4.5",
+"released": "2025-09-29",
+"strict": false
+},
+{
+"bench": "edu_circuit_hw",
+"subject_id": "9e128f66b21216e9",
+"name": "OpenAI GPT-5.1",
+"released": "2025-11-12",
+"strict": false
+},
+{
+"bench": "edu_circuit_hw",
+"subject_id": "844627d75af36c8d",
+"name": "Alibaba Qwen3-VL 8B",
+"released": "2025-10-15",
+"strict": false
+},
+{
+"bench": "edu_circuit_hw",
+"subject_id": "d8f31190ae01c63b",
+"name": "Alibaba Qwen3-VL Plus",
+"released": "2025-09-23",
+"strict": false
+},
+{
+"bench": "healthadminbench",
+"subject_id": "7fd8baeee1896835",
+"name": "Moonshot Kimi K2.5",
+"released": "2026-01-27",
+"strict": true
+},
+{
+"bench": "healthadminbench",
+"subject_id": "8a2698f692597a4c",
+"name": "Alibaba Qwen3.5",
+"released": "2026-02-16",
+"strict": true
+},
+{
+"bench": "healthadminbench",
+"subject_id": "37c6e4ce8a97e794",
+"name": "Anthropic Claude Opus 4.6",
+"released": "2026-02-05",
+"strict": true
+},
+{
+"bench": "healthadminbench",
+"subject_id": "519b49900f96fb3b",
+"name": "OpenAI GPT-5.4",
+"released": "2026-03-05",
+"strict": true
+}
+]

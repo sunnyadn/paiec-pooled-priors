@@ -2,7 +2,7 @@
 
 Submission, simulator and cached model outputs for the Predictive AI Evaluation Competition. Technical report: `report/main.pdf`. Final Codabench submission: 1017682.
 
-Before a model has answered anything on a new benchmark, we ask a language model how often that model answers items like these. On held-out training benchmarks the deployed estimate is worth about six of the model's own answers. It becomes a Beta prior inside a predictor that pools revealed labels across models and calibrates per-item difficulty ratings on the fly.
+Before an AI system has answered anything on a new benchmark, we ask a language model how often that system answers questions like these. The estimate is as accurate as four of the system's own answers on the main public benchmarks, and eight on 44 newer benchmarks that no part of development touched. It becomes a Beta prior inside a predictor that pools revealed labels across models and calibrates per-item difficulty ratings on the fly.
 
 ## Reproduce every table, no API key
 
@@ -50,37 +50,3 @@ Build the Codabench zip with `tools/make_zip.sh submission/model.py KEYFILE NAME
 ## Disclosures
 
 Training data: public measurement-db only, for development, simulation and the eight calibration examples; no parameters are fitted to it. Pretrained models: Claude Opus 5.5 via the Anthropic API for subject priors and item ratings, with Claude Sonnet 5.5 and Claude Haiku 5.5 as fallbacks. Development used LLM coding assistants (Claude Code, Codex).
-
-### API prefix cache for the current TINIT candidate (2026-11-04)
-
-`dist/tinit1_cached/pkg/` and `dist/tinit1_cached/tinit1_cached_no_credentials.zip`
-are the current **cache-enabled candidate**, derived from the TDEPLOY3 original
-package with `tools/build_tinit1_cached.py TDEPLOY3_COPY DESTINATION`.
-They contain no credentials and have not been uploaded. Weights, labeling,
-concurrency and prediction rules are unchanged; the manifest binds both versions.
-The old sealed experiment packages remain historical evidence.
-
-- Prior requests split the fixed calibration examples from variable items and
-  subject details. An explicit `cache_control: {"type": "ephemeral"}` breakpoint
-  follows the shared examples, with the default 5-minute TTL. Identical prefixes
-  can then be reused within each model. Prompt text and order are preserved.
-- Rating requests mark the fixed system prefix too, but that short prefix is
-  currently below the model's minimum cache length. **Do not count this as an
-  effective rating-cache hit or predict savings on those requests.** We do not
-  pad the prompt or cache every changing item merely to advertise caching.
-- The generic `tools/make_zip.sh` applies the same transformation before it reads
-  credentials. Unrecognized prompt construction fails for review rather than
-  silently shipping an uncached variant.
-- Paid-run preparation must inspect the actual outgoing request and distinguish
-  local result reuse from API prefix caching. After execution report
-  `cache_creation_input_tokens`, `cache_read_input_tokens` and hit requests.
-  A cache marker is not evidence of a provider hit. TLIVE1 accounting now reserves
-  for the higher first-write rate and reports cache usage explicitly.
-- No additional paid call was made to validate this change. No-network tests
-  cover prompt preservation, stable breakpoints, fallback, cache write/read
-  pricing, usage reporting and the generated package. The old TLIVE1 source/seal
-  remains the baseline; its old execution authorization is exhausted.
-
-Provider reference: [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching).
-A first write has a premium; subsequent hits save input cost. Cache reuse and
-actual savings must be confirmed from usage, not inferred from request flags.

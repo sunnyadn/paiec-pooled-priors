@@ -32,13 +32,13 @@
 \maketitle
 
 \begin{abstract}
-Given an AI system's graded answers to a few questions of a benchmark, we predict whether it answers each remaining question correctly. The hardest case is before it has answered any, because the predictor does not yet know how strong the system is. A language model does. We give it the system's name and a few of the benchmark's questions, ask for the system's accuracy, and use that as the starting probability that the system's answers then update. On the hidden benchmarks of the Predictive AI Evaluation Competition (PAIEC), this cut the error before the first answer by almost a quarter relative to guessing 50\%, and it helped on 37 of 43 system--benchmark pairs. In simulation it is the largest gain in our predictor over the competition's full scoring. On public benchmarks it closes 78\% of the gap between starting from a guess and starting from the system's true accuracy. Without the system's name it is barely better than a guess.
+Given an AI system's graded answers to a few questions of a benchmark, we predict whether it answers each remaining question correctly. The hardest case is before it has answered any, because the predictor does not yet know how strong the system is. A language model does. We give it the system's name and a few of the benchmark's questions, ask for the system's accuracy, and use that as the starting probability that the system's answers then update. On the hidden benchmarks of the Predictive AI Evaluation Competition (PAIEC), this cut the error before the first answer by a fifth relative to guessing 50\%, and it helped on 33 of 39 system--benchmark pairs. In simulation it is the largest gain in our predictor over the competition's full scoring. On public benchmarks it closes 78\% of the gap between starting from a guess and starting from the system's true accuracy. Without the system's name it is barely better than a guess.
 \end{abstract}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\linewidth]{fig_hidden_b0.pdf}
-\caption{Error before the first answer on the competition's hidden benchmarks. Each dot is one system--benchmark pair from the five live runs that start from the language model's estimate. Without it the predictor answers one half and scores 0.250 on every pair. 37 of 43 pairs fall below that line (blue), 6 above it (red).}
+\caption{Error before the first answer on the competition's hidden benchmarks. Each dot is one distinct system--benchmark pair from the five live runs that start from the language model's estimate. Three pairs appeared in more than one run and are averaged. Without the estimate the predictor answers one half and scores 0.250 on every pair. 33 of 39 pairs fall below that line (blue), 6 above it (red).}
 \label{fig:hidden}
 \end{figure}
 
@@ -109,7 +109,7 @@ Haiku 5.5 & 0.185 \\
 
 Table~\ref{tab:prior} shows the result. On the 277 named pairs from the 24 public benchmarks that supply no calibration example, the deployed prior is worth four of the subject's own answers (90\% interval 0 to 10, bootstrap over benchmarks). Priors from data alone do not work before the first answer: the average benchmark's accuracy is worth nothing on these pairs, and so is a subject's level fitted on its other public benchmarks.
 
-\paragraph{Where the knowledge comes from.} The bottom rows of Table~\ref{tab:prior} answer this. When we hide the subject's name, provider and release date, the estimate falls almost to the constant, so the value comes from knowing which system it is. When we name the benchmark, which the deployed prompt never does, the estimate barely changes, so the language model is not retrieving a stored score for this benchmark. It also cannot know scores on the competition's hidden benchmarks, which it has never seen. A stronger language model knows more: Haiku is worth three answers, Sonnet and Opus seven. What it lacks is how hard the benchmark is, which is why a calibration example on the same benchmark raises its worth to twelve answers. A check on systems released after the language model's training cutoff is in Section~\ref{sec:limits}.
+\paragraph{Where the knowledge comes from.} The bottom rows of Table~\ref{tab:prior} answer this. When we hide the subject's name, provider and release date, the estimate falls almost to the constant, so the value comes from knowing which system it is. When we name the benchmark, which the deployed prompt never does, the estimate barely changes, so we found no sign that it retrieves a stored score for this benchmark. It also cannot know scores on the competition's hidden benchmarks, which it has never seen. A stronger language model knows more: Haiku is worth three answers, Sonnet and Opus seven. What it lacks is how hard the benchmark is, which is why a calibration example on the same benchmark raises its worth to twelve answers. A check on systems released after the language model's training cutoff is in Section~\ref{sec:limits}.
 
 \section{The prior improves the predictor}
 \label{sec:ablate}
@@ -148,12 +148,12 @@ Table~\ref{tab:ablate} gives the result, and Figure~\ref{fig:gap} sets it agains
 \section{Live results}
 \label{sec:online}
 
-Each formative run draws nine subject--benchmark pairs from seven benchmarks, and in our runs most benchmarks had a single subject. Raw scores swing with the draw. Three runs of the same final package scored 0.130, 0.181 and 0.164. Budget 0 still allows a paired comparison. The pooled baseline predicts one half for every item before any answers, so its Brier score at budget 0 is 0.250 on any draw. With the prior the score was 0.193 on the 43 pairs of the five runs with the prior (90\% interval 0.159 to 0.227, bootstrap over the seven hidden benchmarks), lower on 37 of them. These are the five runs with the prior and without item ratings. The three runs of the final package, which add Opus item ratings, scored 0.187 on their 26 pairs. It helped on average on six of the seven hidden benchmarks. On the seventh it made the error worse ($+0.018$, on three of its five pairs). The feedback identifies benchmarks only by an anonymous code, so we cannot say which benchmark that is or why. Later budgets offer no such paired comparison. Appendix~\ref{app:runs} lists every run.
+Each formative run draws nine subject--benchmark pairs from seven benchmarks, and in our runs most benchmarks had a single subject. Raw scores swing with the draw. Three runs of the same final package scored 0.130, 0.181 and 0.164. Budget 0 still allows a paired comparison. The pooled baseline predicts one half for every item before any answers, so its Brier score at budget 0 is 0.250 on any draw. With the prior the score was 0.199 on the 39 distinct pairs of the five runs with the prior and without item ratings (90\% interval 0.166 to 0.227, bootstrap over the seven hidden benchmarks), lower on 33 of them. Three pairs appeared in more than one run, and we average them. The three runs of the final package, which add Opus item ratings, scored 0.187 on their 26 pairs. It helped on average on six of the seven hidden benchmarks. On the seventh it made the error worse ($+0.018$, on three of its five pairs). The feedback identifies benchmarks only by an anonymous code, so we cannot say which benchmark that is or why. Later budgets offer no such paired comparison. Appendix~\ref{app:runs} lists every run.
 
 \section{Limitations}
 \label{sec:limits}
 
-The prior depends on the language model knowing the subject. For unnamed subjects the predictor leaves it out. In simulation on 15 benchmarks never used in development it made no measurable difference: $-0.0011$ on those with named subjects (90\% interval $-0.009$ to $+0.007$), helping on five and hurting on three, in each case where its starting estimate was closer or further than one half (Appendix~\ref{app:heldout}). On 44 newer benchmarks, also untouched by development and with identifiable systems, it lowered the ALC from 0.214 to 0.198 (Figure~\ref{fig:gap}). The simulation benchmarks also served for development, so Table~\ref{tab:ablate} may be optimistic. Online subjects were further from one half than those in the training data, and the shrinkage toward one half makes the prior too cautious for them. The live comparison spans different draws, and we did not compare against the organisers' Bayesian Linguistic Evaluator, whose default configuration failed on the current public data. We submitted a fix (\href{https://github.com/aims-foundations/paiec_baseline/pull/4}{paiec\_baseline\#4}). The method needs a paid API key, and all benchmarks we used have binary responses. Most subjects were released before the language model's training cutoff. On three systems released after it, on one public agent benchmark, the prior beat guessing, but its advantage over the average of earlier systems came from one of the three.
+The prior depends on the language model knowing the subject. For unnamed subjects the predictor leaves it out. In simulation on 15 benchmarks never used in development it made no measurable difference: $-0.0011$ on those with named subjects (90\% interval $-0.009$ to $+0.007$), helping on five and hurting on three, in each case where its starting estimate was closer or further than one half (Appendix~\ref{app:heldout}). On 44 newer benchmarks, also untouched by development and with identifiable systems, it lowered the ALC from 0.214 to 0.198 (Figure~\ref{fig:gap}). Systems there are further from one half, which makes a good starting estimate worth more (Appendix~\ref{app:prior}). The simulation benchmarks also served for development, so Table~\ref{tab:ablate} may be optimistic. Online subjects were further from one half than those in the training data, and the shrinkage toward one half makes the prior too cautious for them. The live comparison spans different draws, and we did not compare against the organisers' Bayesian Linguistic Evaluator, whose default configuration failed on the current public data. We submitted a fix (\href{https://github.com/aims-foundations/paiec_baseline/pull/4}{paiec\_baseline\#4}). The method needs a paid API key, and all benchmarks we used have binary responses. Most subjects were released before the language model's training cutoff. On three systems released after it, on one public agent benchmark, the prior beat guessing, but its advantage over the average of earlier systems came from one of the three.
 
 \section{Reproducibility and disclosures}
 \label{sec:repro}
@@ -266,23 +266,23 @@ All eight & 384 & $-0.003$ & & & & $-0.001$ \\
 
 \begin{table}[h]
 \centering
-\caption{Every online formative run. Section~\ref{sec:online} uses the five runs marked ``+ subject prior''. $B_{31}$ is the mean Brier score at budget 31, and excess is the ALC above each pair's budget-31 level. The runs drew different subjects, so the rows are not a paired comparison.}
+\caption{Every online formative run. Section~\ref{sec:online} uses the five runs marked ``+ subject prior''. $B_0$ and $B_{31}$ are the mean Brier scores at budgets 0 and 31, averaged over a run's pairs, and excess is the ALC above each pair's budget-31 level. The runs drew different subjects, so the rows are not a paired comparison.}
 \small
-\begin{tabular}{llcccc}
+\begin{tabular}{llccccc}
 \toprule
-Submission & Version & Pairs & Raw ALC & $B_{31}$ & Excess \\
+Submission & Version & Pairs & $B_0$ & Raw ALC & $B_{31}$ & Excess \\
 \midrule
-1016627 & v6 & 9 & 0.158 & 0.116 & 0.042 \\
-1016628 & v6 & 9 & 0.170 & 0.143 & 0.027 \\
-1016651 & v6, no API key & 8 & 0.158 & 0.134 & 0.024 \\
-1017498 & + subject prior (v19) & 9 & 0.169 & 0.164 & 0.006 \\
-1017499 & + subject prior (v19) & 9 & 0.159 & 0.151 & 0.008 \\
-1017545 & + subject prior (v23) & 8 & 0.195 & 0.183 & 0.011 \\
-1017562 & + subject prior (v25) & 8 & 0.179 & 0.169 & 0.010 \\
-1017629 & + subject prior (v27) & 9 & 0.184 & 0.167 & 0.017 \\
-1017607 & final & 8 & 0.181 & 0.175 & 0.006 \\
-1017628 & final & 9 & 0.130 & 0.126 & 0.004 \\
-1017682 & final (selected) & 9 & 0.164 & 0.149 & 0.014 \\
+1016627 & v6 & 9 & 0.250 & 0.158 & 0.116 & 0.042 \\
+1016628 & v6 & 9 & 0.250 & 0.170 & 0.143 & 0.027 \\
+1016651 & v6, no API key & 8 & 0.250 & 0.158 & 0.134 & 0.024 \\
+1017498 & + subject prior (v19) & 9 & 0.176 & 0.169 & 0.164 & 0.006 \\
+1017499 & + subject prior (v19) & 9 & 0.177 & 0.159 & 0.151 & 0.008 \\
+1017545 & + subject prior (v23) & 8 & 0.214 & 0.195 & 0.183 & 0.011 \\
+1017562 & + subject prior (v25) & 8 & 0.195 & 0.179 & 0.169 & 0.010 \\
+1017629 & + subject prior (v27) & 9 & 0.203 & 0.184 & 0.167 & 0.017 \\
+1017607 & final & 8 & 0.207 & 0.181 & 0.175 & 0.006 \\
+1017628 & final & 9 & 0.156 & 0.130 & 0.126 & 0.004 \\
+1017682 & final (selected) & 9 & 0.199 & 0.164 & 0.149 & 0.014 \\
 \bottomrule
 \end{tabular}
 \end{table}

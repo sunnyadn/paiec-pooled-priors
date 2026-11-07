@@ -26,12 +26,13 @@ measurement-db is gated, so this repository ships item and subject identifiers, 
 
 | Report | Source |
 |---|---|
-| Tables 1 and 3 and the recall tests, subject prior | `reproduce.py` from `data/llm/prior_eval_*.json` (estimates made with `src/prior_eval_deployed.py`; all 765 public pairs in `data/llm/prior_estimates_all.csv`) |
-| Table 2 and Figure 2, submitted predictor with each language-model term switched off | `src/sim_sh.py`, subject priors replayed from `data/llm/prior_cache.jsonl` (logs in `data/ablate/`, figure `report/fig_ablate.py`) |
-| Figure 1, the paired budget-0 result of Section 6 and Tables 7-8, online runs | `reproduce.py` with `src/online_table.py` (run IDs inside); figure `report/fig_hidden_b0.py` |
-| Table 2 caption, labels counted out of 31 | `tools/sim_acq31.py` (logs in `data/acq31/`; it saves the de-duplicated table that `src/sim_sh.py` builds in memory as `data/long_dedup_mac.parquet`, which stays local because it holds responses) |
-| Section 5 and Table 4 (Appendix B), the prior with four subjects per benchmark and on held-out benchmarks | `src/sim_sh.py` with `NSUBS=4,...` or `ITEMS=data/llm/items_disjoint.json` (logs in `data/multi/`, `data/disjoint/`) |
-| Tables 5-6 and Figure 3, pooling in simulation (appendix) | `src/sim_pp.py` (commands in `reproduce.py`, logs in `data/` and `data/small/`, figure `report/fig_budget.py`) |
+| Table 1 (first and last blocks), Tables 3 and 4, recall tests: subject prior | `reproduce.py` from `data/llm/prior_eval_*.json` (estimates made with `src/prior_eval_deployed.py`; all 765 public pairs in `data/llm/prior_estimates_all.csv`). The true accuracies come from measurement-db, so the scores need access. |
+| Table 1 (middle block) and Figure 2: the 44 newer benchmarks | forecasts in `data/forecasts/forecasts.csv` (`set = new`), scored by `src/score_forecasts.py`; simulations by `src/sim_extra_build.py` and `src/sim_extra.py` on the draws in `data/llm/extra/sim/`. Both need measurement-db, and the per-pair outputs are not shipped. Figure 2 (`report/fig_gap.py`) plots the per-budget means of those runs; its true-accuracy line comes from the same loop with each pair's true accuracy as the prior. |
+| Table 2: the submitted predictor with each language-model part switched off | `reproduce.py` from the logs in `data/ablate/` (`src/sim_sh.py`, subject priors replayed from `data/llm/prior_cache.jsonl`) |
+| Table 2 caption, labels counted out of 31 | `tools/sim_acq31.py` (logs in `data/acq31/`) |
+| Table 5 (Appendix B) and the four-subject result | `reproduce.py` from the logs in `data/disjoint/` and `data/multi/` (`src/sim_sh.py` with `ITEMS=data/llm/items_disjoint.json` or `NSUBS=4`) |
+| Figure 1, Section 6 and Table 6: online runs | the Codabench scoring logs of the listed runs (`src/online_table.py`, `src/online_pairs.py`). They are private to the submitting team and not released, so `reproduce.py` skips this part when `data/online/` is absent. With the logs it prints the distinct-pair result of Section 6 (39 pairs, $B_0$ 0.199, lower on 33). |
+| Table 7: variants that did not help | descriptions only; the exploratory scripts are in `src/explore/` |
 
 Checks on systems released after a predictor's training data (Section 7 of the report) need the API or the Claude Code CLI and the gated measurement-db: `src/prior_eval_unseen.py` with `src/prior_unseen_analysis.py` and `src/prior_unseen_control.py` (Claude Opus 4.5; frozen pair lists and hashes in `data/llm/unseen_manifest/`), and `src/prior_eval_chibench.py` (the deployed prior on CHI-Bench). Their outputs contain true accuracies and are not shipped. Before the CHI-Bench run, one engineering probe of the CLI route was made on one target (Kimi K3); the reported analysis uses the fresh results of the full run, not a choice between the two.
 

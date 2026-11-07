@@ -128,7 +128,7 @@ def table_prior_all(labels, dev_sim):
                     ("subject's level from other benchmarks", np.array(P1)), ("subject's + this benchmark's level (other subjects)", np.array(P2))):
         mse = np.mean((p - a_) ** 2); print(f'  {name:52s} pairs {m.sum():3d}  RMSE {np.sqrt(mse):.3f}  labels {labels(a_, mse)}')
     rng = np.random.default_rng(0)
-    print('Tables 1 (top rows) and 3. Deployed chain on every named public pair, shrinkage 0.75 fixed in advance')
+    print('Table 1 (top block) and Table 4. Deployed chain on every named public pair, shrinkage 0.75 fixed in advance')
     for name, m in (('all benchmarks', ~skip), ('benchmarks with a calibration example', ~skip & np.isin(bench, list(calib))),
                     ('benchmarks without one', ~skip & ~np.isin(bench, list(calib))),
                     ('  of which never used in development', ~skip & ~np.isin(bench, list(calib)) & ~np.isin(bench, list(dev)))):
@@ -144,11 +144,11 @@ def table_prior_all(labels, dev_sim):
 def table_online():
     """Figure 1, Section 6 and Table 7: online formative runs, draw-adjusted, with per-budget excess."""
     if not glob.glob('data/online/scoring_*.txt'):
-        print('Table 7: Codabench scoring logs not found in data/online/ (run IDs in src/online_table.py)'); return
+        print('Figure 1, Section 6 and Table 6: Codabench scoring logs not found in data/online/ (private to the submitting team; run IDs in src/online_table.py)'); return
     from online_pairs import load
     import online_table as T
-    print('Table 7, weighted excess. Online formative runs by version'); T.main()
-    P = load(); print('Table 7. Online excess Brier per budget (b=0,1,3,7,15)')
+    print('Table 6. Online formative runs by version, weighted excess'); T.main()
+    P = load(); print('Online runs by version: excess Brier per budget (b=0,1,3,7,15), not in the report')
     for name, runs in T.GROUPS:
         pb = np.array([p['pb'] for p in P if p['run'] in runs])
         print(f'  {name:38s}', ' '.join(f'{v:6.3f}' for v in (pb - pb[:, 5:6]).mean(0)[:5]))
@@ -193,7 +193,7 @@ def table_regimes():
             print(f'  held-out, mostly {"named" if grp else "unnamed"} subjects ({len(bs)} benchmarks)  {d:+.4f}  helped on {helped} of {len(bs)}')
     H_ = f'{LOG}/disjoint' if RERUN else 'data/disjoint_pb'   # the same runs, with per-benchmark, per-budget output
     if os.path.exists(f'{H_}/bb_prior_s5.log'):
-        print('Table 4. Prior minus no prior on the named held-out benchmarks: pairs, B0, B1, B3, B7, ALC')
+        print('Table 5. Prior minus no prior on the named held-out benchmarks: pairs, B0, B1, B3, B7, ALC')
         agg = {}
         for s in SEEDS:
             P, N = field(f'{H_}/bb_prior_s{s}.log', 'BY_BENCH'), field(f'{H_}/bb_none_s{s}.log', 'BY_BENCH')
@@ -262,7 +262,7 @@ def table_new():
     if missing:
         print(f'New-benchmark table: {len(missing)} simulation outputs missing from {S}/. They hold per-pair scores on the gated measurement-db, so they are '
               'not shipped: run src/sim_extra_build.py, then src/sim_extra.py ARM SEED for each arm and seed 5, 6, 7 (no API call)'); return
-    print('New-benchmark table (Section 5). With and without the subject prior on the new benchmarks, 90 draws, item ratings off')
+    print('Figure 2 panel (44 newer benchmarks). With and without the subject prior on the new benchmarks, 90 draws, item ratings off')
     import runpy; runpy.run_path('src/sim_extra_analysis.py', run_name='__main__')
 
 
@@ -270,13 +270,13 @@ def table_sim():
     """Tables 5 and 6: pooling in simulation, overall and per benchmark."""
     g = lambda k: mean_of(f'{LOG}/{SIMS[k][1]}')
     sm = lambda stem, n: np.mean([mean_of(f'{LOG}/small/{stem}_n{n}_s{s}.log') for s in SEEDS])
-    print('Table 5. Brier ALC in simulation: Baseline, v5, v6 random reveals, v6 coverage-first')
+    print('Pooling in simulation (not in the report): Baseline, v5, v6 random reveals, v6 coverage-first')
     print('  300 items, 12 benchmarks   ', ' '.join(f'{g(k):.4f}' for k in ('base300', 'v5_300', 'v6r_300', 'v6c_300')))
     for n in (2, 5, 10):
         print(f'  Online scale, {n:2d} subjects  ', ' '.join(f'{sm(stem, n):.4f}' for _, _, stem in SMALL.values()))
     print('  Full pools, no rating term ', ' '.join(f'{g(k):.4f}' for k in ('base_full', 'v5_full', 'v6r_full', 'v6c_full')))
     print(f'  v6 coverage-first without the rating term: {g("v6c_nollm"):.4f}   with true ability (oracle): {g("oracle"):.4f}')
-    print('Table 6. ALC per benchmark (300 items): benchmark, subjects, baseline, v5, v6, v6 without rating term')
+    print('Pooling per benchmark (not in the report, 300 items): benchmark, subjects, baseline, v5, v6, v6 without rating term')
     per = {}
     for k in ('base300', 'v5_300', 'v6c_300', 'v6c_nollm'):
         for b, n, v in re.findall(r'^(\S+) (\d+) ([\d.]+)', open(f'{LOG}/{SIMS[k][1]}').read(), re.M):

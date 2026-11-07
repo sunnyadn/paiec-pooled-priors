@@ -155,9 +155,11 @@ def table_online():
     print('Section 6. Budget 0, paired: the baseline predicts one half, so it scores 0.250 on every pair')
     rng = np.random.default_rng(0)
     for name, runs in T.GROUPS[1:]:
-        G = [p for p in P if p['run'] in runs]; d = np.array([p['pb'][0] for p in G]) - 0.25; b = np.array([p['bench'] for p in G]); ub = np.unique(b)
+        G = [p for p in P if p['run'] in runs]; by = {}
+        for p in G: by.setdefault((p['subj'], p['bench']), []).append(p['pb'][0])   # a pair that recurs across runs counts once (mean of its runs)
+        d = np.array([np.mean(v) for v in by.values()]) - 0.25; b = np.array([k[1] for k in by]); ub = np.unique(b)
         bs = [d[np.concatenate([np.where(b == x)[0] for x in rng.choice(ub, len(ub))])].mean() for _ in range(4000)]
-        print(f'  {name:38s} pairs {len(G)}  B0 {0.25 + d.mean():.3f} [{0.25 + np.percentile(bs, 5):.3f}, {0.25 + np.percentile(bs, 95):.3f}]  lower on {(d < 0).sum()}')
+        print(f'  {name:38s} pair-runs {len(G)}  distinct pairs {len(by)}  B0 {0.25 + d.mean():.3f} [{0.25 + np.percentile(bs, 5):.3f}, {0.25 + np.percentile(bs, 95):.3f}]  lower on {(d < 0).sum()}')
 
 
 def table_ablate():

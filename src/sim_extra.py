@@ -9,7 +9,8 @@ P = {p['key']: p for p in json.load(open(f'{S}/pairs.json'))}; ITEMS = json.load
 DRAWS = [json.loads(l) for l in open(f'{S}/draws_s{SEED}.jsonl')][:ND]
 B, W = [0, 1, 3, 7, 15, 31], [.1, .2, .2, .2, .2, .1]
 load = lambda path, name: (lambda s: (s.loader.exec_module(m := importlib.util.module_from_spec(s)), m)[1])(importlib.util.spec_from_file_location(name, path))
-MODEL = {'prior': 'submission/model_v26.py', 'noprior': 'submission/model_v26.py', 'laplace': 'src/baselines/laplace.py',
+_V26 = 'submission/model_v26.py' if os.path.exists('submission/model_v26.py') else 'submission/model.py'   # the release ships v26 as model.py (anchors from submission/anchors.json)
+MODEL = {'prior': _V26, 'noprior': _V26, 'laplace': 'src/baselines/laplace.py',
          'empirical_mean': 'src/baselines/empirical_mean.py'}[ARM]   # the organisers' baseline (the copy first run lacked only a __future__ import)
 M = load(MODEL, 'm'); LAB = load('submission/labeling.py', 'lab')
 if ARM in ('prior', 'noprior'):

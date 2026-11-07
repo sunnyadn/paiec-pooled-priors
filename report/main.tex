@@ -51,7 +51,7 @@ Our idea is to ask a language model. It has read about most named AI systems, so
 \begin{itemize}
 \item \textbf{The finding} (Section~\ref{sec:prior}): a language model knows roughly how strong a named AI system is, and the knowledge comes from the system's identity.
 \item \textbf{The effect} (Sections~\ref{sec:ablate} and~\ref{sec:online}): starting from its estimate helps most before the first answer, on the hidden benchmarks and on public ones untouched by development.
-\item \textbf{A reusable kit}: the predictor, a simulator of the competition protocol, every cached language-model output, and 1,157 accuracy forecasts that other methods can be scored on.
+\item \textbf{A reusable kit}: the predictor, a simulator of the competition protocol, every cached language-model output, and 1,157 accuracy forecasts (757 on the main public benchmarks, 400 on 44 newer ones) that other methods can be scored on.
 \end{itemize}
 
 \paragraph{Related work.} The organisers' Bayesian Linguistic Evaluator also starts from a language model's estimate, but it asks for every target response separately and revises the estimate in the prompt. We ask once per subject and benchmark and update the estimate numerically. Language models have also been asked to forecast benchmark scores from task descriptions \cite{park2025}, and missing scores can be completed from a model's other scores \cite{zeng2026}. We use such a forecast as the prior of an item-level predictor. Methods that predict from few items usually assume items already calibrated on many models \cite{polo2024tiny,hofmann2025,vivek2023,truong2025}, which a new benchmark lacks. In measurement terms, the task is a Rasch model \cite{rasch1960,lord1980} fitted online from very few responses, as in adaptive testing \cite{vanderlinden2010}, and our prior is the collateral information that sets an examinee's starting ability \cite{mislevy1987}.
@@ -80,7 +80,7 @@ We measured the prior on public benchmarks, against each subject's true accuracy
 
 \begin{table}[t]
 \centering
-\caption{Error of the estimated accuracy of a system on a benchmark, before the system answers anything. This is the RMSE of the accuracy estimate against the system's true accuracy, not the Brier score of Figures~\ref{fig:hidden} and~\ref{fig:gap}. Lower is better. The two blocks are different samples, so compare rows only within a block. Full table in Appendix~\ref{app:prior}.}
+\caption{Error of the estimated accuracy of a system on a benchmark, before the system answers anything. This is the RMSE of the accuracy estimate against the system's true accuracy, not the Brier score of Figures~\ref{fig:hidden} and~\ref{fig:gap}. Lower is better. The blocks are different samples, so compare rows only within a block. Full table in Appendix~\ref{app:prior}.}
 \label{tab:prior}
 \small
 \begin{tabular}{lc}
@@ -91,6 +91,11 @@ Estimate & Error \\
 Guess 50\% & 0.197 \\
 Average accuracy of all systems on the other benchmarks & 0.199 \\
 Language model (Opus 5.5, or Sonnet and Haiku where Opus gives no number) & \textbf{0.168} \\
+\midrule
+\midrule
+\multicolumn{2}{l}{\emph{400 pairs from 44 newer benchmarks that no part of our development touched}} \\
+Guess 50\% & 0.247 \\
+Language model (as above) & \textbf{0.133} \\
 \midrule
 \multicolumn{2}{l}{\emph{An earlier sample of 71 pairs}} \\
 Guess 50\% & 0.217 \\
@@ -113,7 +118,7 @@ To isolate the prior, we ran the submitted predictor on identical simulated draw
 
 \begin{table}[t]
 \centering
-\caption{The submitted predictor on 90 identical simulated draws. Differences are paired over draws, against the variant with both language-model parts off. Counting a pair's remaining labels out of 31, as the platform does, gives the same ALC values.}
+\caption{The submitted predictor on 90 identical simulated draws. Differences are paired over draws ($\pm$ one standard error over draws), against the variant with both language-model parts off. Counting a pair's remaining labels out of 31, as the platform does, gives the same ALC values.}
 \label{tab:ablate}
 \small
 \begin{tabular}{lcccc}
@@ -143,7 +148,7 @@ Table~\ref{tab:ablate} gives the result, and Figure~\ref{fig:gap} sets it agains
 \section{Live results}
 \label{sec:online}
 
-Each formative run draws nine subject--benchmark pairs from seven benchmarks, and in our runs most benchmarks had a single subject. Raw scores swing with the draw. Three runs of the same final package scored 0.130, 0.181 and 0.164. Budget 0 still allows a paired comparison. The pooled baseline predicts one half for every item before any answers, so its Brier score at budget 0 is 0.250 on any draw. With the prior the score was 0.193 on the 43 pairs of the five runs with the prior (90\% interval 0.159 to 0.227, bootstrap over the seven hidden benchmarks), lower on 37 of them. It helped on average on six of the seven hidden benchmarks. On the seventh it made the error worse ($+0.018$, on three of its five pairs). The feedback identifies benchmarks only by an anonymous code, so we cannot say which benchmark that is or why. Later budgets offer no such paired comparison. Appendix~\ref{app:runs} lists every run.
+Each formative run draws nine subject--benchmark pairs from seven benchmarks, and in our runs most benchmarks had a single subject. Raw scores swing with the draw. Three runs of the same final package scored 0.130, 0.181 and 0.164. Budget 0 still allows a paired comparison. The pooled baseline predicts one half for every item before any answers, so its Brier score at budget 0 is 0.250 on any draw. With the prior the score was 0.193 on the 43 pairs of the five runs with the prior (90\% interval 0.159 to 0.227, bootstrap over the seven hidden benchmarks), lower on 37 of them. These are the five runs with the prior and without item ratings. The three runs of the final package, which add Opus item ratings, scored 0.187 on their 26 pairs. It helped on average on six of the seven hidden benchmarks. On the seventh it made the error worse ($+0.018$, on three of its five pairs). The feedback identifies benchmarks only by an anonymous code, so we cannot say which benchmark that is or why. Later budgets offer no such paired comparison. Appendix~\ref{app:runs} lists every run.
 
 \section{Limitations}
 \label{sec:limits}
@@ -205,7 +210,9 @@ Opus, benchmark named in the prompt & 71 & 0.136 & 0.78 & 8 \\
 \end{table}
 
 
-The full evaluation takes every public pair with a named subject and at least 50 responses, one subject per name and benchmark: 765 pairs on 32 benchmarks, of which the eight calibration pairs are left out. Every estimate saw five sample items, and the shrinkage of 0.75 was fixed before this evaluation. Opus gave a number on 678 pairs. On the other 79, all from \texttt{alignment\_faking} and \texttt{harmbench}, the deployed predictor falls back to Sonnet and then Haiku. Table~\ref{tab:priordep} splits the result. The data-only priors in Table~\ref{tab:prior} are fitted on the public response tables with the target pair left out. The subject's level and the benchmark's level are additive on the logit scale, fitted by alternating ridge regression; a subject seen on no other public benchmark (127 of the 277 pairs) gets level zero. The lower rows of Table~\ref{tab:prior} come from an earlier sample of at most four pairs per benchmark, using the 71 on which all three models gave a number.
+\paragraph{Benchmark sets.} The paper uses three sets of public benchmarks. The main evaluation has 32 benchmarks with named subjects, eight of which supply a calibration example, leaving the 24 of Table~\ref{tab:prior}. Appendix~\ref{app:heldout} simulates 15 benchmarks used in no development step, eight of them with mostly named subjects. Figure~\ref{fig:gap} and the third block of Table~\ref{tab:prior} use 44 benchmarks added to the public data after development, with identifiable systems. Their subjects are further from one half (guessing scores 0.247 there against 0.197 on the main set), and the prior's error is about half that of guessing there, against 85\% of it on the main set.
+
+The full evaluation takes every public pair with a named subject and at least 50 responses, one subject per name and benchmark: 765 pairs on 32 benchmarks, of which the eight calibration pairs are left out. Every estimate saw five sample items (the deployed prompt shows up to eight), and the shrinkage of 0.75 was fixed before this evaluation. Opus gave a number on 678 pairs. On the other 79, all from \texttt{alignment\_faking} and \texttt{harmbench}, the deployed predictor falls back to Sonnet and then Haiku. Table~\ref{tab:priordep} splits the result. The data-only priors in Table~\ref{tab:prior} are fitted on the public response tables with the target pair left out. The subject's level and the benchmark's level are additive on the logit scale, fitted by alternating ridge regression; a subject seen on no other public benchmark (127 of the 277 pairs) gets level zero. The lower rows of Table~\ref{tab:prior} come from an earlier sample of at most four pairs per benchmark, using the 71 on which all three models gave a number.
 
 \begin{table}[h]
 \centering
@@ -259,7 +266,7 @@ All eight & 384 & $-0.003$ & & & & $-0.001$ \\
 
 \begin{table}[h]
 \centering
-\caption{Every online formative run. $B_{31}$ is the mean Brier score at budget 31, and excess is the ALC above each pair's budget-31 level. The runs drew different subjects, so the rows are not a paired comparison.}
+\caption{Every online formative run. Section~\ref{sec:online} uses the five runs marked ``+ subject prior''. $B_{31}$ is the mean Brier score at budget 31, and excess is the ALC above each pair's budget-31 level. The runs drew different subjects, so the rows are not a paired comparison.}
 \small
 \begin{tabular}{llcccc}
 \toprule

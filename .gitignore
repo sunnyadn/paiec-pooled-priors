@@ -10,3 +10,5 @@ data/llm/prior_eval_full.json
 data/rerun/
 data/online/
 dist/
+data/llm/prior_eval_all.json
+data/llm/items_disjoint.json

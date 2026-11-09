@@ -4,7 +4,7 @@ Submission, simulator and cached model outputs for the Predictive AI Evaluation 
 
 Before an AI system has answered anything on a new benchmark, we ask a language model how often that system answers questions like these. The estimate is as accurate as four of the system's own answers on the main public benchmarks, and eight on 44 newer benchmarks that no part of development touched. It becomes a Beta prior inside a predictor that pools revealed labels across models and calibrates per-item difficulty ratings on the fly.
 
-## Reproduce every table, no API key
+## Reproduce the tables, no API key (some need the gated measurement-db)
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
@@ -40,7 +40,7 @@ Item ratings were produced by `src/rate_prep.py` (prompts) with `src/rate_api.py
 
 ## The submission
 
-`submission/model.py` (predictor) and `submission/labeling.py` (acquisition). `model.py` is the predictor of Codabench submission 1017682 (named v26 in the logs), except that it loads the calibration examples from `anchors.json` instead of carrying them inline. `model_v5.py` and `model_v6.py` are the earlier pooled predictors in the simulation tables. Python standard library and NumPy only. No parameters are fitted to the training responses; the prior's calibration examples and constants and the simulation-tuned settings are listed in Section 3 of the report.
+`submission/model.py` (predictor) and `submission/labeling.py` (acquisition). `model.py` is the predictor of Codabench submission 1017682 (named v26 in the logs), except that it loads the calibration examples from `anchors.json` instead of carrying them inline. `anchors.json` holds item text from the gated measurement-db, so it is not in this repository: a fresh clone runs the predictor without the calibration examples (it prints a warning) until `src/make_anchors.py` has rebuilt them. The rebuilt file is identical to the eight examples inside submission 1017682. `model_v5.py` and `model_v6.py` are the earlier pooled predictors in the simulation tables. Python standard library and NumPy only. No parameters are fitted to the training responses; the prior's calibration examples and constants and the simulation-tuned settings are listed in Section 3 of the report.
 
 - Without an API key the language-model terms are skipped and the pooled predictor runs on its own.
 - With `llm_config.json` next to `model.py` (see `submission/llm_config.example.json`), it asks Claude Opus 5.5 for each subject's accuracy (once per subject and benchmark) and each item's difficulty. Subject-prior calls fall back to Claude Sonnet 5.5 and then Claude Haiku 5.5 when Opus gives no number. Results are cached on disk so the platform's worker processes share them, calls retry on rate limits, and per-process caps limit logical calls (150 prior calls, 300 item ratings). These are not dollar limits: checkpoints restart workers, each worker has its own allowance, retries can add HTTP attempts, and token use varies. Do not assume $10–15 covers a run.

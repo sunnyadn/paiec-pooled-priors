@@ -12,7 +12,7 @@ for b in benches:
     its=rng.choice(pool,min(300,len(pool)),replace=False)
     if IDS: its=np.array(IDS[b], dtype=type(its[0]))
     items=pd.read_parquet(f'data/mdb/{b}/formatted_tables/items.parquet',columns=['item_id','content','item_features']).drop_duplicates('item_id').set_index('item_id').loc[its]
-    out[b]=[dict(item_id=i,text=(str(r.content)[:1500]+' || features: '+str(r.item_features)[:200])) for i,r in items.iterrows()]
+    out[b]=[dict(item_id=i,text=(str(r.content)[:1500]+' || features: '+str(None if r.item_features != r.item_features else r.item_features)[:200])) for i,r in items.iterrows()]
     print(b,len(out[b]))
 json.dump(out,open('data/llm/items_to_rate.json','w'),ensure_ascii=False)
 # write batch prompts

@@ -20,7 +20,7 @@ for k, r in RES.items():
                       outcomes=[[str(i), int(y)] for i, y in zip(R.item_id, R.y)]))
     if e['bench'] not in items:
         I = pd.read_parquet(d + '/items.parquet', columns=['item_id', 'content', 'item_features'])
-        items[e['bench']] = {str(i): [str(c), '' if f is None else str(f)] for i, c, f in zip(I.item_id, I.content, I.item_features)}   # text and features, as the platform sends them
+        items[e['bench']] = {str(i): [str(c), '' if f is None or f != f else str(f)] for i, c, f in zip(I.item_id, I.content, I.item_features)}   # text and features, as the platform sends them
 need = {p['bench']: set() for p in pairs}
 for p in pairs: need[p['bench']] |= {i for i, _ in p['outcomes']}
 items = {b: {i: t for i, t in v.items() if i in need[b]} for b, v in items.items()}

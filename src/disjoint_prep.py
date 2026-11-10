@@ -18,6 +18,6 @@ for b, d in R.groupby('bench'):
         continue
     items = pd.read_parquet(f'data/mdb/{b}/formatted_tables/items.parquet', columns=['item_id', 'content', 'item_features']).drop_duplicates('item_id').set_index('item_id')
     its = [i for i in its if i in items.index]
-    out[b] = [dict(item_id=i, text=str(items.loc[i, 'content'])[:1500] + ' || features: ' + str(items.loc[i, 'item_features'])[:200]) for i in its]
+    out[b] = [dict(item_id=i, text=str(items.loc[i, 'content'])[:1500] + ' || features: ' + str(None if items.loc[i, 'item_features'] != items.loc[i, 'item_features'] else items.loc[i, 'item_features'])[:200]) for i in its]
     print(b, len(out[b]), 'subjects with enough items', good)
 json.dump(out, open('data/llm/items_disjoint.json', 'w'), ensure_ascii=False)

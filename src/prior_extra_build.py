@@ -9,6 +9,7 @@ tables = lambda root: {p.split('/')[-3]: os.path.dirname(p) for p in glob.glob(f
 SEM = json.load(open('data/llm/extra/semantics.json'))   # score meaning, declared before any estimate
 LONG = set(pd.read_parquet('data/long.parquet', columns=['bench']).bench.unique())   # the 0/1 benchmarks behind Table 1
 NEW = {b: d for b, d in tables('data/mdb_extra').items() if b in SEM['keep']}   # only the benchmarks whose score meaning was checked
+if set(SEM['keep']) - set(NEW): raise SystemExit('data/mdb_extra lacks ' + str(len(set(SEM['keep']) - set(NEW))) + ' of the ' + str(len(SEM['keep'])) + ' newer benchmarks: run dl_extra.py first')
 OLD = {}   # the Table 1 benchmarks enter the data-only predictor from long.parquet, exactly as in Table 1 (below)
 
 def hashes(d):

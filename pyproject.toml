@@ -1,0 +1,17 @@
+[project]
+name = "paiec-pooled-priors"
+version = "1.0.0"
+description = "Pooled Priors: PAIEC 2026 submission, simulator and cached model outputs"
+requires-python = ">=3.9,<3.14"
+# The versions the reported numbers were produced with. The submission itself (submission/) needs only NumPy.
+dependencies = [
+    "numpy==2.0.2",
+    "pandas==2.3.3",
+    "pyarrow==21.0.0",
+    "scipy==1.13.1",
+    "matplotlib==3.9.4",
+    "huggingface_hub",
+]
+
+[tool.uv]
+package = false

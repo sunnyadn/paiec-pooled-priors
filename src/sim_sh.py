@@ -86,7 +86,7 @@ if os.environ.get('FEAT', '0') == '1':   # pass the benchmark's item_features th
     for b in items_all:
         try:
             I = pd.read_parquet(f'data/mdb/{b}/formatted_tables/items.parquet', columns=['item_id', 'item_features'])
-            FEAT.update({str(i): ('' if f is None else str(f)) for i, f in zip(I.item_id, I.item_features)})
+            FEAT.update({str(i): ('' if f is None or f != f else str(f)) for i, f in zip(I.item_id, I.item_features)})
         except Exception: pass
     for b in items_all:
         for x in items_all[b]:

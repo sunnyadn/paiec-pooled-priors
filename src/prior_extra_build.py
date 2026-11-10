@@ -46,7 +46,7 @@ for b, d in sorted({**OLD, **NEW}.items()):
     I = pd.read_parquet(d + '/items.parquet', columns=['item_id', 'content', 'item_features'])
     I = I[I.item_id.isin(set(it.item_id))]
     samp = I.sample(min(10, len(I)), random_state=0)   # as in the main evaluation
-    texts = [(str(c)[:600] + (' ' + str(f) if f is not None and str(f) not in ('', 'None', '{}') else '')) for c, f in zip(samp.content, samp.item_features)]
+    texts = [(str(c)[:600] + (' ' + str(f) if f is not None and str(f) not in ('', 'None', '{}', 'nan') else '')) for c, f in zip(samp.content, samp.item_features)]
     for n, r in g[g['size'] >= 50].groupby('normalized_name'):
         s = sorted(r.index, key=lambda i: (-r.loc[i, 'size'], str(i)))[0]   # most items, then smallest id: no use of accuracy
         subj = {k: ('' if pd.isna(r.loc[s].get(k)) else str(r.loc[s].get(k))) for k in
